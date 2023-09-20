@@ -4,8 +4,6 @@ using UnityEngine;
 public class CharacterPrimaryFire : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _bulletPrefab;
-    [SerializeField]
     private Transform _firingPoint;
     [SerializeField]
     private float _firingRate;
@@ -34,7 +32,7 @@ public class CharacterPrimaryFire : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.GetComponent<Bullet>().SetShootDirection(_firingPoint.forward);
+            bullet.GetComponent<Projectile>().SetShootDirection(_firingPoint.forward);
         }
     }
 }

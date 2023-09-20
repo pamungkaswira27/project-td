@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
+    [SerializeField]
+    private float _damage;
+
+    [Space]
+
     [SerializeField]
     private Rigidbody _rigidbody;
     [SerializeField]
