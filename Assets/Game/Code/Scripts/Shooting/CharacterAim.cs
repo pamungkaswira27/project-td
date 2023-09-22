@@ -1,30 +1,35 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterAim : MonoBehaviour
+namespace ProjectTD
 {
-    [SerializeField]
-    private LayerMask _groundLayer;
-
-    private Camera _camera;
-    private Ray _ray;
-    private RaycastHit _raycastHit;
-    private Vector3 _mousePosition;
-
-    private void Awake()
+    public class CharacterAim : MonoBehaviour
     {
-        _camera = Camera.main;
-    }
+        private Camera _camera;
+        private Ray _ray;
+        private Vector3 _mousePosition;
+        private Plane _plane;
 
-    private void Update()
-    {
-        _mousePosition = Mouse.current.position.ReadValue();
-        _ray = _camera.ScreenPointToRay(_mousePosition);
-
-        if (Physics.Raycast(_ray, out _raycastHit, Mathf.Infinity, _groundLayer))
+        private void Awake()
         {
-            Vector3 aimDirection = _raycastHit.point - transform.position;
-            transform.localRotation = Quaternion.LookRotation(aimDirection);
+            _camera = Camera.main;
+        }
+
+        private void Start()
+        {
+            _plane = new Plane(Vector3.up, Vector3.zero);
+        }
+
+        private void Update()
+        {
+            _mousePosition = Mouse.current.position.ReadValue();
+            _ray = _camera.ScreenPointToRay(_mousePosition);
+
+            if (_plane.Raycast(_ray, out float enter))
+            {
+                Vector3 aimDirection = _ray.GetPoint(enter) - transform.position;
+                transform.localRotation = Quaternion.LookRotation(aimDirection);
+            }
         }
     }
 }

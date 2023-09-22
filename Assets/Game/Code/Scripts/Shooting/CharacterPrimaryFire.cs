@@ -1,40 +1,41 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharacterPrimaryFire : MonoBehaviour
+namespace ProjectTD
 {
-    [SerializeField]
-    private GameObject _bulletPrefab;
-    [SerializeField]
-    private Transform _firingPoint;
-    [SerializeField]
-    private float _firingRate;
-
-    private ObjectPooler _objectPooler;
-    private WaitForSeconds _waitForSeconds;
-
-    private void Start()
+    public class CharacterPrimaryFire : MonoBehaviour
     {
-        _objectPooler = ObjectPooler.Instance;
-        _waitForSeconds = new WaitForSeconds(1 / _firingRate);
-    }
+        [SerializeField]
+        private Transform _firingPoint;
+        [SerializeField]
+        private float _firingRate;
 
-    public IEnumerator FireCoroutine()
-    {
-        while (true)
+        private ObjectPooler _objectPooler;
+        private WaitForSeconds _firingRateWaitForSeconds;
+
+        private void Start()
         {
-            Fire();
-            yield return _waitForSeconds;
+            _objectPooler = ObjectPooler.Instance;
+            _firingRateWaitForSeconds = new WaitForSeconds(1 / _firingRate);
         }
-    }
 
-    private void Fire()
-    {
-        GameObject bullet = _objectPooler.GetPooledObject("Bullet", _firingPoint.position, _firingPoint.rotation);
-
-        if (bullet != null)
+        public IEnumerator FireCoroutine()
         {
-            bullet.GetComponent<Bullet>().SetShootDirection(_firingPoint.forward);
+            while (true)
+            {
+                Fire();
+                yield return _firingRateWaitForSeconds;
+            }
+        }
+
+        private void Fire()
+        {
+            GameObject bullet = _objectPooler.GetPooledObject("Bullet", _firingPoint.position, _firingPoint.rotation);
+
+            if (bullet != null)
+            {
+                bullet.GetComponent<Projectile>().SetShootDirection(_firingPoint.forward);
+            }
         }
     }
 }
