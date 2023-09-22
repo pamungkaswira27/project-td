@@ -53,6 +53,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rolling"",
+                    ""type"": ""Button"",
+                    ""id"": ""b124e51c-017d-4dc2-87d4-c79a1a1d998e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Running"",
+                    ""type"": ""Button"",
+                    ""id"": ""efc60628-6a1a-4b6c-b322-fe52d9000d3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -273,6 +291,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d8551e4-6a51-4426-a00d-85f03d8c97a6"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Rolling"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62ad5dfb-c9fd-41c4-bbd0-b6062e7f1c65"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Running"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,6 +903,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Rolling = m_Player.FindAction("Rolling", throwIfNotFound: true);
+        m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -939,6 +981,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Rolling;
+    private readonly InputAction m_Player_Running;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -946,6 +990,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Rolling => m_Wrapper.m_Player_Rolling;
+        public InputAction @Running => m_Wrapper.m_Player_Running;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -964,6 +1010,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Rolling.started += instance.OnRolling;
+            @Rolling.performed += instance.OnRolling;
+            @Rolling.canceled += instance.OnRolling;
+            @Running.started += instance.OnRunning;
+            @Running.performed += instance.OnRunning;
+            @Running.canceled += instance.OnRunning;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -977,6 +1029,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Rolling.started -= instance.OnRolling;
+            @Rolling.performed -= instance.OnRolling;
+            @Rolling.canceled -= instance.OnRolling;
+            @Running.started -= instance.OnRunning;
+            @Running.performed -= instance.OnRunning;
+            @Running.canceled -= instance.OnRunning;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1162,6 +1220,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnRolling(InputAction.CallbackContext context);
+        void OnRunning(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
