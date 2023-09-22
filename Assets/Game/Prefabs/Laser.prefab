@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1fa7d5e3cd3f240b929fa584dffdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 45
+  _type: 1
+  _maxHitCount: 3
   _rigidbody: {fileID: 2523687942796851048}
-  _speed: 25
+  _speed: 60
   _maxBulletTravelTime: 2.5
 --- !u!1 &5598430498502909129
 GameObject:

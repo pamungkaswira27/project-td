@@ -52,4 +52,4 @@ MonoBehaviour:
   - tag: Laser
     prefab: {fileID: 1636248499688089840, guid: 2d115b5a515caf34b8103fd67f80a220,
       type: 3}
-    size: 10
+    size: 50

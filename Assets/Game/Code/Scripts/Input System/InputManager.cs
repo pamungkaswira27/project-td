@@ -1,65 +1,76 @@
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+namespace ProjectTD
 {
-    private PlayerInputAction _playerInputAction;
-
-    private CharacterPrimaryFire _characterPrimaryFire;
-    private CharacterUltimateFire _characterUltimateFire;
-
-    private Coroutine _fireCoroutine;
-
-    private void Awake()
+    public class InputManager : MonoBehaviour
     {
-        _playerInputAction = new PlayerInputAction();
+        private PlayerInputAction _playerInputAction;
 
-        _characterPrimaryFire = FindFirstObjectByType<CharacterPrimaryFire>();
-        _characterUltimateFire = FindFirstObjectByType<CharacterUltimateFire>();
-    }
+        private CharacterPrimaryFire _characterPrimaryFire;
+        private CharacterUltimateFire _characterUltimateFire;
 
-    private void OnEnable()
-    {
-        _playerInputAction.Enable();
+        private Coroutine _fireCoroutine;
 
-        SubscribeInputEvents();
-    }
-
-    private void OnDisable()
-    {
-        _playerInputAction.Disable();
-
-        UnsubscribeInputEvents();
-    }
-
-    private void SubscribeInputEvents()
-    {
-        _playerInputAction.Player.Fire.started += _ => StartFire();
-        _playerInputAction.Player.Fire.canceled += _ => StopFire();
-        _playerInputAction.Player.Ultimate.performed += _ => LaunchUltimate();
-    }
-
-    private void UnsubscribeInputEvents()
-    {
-        _playerInputAction.Player.Fire.started -= _ => StartFire();
-        _playerInputAction.Player.Fire.canceled -= _ => StopFire();
-        _playerInputAction.Player.Ultimate.performed -= _ => LaunchUltimate();
-    }
-
-    private void StartFire()
-    {
-        _fireCoroutine = StartCoroutine(_characterPrimaryFire.FireCoroutine());
-    }
-
-    private void StopFire()
-    {
-        if (_fireCoroutine != null)
+        private void Awake()
         {
-            StopCoroutine(_fireCoroutine);
-        }
-    }
+            _playerInputAction = new PlayerInputAction();
 
-    private void LaunchUltimate()
-    {
-        StartCoroutine(_characterUltimateFire.FireCoroutine());
+            _characterPrimaryFire = FindFirstObjectByType<CharacterPrimaryFire>();
+            _characterUltimateFire = FindFirstObjectByType<CharacterUltimateFire>();
+        }
+
+        private void OnEnable()
+        {
+            _playerInputAction.Enable();
+
+            SubscribeInputEvents();
+        }
+
+        private void OnDisable()
+        {
+            _playerInputAction.Disable();
+
+            UnsubscribeInputEvents();
+        }
+
+        private void SubscribeInputEvents()
+        {
+            _playerInputAction.Player.Fire.started += _ => StartFire();
+            _playerInputAction.Player.Fire.canceled += _ => StopFire();
+            _playerInputAction.Player.Ultimate.performed += _ => ActivateUltimate();
+        }
+
+        private void UnsubscribeInputEvents()
+        {
+            _playerInputAction.Player.Fire.started -= _ => StartFire();
+            _playerInputAction.Player.Fire.canceled -= _ => StopFire();
+            _playerInputAction.Player.Ultimate.performed -= _ => ActivateUltimate();
+        }
+
+        private void StartFire()
+        {
+            if (_characterUltimateFire.IsUltimateActive())
+            {
+                _fireCoroutine = StartCoroutine(_characterUltimateFire.FireCoroutine());
+            }
+            else
+            {
+                _fireCoroutine = StartCoroutine(_characterPrimaryFire.FireCoroutine());
+            }
+        }
+
+        private void StopFire()
+        {
+            if (_fireCoroutine != null && !_characterUltimateFire.IsUltimateActive())
+            {
+                StopCoroutine(_fireCoroutine);
+            }
+        }
+
+        private void ActivateUltimate()
+        {
+            _characterUltimateFire.ActivateUltimate();
+            StopFire();
+        }
     }
 }
