@@ -9,15 +9,15 @@ namespace ProjectTD
         [SerializeField]
         private Transform _firingPoint;
         [SerializeField]
-        private int _numberOfLaser;
+        private int _numberOfLaser = 3;
         [SerializeField]
-        private float _cooldown;
+        private float _cooldown = 60f;
         [SerializeField]
-        private float _duration;
+        private float _duration = 10f;
         [SerializeField]
-        private float _burstInterval;
+        private float _burstInterval = 0.5f;
         [SerializeField]
-        private float _intervalBetweenLasers;
+        private float _intervalBetweenLasers = 0.1f;
 
         private ObjectPooler _objectPooler;
         private SimulationTimer _cooldownTimer;

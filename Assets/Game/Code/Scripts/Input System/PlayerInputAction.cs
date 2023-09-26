@@ -918,7 +918,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player
+        // CharacterMovement
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
@@ -996,7 +996,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player
+    // CharacterMovement
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;

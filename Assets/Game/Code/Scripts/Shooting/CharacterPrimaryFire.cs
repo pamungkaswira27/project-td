@@ -8,7 +8,7 @@ namespace ProjectTD
         [SerializeField]
         private Transform _firingPoint;
         [SerializeField]
-        private float _firingRate;
+        private float _firingRate = 15f;
 
         private ObjectPooler _objectPooler;
         private WaitForSeconds _firingRateWaitForSeconds;
