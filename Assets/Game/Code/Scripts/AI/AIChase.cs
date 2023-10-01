@@ -1,56 +1,86 @@
-using NaughtyAttributes;
 using Pathfinding;
 using UnityEngine;
 
 namespace ProjectTD
 {
-    [RequireComponent (typeof (Seeker), typeof (AIPath), typeof (AIDestinationSetter))]
+    [RequireComponent (typeof (AIFieldOfView), typeof(Rigidbody), typeof(Seeker))]
     public class AIChase : MonoBehaviour
     {
         [SerializeField]
-        private float _aIDetectionRadius;
-        [SerializeField, Tag]
-        private string _detectionTag;
+        private AIFieldOfView _aIFieldOfView;
+        [SerializeField]
+        private float _speed;
+        [SerializeField]
+        private float _nextWaypointDistance = 3f;
 
-        private AIDestinationSetter _aIDestinationSetter;
-        private SphereCollider _detectionCollider;
+        private Path _currentPath;
+        private Seeker _seeker;
+        private Rigidbody _rigidbody;
+        private Vector3 _lookAtDirection;
+        private Vector3 _forceDirection;
+        private Vector3 _rigidbodyForce;
+        private Quaternion _targetRotation;
+        private int _currentWaypointIndex;
+        private float _distanceToWaypoint;
 
         private void Awake()
         {
-            _aIDestinationSetter = GetComponent<AIDestinationSetter>();
-            _detectionCollider = GetComponent<SphereCollider>();
+            _seeker = GetComponent<Seeker>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         private void Start()
         {
-            _detectionCollider.isTrigger = true;
-            _detectionCollider.radius = _aIDetectionRadius;
+            InvokeRepeating(nameof(UpdatePath), 0f, 0.2f);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_aIDestinationSetter.target != null)
+            if (_currentPath != null)
             {
-                if (transform.position == _aIDestinationSetter.target.position)
+                if (_currentWaypointIndex >= _currentPath.vectorPath.Count)
                 {
-                    _aIDestinationSetter.target = null;
+                    return;
+                }
+
+                if (_aIFieldOfView.Target == null)
+                {
+                    return;
+                }
+
+                _forceDirection = (_currentPath.vectorPath[_currentWaypointIndex] - _rigidbody.position).normalized;
+                _rigidbodyForce = _speed * _forceDirection;
+                _rigidbody.AddForce(_rigidbodyForce);
+
+                _lookAtDirection = (_aIFieldOfView.Target.position - transform.position).normalized;
+                transform.localRotation = Quaternion.LookRotation(_lookAtDirection);
+
+                _distanceToWaypoint = Vector3.Distance(_rigidbody.position, _currentPath.vectorPath[_currentWaypointIndex]);
+
+                if (_distanceToWaypoint < _nextWaypointDistance)
+                {
+                    _currentWaypointIndex++;
                 }
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnPathComplete(Path path)
         {
-            if (other.CompareTag(_detectionTag))
+            if (!path.error)
             {
-                _aIDestinationSetter.target = other.transform;
+                _currentPath = path;
+                _currentWaypointIndex = 0;
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void UpdatePath()
         {
-            if (other.CompareTag(_detectionTag))
+            if (_aIFieldOfView.Target != null)
             {
-                _aIDestinationSetter.target = transform;
+                if (_seeker.IsDone())
+                {
+                    _seeker.StartPath(_rigidbody.position, _aIFieldOfView.Target.position, OnPathComplete);
+                }
             }
         }
     }
