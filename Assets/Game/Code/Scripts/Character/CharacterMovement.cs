@@ -7,8 +7,6 @@ namespace ProjectTD
         [Header("Character Speed")]
         [SerializeField]
         private float _walkSpeed = 8f;
-        [SerializeField]
-        private float _rotateSpeed = 12f;
 
         private CapsuleCollider _capsuleCollider;
         private Vector2 _direction;
@@ -75,7 +73,6 @@ namespace ProjectTD
             _move = new(_direction.x, 0, _direction.y);
 
             transform.position += _moveSpeed * Time.deltaTime * _move;
-            transform.forward = Vector3.Slerp(transform.forward, _move, _rotateSpeed * Time.deltaTime);
         }
 
         private void RollingMovement()
