@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8801026746124344206}
   - component: {fileID: 2523687942796851048}
   - component: {fileID: 8947448527659627879}
-  - component: {fileID: 6505421486402300251}
+  - component: {fileID: 2933791645654434511}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: UltimateProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 118
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &8947448527659627879
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -81,11 +81,11 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 2.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6505421486402300251
+--- !u!114 &2933791645654434511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,15 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1636248499688089840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1fa7d5e3cd3f240b929fa584dffdc4, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e2862e53d0f3a4ebf326241cf9800a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 45
-  _type: 1
-  _maxHitCount: 3
-  _rigidbody: {fileID: 2523687942796851048}
+  _damagePoints: 45
   _speed: 60
-  _maxBulletTravelTime: 2.5
+  _lifetime: 2.5
+  _rigidbody: {fileID: 2523687942796851048}
+  _maxHitCount: 2
 --- !u!1 &5598430498502909129
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +130,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8801026746124344206}

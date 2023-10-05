@@ -11,8 +11,8 @@ namespace ProjectTD
         private PlayerInputAction _playerInputAction;
 
         private CharacterMovement _characterMovement;
-        private CharacterPrimaryFire _characterPrimaryFire;
-        private CharacterUltimateFire _characterUltimateFire;
+        private CharacterBasicShoot _characterBasicShoot;
+        private CharacterUltimateShoot _characterUltimateShoot;
 
         private Coroutine _fireCoroutine;
         private Vector2 _movementInputVector;
@@ -24,8 +24,8 @@ namespace ProjectTD
             _playerInputAction = new PlayerInputAction();
 
             _characterMovement = FindFirstObjectByType<CharacterMovement>();
-            _characterPrimaryFire = FindFirstObjectByType<CharacterPrimaryFire>();
-            _characterUltimateFire = FindFirstObjectByType<CharacterUltimateFire>();
+            _characterBasicShoot = FindFirstObjectByType<CharacterBasicShoot>();
+            _characterUltimateShoot = FindFirstObjectByType<CharacterUltimateShoot>();
         }
 
         private void OnEnable()
@@ -123,19 +123,19 @@ namespace ProjectTD
 
         private void StartFire()
         {
-            if (_characterUltimateFire.IsUltimateActive())
+            if (_characterUltimateShoot.IsUltimateActive())
             {
-                _fireCoroutine = StartCoroutine(_characterUltimateFire.FireCoroutine());
+                _fireCoroutine = StartCoroutine(_characterUltimateShoot.FireCoroutine());
             }
             else
             {
-                _fireCoroutine = StartCoroutine(_characterPrimaryFire.FireCoroutine());
+                _fireCoroutine = StartCoroutine(_characterBasicShoot.FireCoroutine());
             }
         }
 
         private void StopFire()
         {
-            if (_fireCoroutine != null && !_characterUltimateFire.IsUltimateActive())
+            if (_fireCoroutine != null && !_characterUltimateShoot.IsUltimateActive())
             {
                 StopCoroutine(_fireCoroutine);
             }
@@ -143,7 +143,7 @@ namespace ProjectTD
 
         private void ActivateUltimate()
         {
-            _characterUltimateFire.ActivateUltimate();
+            _characterUltimateShoot.ActivateUltimate();
             StopFire();
         }
     }
