@@ -10,9 +10,7 @@ namespace ProjectTD
 
         private PlayerInputAction _playerInputAction;
 
-        private CharacterMovement _characterMovement;
-        private CharacterPrimaryFire _characterPrimaryFire;
-        private CharacterUltimateFire _characterUltimateFire;
+        private PlayerManager _playerManager;
 
         private Coroutine _fireCoroutine;
         private Vector2 _movementInputVector;
@@ -22,10 +20,6 @@ namespace ProjectTD
         {
             Instance = this;
             _playerInputAction = new PlayerInputAction();
-
-            _characterMovement = FindFirstObjectByType<CharacterMovement>();
-            _characterPrimaryFire = FindFirstObjectByType<CharacterPrimaryFire>();
-            _characterUltimateFire = FindFirstObjectByType<CharacterUltimateFire>();
         }
 
         private void OnEnable()
@@ -37,6 +31,7 @@ namespace ProjectTD
 
         private void Start()
         {
+            _playerManager = PlayerManager.Instance;
             _delayedRollWaitForSeconds = new WaitForSeconds(5f);
         }
 
@@ -93,11 +88,11 @@ namespace ProjectTD
         {
             if (context.performed)
             {
-                _characterMovement.IsRunning = true;
+                _playerManager.CharacterMovement.IsRunning = true;
             }
             else if (context.canceled)
             {
-                _characterMovement.IsRunning = false;
+                _playerManager.CharacterMovement.IsRunning = false;
             }
         }
 
@@ -105,11 +100,11 @@ namespace ProjectTD
         {
             if (context.performed)
             {
-                _characterMovement.IsRolling = true;
+                _playerManager.CharacterMovement.IsRolling = true;
             }
             else if (context.canceled)
             {
-                _characterMovement.IsRolling = false;
+                _playerManager.CharacterMovement.IsRolling = false;
                 StartCoroutine(DelayedRollCoroutine());
             }
         }
@@ -123,19 +118,19 @@ namespace ProjectTD
 
         private void StartFire()
         {
-            if (_characterUltimateFire.IsUltimateActive())
+            if (_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
-                _fireCoroutine = StartCoroutine(_characterUltimateFire.FireCoroutine());
+                _fireCoroutine = StartCoroutine(_playerManager.CharacterUltimateShoot.FireCoroutine());
             }
             else
             {
-                _fireCoroutine = StartCoroutine(_characterPrimaryFire.FireCoroutine());
+                _fireCoroutine = StartCoroutine(_playerManager.CharacterBasicShoot.FireCoroutine());
             }
         }
 
         private void StopFire()
         {
-            if (_fireCoroutine != null && !_characterUltimateFire.IsUltimateActive())
+            if (_fireCoroutine != null && !_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
                 StopCoroutine(_fireCoroutine);
             }
@@ -143,7 +138,7 @@ namespace ProjectTD
 
         private void ActivateUltimate()
         {
-            _characterUltimateFire.ActivateUltimate();
+            _playerManager.CharacterUltimateShoot.ActivateUltimate();
             StopFire();
         }
     }

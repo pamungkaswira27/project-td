@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1937730147474509259}
   - component: {fileID: 1206656908152535088}
   - component: {fileID: 4821694961386824624}
-  - component: {fileID: 8537467086586165651}
+  - component: {fileID: 6242281127234861200}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BasicProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 118
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &4821694961386824624
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -85,7 +85,7 @@ CapsuleCollider:
   m_Height: 0.2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8537467086586165651
+--- !u!114 &6242281127234861200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,16 +94,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2238064687733802928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1fa7d5e3cd3f240b929fa584dffdc4, type: 3}
+  m_Script: {fileID: 11500000, guid: a09b6e065e89a7542846e663788ecc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 15
-  _type: 0
-  _maxHitCount: 0
-  _rigidbody: {fileID: 1206656908152535088}
+  _damagePoints: 15
   _speed: 30
-  _maxBulletTravelTime: 2.5
-  _trailRenderer: {fileID: 5251401061335331803}
+  _lifetime: 2.5
+  _rigidbody: {fileID: 1206656908152535088}
 --- !u!1 &7274703466307596671
 GameObject:
   m_ObjectHideFlags: 0
