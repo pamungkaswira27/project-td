@@ -71,7 +71,6 @@ namespace ProjectTD
                     }
 
                     yield return _intervalBetweenProjectileWaitForSeconds;
-                    Debug.Log($"Pelor {i}");
                 }
             }
         }

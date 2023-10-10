@@ -30,7 +30,6 @@ namespace ProjectTD
                 }
 
                 yield return _firingRateWaitForSeconds;
-                Debug.Log("Mbredet");
             }
         }
     }

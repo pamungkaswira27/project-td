@@ -60,25 +60,21 @@ namespace ProjectTD
                 _targetTransform = _targetColliders[0].transform;
                 _directionToTarget = (_targetTransform.position - transform.position).normalized;
 
-                if (Vector3.Angle(transform.forward, _directionToTarget) < _angle / 2)
-                {
-                    _distanceToTarget = Vector3.Distance(transform.position, _targetTransform.position);
-
-                    if (!Physics.Raycast(transform.position, _directionToTarget, _distanceToTarget, _obstructionMask))
-                    {
-                        _canSeePlayer = true;
-                    }
-                    else
-                    {
-                        _canSeePlayer = false;
-                        _targetTransform = null;
-                    }
-                }
-                else
+                if (Vector3.Angle(transform.forward, _directionToTarget) >= _angle / 2)
                 {
                     _canSeePlayer = false;
                     _targetTransform = null;
+                    return;
                 }
+
+                if (Physics.Raycast(transform.position, _directionToTarget, _distanceToTarget, _obstructionMask))
+                {
+                    _canSeePlayer = false;
+                    _targetTransform = null;
+                    return;
+                }
+
+                _distanceToTarget = Vector3.Distance(transform.position, _targetTransform.position);
             }
             else if (_canSeePlayer)
             {
