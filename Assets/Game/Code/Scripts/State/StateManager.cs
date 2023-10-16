@@ -1,36 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public class StateManager : MonoBehaviour
     {
-        private Vector3 _enemiesFacingDistance;
+        private EnemyMeleeAttack _attackMelee;
+        private EnemyRangedAttack _attackRanged;
+        private EnemySelfExplodingAttack _attackSelfExploding;
+        private Vector3 _enemiesFacingDistance; // ganti dengan value pada AI FoV
         private Vector3 _lastRotation;
-        private Vector3 _playerTarget;
+        private Vector3 _playerTarget; // ganti dengan value pada AI FoV
+        private LayerMask _obstructionMask; // ganti dengan value pada AI FoV
         private float _rangedDistance;
         private bool _inAngel;
         private bool _inFOV;
-        private bool _inRangedDistance;
+        private bool _inRangedDistance; 
         private bool _inMeleeDistance;
         private bool _inSelfExplodingDistance;
 
         [SerializeField]
-        private GameObject _player;
+        private GameObject _player; // ganti dengan value pada AI FoV
         [SerializeField]
-        private GameObject _enemy;
+        private GameObject _enemy; // ganti dengan value pada AI FoV
         [SerializeField]
-        private LayerMask _obstructionMask;
-        [SerializeField]
-        private EnemyAttack _attackEnemy;
+        private AIFieldOfView _fieldOfView;
+        //[SerializeField]
+        //private LayerMask _obstructionMask; // ganti dengan value pada AI FoV
 
-        [SerializeField]
-        private float _viewAngle;
-        [SerializeField]
-        private float _viewRadius;
 
-        void Update()
+
+       // [SerializeField]
+        private float _viewAngle; // ganti dengan value pada AI FoV
+       // [SerializeField]
+        private float _viewRadius; // ganti dengan value pada AI FoV
+
+        private void Awake()
+        {
+            _attackMelee = GetComponent<EnemyMeleeAttack>();
+            _attackRanged = GetComponent<EnemyRangedAttack>();
+            _attackSelfExploding = GetComponent<EnemySelfExplodingAttack>();
+
+            _obstructionMask = _fieldOfView.Obstruction;
+            _viewAngle = _fieldOfView.Angle;
+            _viewRadius = _fieldOfView.Radius;
+        }
+
+        void FixedUpdate()
         {
             _enemiesFacingDistance = _player.transform.position - _enemy.transform.position;
             _playerTarget = (_player.transform.position - _enemy.transform.position).normalized;
@@ -38,8 +56,8 @@ namespace ProjectTD
 
             _inFOV = Physics.Raycast(_enemy.transform.position, _playerTarget, _rangedDistance, _obstructionMask);
             _inAngel = Vector3.Angle(_enemy.transform.forward, _playerTarget) < _viewAngle / 2;
-            _inRangedDistance = _rangedDistance <= 15 && _rangedDistance > 3 && _rangedDistance <= _viewRadius && _lastRotation != _enemiesFacingDistance;
-            _inMeleeDistance = _rangedDistance <= 2f && _rangedDistance <= _viewRadius && _lastRotation != _enemiesFacingDistance;
+            _inRangedDistance = _rangedDistance <= 15f && _rangedDistance > 3f && _rangedDistance <= _viewRadius && _lastRotation != _enemiesFacingDistance;
+            _inMeleeDistance = _rangedDistance <= 2f && _rangedDistance > 1f && _rangedDistance <= _viewRadius && _lastRotation != _enemiesFacingDistance;
             _inSelfExplodingDistance = _rangedDistance <= 1.5f && _rangedDistance <= _viewRadius && _lastRotation != _enemiesFacingDistance;
 
             if (!_inAngel && _inFOV)
@@ -49,19 +67,19 @@ namespace ProjectTD
 
             if (_inAngel && _inRangedDistance && !_inFOV)
             {
-                RangedAttackMode();
+                _attackRanged.RangedAttack(25);
                 return;
             }
 
             if (_inAngel && _inMeleeDistance && !_inFOV)
             {
-                MeleeAttackMode();
+                _attackMelee.MeleeAttack(15);
                 return;
             }
             
             if (_inAngel && _inSelfExplodingDistance && !_inFOV)
             {
-                SelfExplodingAttackMode();
+                _attackSelfExploding.SelfExplodingAttack(90);
                 return;
             }
 
@@ -70,22 +88,23 @@ namespace ProjectTD
 
         private void RangedAttackMode()
         {
-            _attackEnemy.attackMode = Attack.Ranged;
-            _enemy.transform.LookAt(_player.transform.position);
+            //_attackEnemy.attackMode = Attack.Ranged;
+            //_enemy.transform.LookAt(_player.transform.position);
             _lastRotation = _enemiesFacingDistance;
         }
 
         private void MeleeAttackMode()
         {
-            _attackEnemy.attackMode = Attack.Melee;
-            _enemy.transform.LookAt(_player.transform.position);
+           // _attackEnemy.attackMode = Attack.Melee;
+           // _enemy.transform.LookAt(_player.transform.position);
             _lastRotation = _enemiesFacingDistance;
         }
 
         private void SelfExplodingAttackMode()
         {
-            _attackEnemy.attackMode = Attack.SelfExploding;
-            _enemy.transform.LookAt(_player.transform.position);
+           // _attackEnemy.attackMode = Attack.SelfExploding;
+           // _enemy.transform.LookAt(_player.transform.position);
+            _lastRotation = _enemiesFacingDistance;
         }
 
     }
