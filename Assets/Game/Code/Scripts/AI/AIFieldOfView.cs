@@ -19,6 +19,14 @@ namespace ProjectTD
         private bool _canSeePlayer;
         private float _distanceToTarget;
 
+        public LayerMask Obstruction
+        {
+            get
+            {
+                return _obstructionMask;
+            }
+        }
+
         public Transform Target
         {
             get
