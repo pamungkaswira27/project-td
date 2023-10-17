@@ -14,8 +14,9 @@ namespace ProjectTD
                 if (other.TryGetComponent<IDamageable>(out IDamageable target))
                 {
                     target.TakeDamage(_damagePoints);
-                    DeactivateProjectile();
                 }
+
+                DeactivateProjectile();
             }
         }
     }

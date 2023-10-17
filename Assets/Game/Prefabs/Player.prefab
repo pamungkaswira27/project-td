@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firingPoint: {fileID: 8256913225303155314}
-  _firingRate: 15
+  _firingRate: 7.5
 --- !u!114 &7258894309596920576
 MonoBehaviour:
   m_ObjectHideFlags: 0

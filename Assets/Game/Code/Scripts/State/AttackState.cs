@@ -50,7 +50,7 @@ namespace ProjectTD
                 _inAngel = Vector3.Angle(transform.forward, _playerTarget) < _viewAngle / 2;
 
                 _inRangedDistance = _rangedDistance <= 15f && _rangedDistance > 3f && _rangedDistance <= _viewRadius;
-                _inMeleeDistance = _rangedDistance <= 2f && _rangedDistance > 1f && _rangedDistance <= _viewRadius;
+                _inMeleeDistance = _rangedDistance <= 3f && _rangedDistance > 1f && _rangedDistance <= _viewRadius;
                 _inSelfExplodingDistance = _rangedDistance <= 1.5f && _rangedDistance <= _viewRadius;
 
 

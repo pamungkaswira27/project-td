@@ -14,7 +14,7 @@ namespace ProjectTD
             if (_healthPoints <= 0f)
             {
                 _healthPoints = 0f;
-                Debug.Log($"[{this.GetType().Name}] {gameObject.name} is dead.");
+                gameObject.SetActive(false);
             }
         }
     }

@@ -20,7 +20,6 @@ namespace ProjectTD
         {
             Instance = this;
             _playerInputAction = new PlayerInputAction();
-            _playerManager = gameObject.AddComponent<PlayerManager>();
         }
 
         private void OnEnable()
@@ -32,6 +31,7 @@ namespace ProjectTD
 
         private void Start()
         {
+            _playerManager = PlayerManager.Instance;
             _delayedRollWaitForSeconds = new WaitForSeconds(5f);
         }
 
