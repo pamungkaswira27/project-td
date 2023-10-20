@@ -15,6 +15,10 @@ namespace ProjectTD
             {
                 _healthPoints = 0f;
                 gameObject.SetActive(false);
+
+                if (!TryGetComponent<BaseCharacter>(out _)) return;
+
+                PlayerManager.Instance.DecreaseLife();
             }
         }
     }
