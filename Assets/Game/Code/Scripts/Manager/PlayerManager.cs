@@ -25,6 +25,11 @@ namespace ProjectTD
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
         public int Life => _life;
 
+        public Transform PlayerSpawnPoint
+        {
+            set => _playerSpawnPoint = value;
+        }
+
         private void Awake()
         {
             Instance = this;
