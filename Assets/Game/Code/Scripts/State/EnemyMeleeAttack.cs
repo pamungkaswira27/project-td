@@ -8,9 +8,9 @@ namespace ProjectTD
     {
         public override void MeleeAttack(int damaged)
         {
-            if (aiFieldOfView.Target.TryGetComponent<Health>(out Health playerHealth))
+            if (aiFieldOfView.Target.TryGetComponent(out IDamageable damageable))
             {
-                playerHealth.TakeDamage(damaged);
+                damageable.TryTakeDamage(damaged);
             }
         }
     }

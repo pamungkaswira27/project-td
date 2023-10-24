@@ -100,7 +100,9 @@ MonoBehaviour:
   _damagePoints: 45
   _speed: 60
   _lifetime: 2.5
-  _rigidbody: {fileID: 2523687942796851048}
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 768
   _maxHitCount: 2
 --- !u!1 &5598430498502909129
 GameObject:

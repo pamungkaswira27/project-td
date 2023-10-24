@@ -6,6 +6,8 @@ namespace ProjectTD
     {
         public static PlayerManager Instance;
 
+        private const string _playerPoolTag = "Player";
+
         [Header("Player Lifes")]
         [SerializeField]
         private int _life;
@@ -17,8 +19,10 @@ namespace ProjectTD
         private float _spawnTime;
 
         private CharacterMovement _characterMovement;
+        private CharacterHealth _characterHealth;
         private CharacterBasicShoot _characterBasicShoot;
         private CharacterUltimateShoot _characterUltimateShoot;
+        private bool _isInitialSpawn;
 
         public CharacterMovement CharacterMovement => _characterMovement;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
@@ -37,20 +41,30 @@ namespace ProjectTD
 
         private void Start()
         {
+            _isInitialSpawn = true;
             SpawnPlayer();
         }
 
         public void SetupPlayer(BaseCharacter character)
         {
             _characterMovement = character.GetComponent<CharacterMovement>();
+            _characterHealth = character.GetComponent<CharacterHealth>();
             _characterBasicShoot = character.GetComponent<CharacterBasicShoot>();
             _characterUltimateShoot = character.GetComponent <CharacterUltimateShoot>();
         }
 
         public void SpawnPlayer()
         {
-            GameObject player = ObjectPooler.Instance.GetPooledObject("Player", _playerSpawnPoint.position, Quaternion.identity);
+            GameObject player = ObjectPooler.Instance.GetPooledObject(_playerPoolTag, _playerSpawnPoint.position, Quaternion.identity);
             CameraManager.Instance.SetupFollowCamera(player.transform);
+
+            if (!_isInitialSpawn)
+            {
+                _characterHealth.HealthPoints = _characterHealth.MaxHealthPoints;
+                return;
+            }
+
+            _isInitialSpawn = false;
         }
 
         public void DecreaseLife()
@@ -59,7 +73,7 @@ namespace ProjectTD
 
             if (_life <= 0)
             {
-                Debug.Log($"[{GetType().Name}] Game Over!");
+                Debug.Log($"[{nameof(PlayerManager)}] Game Over!");
             }
             else
             {
