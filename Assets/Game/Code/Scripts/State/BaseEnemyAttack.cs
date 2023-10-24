@@ -8,6 +8,7 @@ namespace ProjectTD
     public class BaseEnemyAttack : MonoBehaviour
     {
         private int _damage;
+        [SerializeField]
         protected AIFieldOfView aiFieldOfView;
 
         public virtual void MeleeAttack(int damaged)
