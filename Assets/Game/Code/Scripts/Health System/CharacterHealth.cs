@@ -12,27 +12,23 @@ namespace ProjectTD
 
         private IDamageable _damageable;
 
-        public float HealthPoints 
-        { 
-            get => _healthPoints; 
-            set => _healthPoints = value; 
-        }
-
+        public float HealthPoints => _healthPoints;
         public float MaxHealthPoints => _maxHealthPoints;
-
-        private void Awake()
-        {
-            _damageable = GetComponent<IDamageable>();
-        }
 
         private void Start()
         {
+            _damageable = GetComponent<IDamageable>();
             _damageable.OnDamaged += OnCharacterDamaged;
         }
 
         public virtual void DecreaseHealth(float amount)
         {
             _healthPoints -= amount;
+        }
+
+        public void SetHealthPoints(float amount)
+        {
+            _healthPoints = amount;
         }
 
         private void OnCharacterDamaged(float damageAmount)
