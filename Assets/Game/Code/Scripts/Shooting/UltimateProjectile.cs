@@ -12,13 +12,15 @@ namespace ProjectTD
 
         protected override void HitTarget()
         {
-            int hitColliderSize = 10;
-            Collider[] hitColliders = new Collider[hitColliderSize];
-            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, hitColliders, _targetMask);
+            ClearHitColliderCache();    
+
+            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, _hitColliders, _targetMask);
 
             for (int i = 0; i < numberOfCollider; i++)
             {
-                if (hitColliders[i].TryGetComponent(out IDamageable target))
+                if (_hitColliders[i] == null) continue;
+
+                if (_hitColliders[i].TryGetComponent(out IDamageable target))
                 {
                     target.TryTakeDamage(_damagePoints);
                 }

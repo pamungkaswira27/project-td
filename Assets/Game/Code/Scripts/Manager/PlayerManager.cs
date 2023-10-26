@@ -6,7 +6,7 @@ namespace ProjectTD
     {
         public static PlayerManager Instance;
 
-        private const string _playerPoolTag = "Player";
+        private const string PLAYER_POOL_TAG = "Player";
 
         [Header("Player Lifes")]
         [SerializeField]
@@ -55,12 +55,12 @@ namespace ProjectTD
 
         public void SpawnPlayer()
         {
-            GameObject player = ObjectPooler.Instance.GetPooledObject(_playerPoolTag, _playerSpawnPoint.position, Quaternion.identity);
+            GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             CameraManager.Instance.SetupFollowCamera(player.transform);
 
             if (!_isInitialSpawn)
             {
-                _characterHealth.HealthPoints = _characterHealth.MaxHealthPoints;
+                _characterHealth.SetHealthPoints(_characterHealth.MaxHealthPoints);
                 return;
             }
 

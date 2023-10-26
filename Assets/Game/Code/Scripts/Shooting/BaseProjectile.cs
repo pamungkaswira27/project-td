@@ -5,6 +5,8 @@ namespace ProjectTD
 {
     public abstract class BaseProjectile : MonoBehaviour
     {
+        protected const int HIT_COLLIDER_CACHE_SIZE = 5;
+
         [Header("General")]
         [SerializeField]
         protected float _damagePoints;
@@ -16,12 +18,18 @@ namespace ProjectTD
         protected LayerMask _targetMask;
 
         protected Vector3 _direction;
+        protected Collider[] _hitColliders;
 
         private SimulationTimer _projectileLifeTimer;
 
         private void OnEnable()
         {
             _projectileLifeTimer = SimulationTimer.CreateFromSeconds(_lifetime);
+        }
+
+        private void Start()
+        {
+            _hitColliders = new Collider[HIT_COLLIDER_CACHE_SIZE];
         }
 
         private void Update()
@@ -39,6 +47,14 @@ namespace ProjectTD
         protected virtual void HitTarget()
         {
             // Implementation in child class
+        }
+
+        protected virtual void ClearHitColliderCache()
+        {
+            for (int i = 0; i < _hitColliders.Length; i++)
+            {
+                _hitColliders[i] = null;
+            }
         }
 
         private void Move()
