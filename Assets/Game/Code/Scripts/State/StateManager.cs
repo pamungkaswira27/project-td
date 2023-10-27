@@ -86,26 +86,5 @@ namespace ProjectTD
 
         }
 
-        private void RangedAttackMode()
-        {
-            //_attackEnemy.attackMode = Attack.Ranged;
-            //_enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
-        }
-
-        private void MeleeAttackMode()
-        {
-           // _attackEnemy.attackMode = Attack.Melee;
-           // _enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
-        }
-
-        private void SelfExplodingAttackMode()
-        {
-           // _attackEnemy.attackMode = Attack.SelfExploding;
-           // _enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
-        }
-
     }
 }
