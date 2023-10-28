@@ -1,4 +1,10 @@
-public interface IDamageable
+using System;
+
+namespace ProjectTD
 {
-    public void TakeDamage(float damagePoints);
+    public interface IDamageable
+    {
+        public event Action<float> OnDamaged;
+        public bool TryTakeDamage(float damagePoints);
+    }
 }

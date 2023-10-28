@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectTD
 {
-    public class Health : MonoBehaviour, IDamageable
+    public class Health : MonoBehaviour
     {
         [SerializeField]
         private float _healthPoints;

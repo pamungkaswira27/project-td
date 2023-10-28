@@ -23,28 +23,7 @@ namespace ProjectTD
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Start()
-        {
-            _poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-            foreach (Pool pool in _poolList)
-            {
-                GameObject objectPoolParentTransform = new GameObject(pool.tag);
-                objectPoolParentTransform.transform.SetParent(transform);
-
-                Queue<GameObject> objectPoolQueue = new Queue<GameObject>();
-
-                for (int i = 0; i < pool.size; i++)
-                {
-                    GameObject objectPool = Instantiate(pool.prefab, objectPoolParentTransform.transform);
-                    objectPool.SetActive(false);
-                    objectPoolQueue.Enqueue(objectPool);
-                }
-
-                _poolDictionary.Add(pool.tag, objectPoolQueue);
-            }
+            StartPooling();
         }
 
         public GameObject GetPooledObject(string poolTag, Vector3 positionToSpawn, Quaternion objectRotation)
@@ -65,6 +44,28 @@ namespace ProjectTD
             _poolDictionary[poolTag].Enqueue(objectToSpawn);
 
             return objectToSpawn;
+        }
+
+        private void StartPooling()
+        {
+            _poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+            foreach (Pool pool in _poolList)
+            {
+                GameObject objectPoolParentTransform = new GameObject(pool.tag);
+                objectPoolParentTransform.transform.SetParent(transform);
+
+                Queue<GameObject> objectPoolQueue = new Queue<GameObject>();
+
+                for (int i = 0; i < pool.size; i++)
+                {
+                    GameObject objectPool = Instantiate(pool.prefab, objectPoolParentTransform.transform);
+                    objectPool.SetActive(false);
+                    objectPoolQueue.Enqueue(objectPool);
+                }
+
+                _poolDictionary.Add(pool.tag, objectPoolQueue);
+            }
         }
     }
 }

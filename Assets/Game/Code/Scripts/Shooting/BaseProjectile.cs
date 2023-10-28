@@ -1,9 +1,12 @@
+using StinkySteak.SimulationTimer;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public abstract class BaseProjectile : MonoBehaviour
     {
+        protected const int HIT_COLLIDER_CACHE_SIZE = 5;
+
         [Header("General")]
         [SerializeField]
         protected float _damagePoints;
@@ -12,18 +15,28 @@ namespace ProjectTD
         [SerializeField]
         protected float _lifetime;
         [SerializeField]
-        protected Rigidbody _rigidbody;
+        protected LayerMask _targetMask;
 
         protected Vector3 _direction;
+        protected Collider[] _hitColliders;
+
+        private SimulationTimer _projectileLifeTimer;
 
         private void OnEnable()
         {
-            Invoke(nameof(DeactivateProjectile), _lifetime);
+            _projectileLifeTimer = SimulationTimer.CreateFromSeconds(_lifetime);
+        }
+
+        private void Start()
+        {
+            _hitColliders = new Collider[HIT_COLLIDER_CACHE_SIZE];
         }
 
         private void Update()
         {
-            transform.position += _speed * Time.deltaTime * _direction;
+            Move();
+            HitTarget();
+            DeactivateProjectile();
         }
 
         public virtual void SetProjectileDirection(Vector3 direction)
@@ -31,9 +44,31 @@ namespace ProjectTD
             _direction = direction;
         }
 
-        protected void DeactivateProjectile()
+        protected virtual void HitTarget()
         {
-            gameObject.SetActive(false);
+            // Implementation in child class
+        }
+
+        protected virtual void ClearHitColliderCache()
+        {
+            for (int i = 0; i < _hitColliders.Length; i++)
+            {
+                _hitColliders[i] = null;
+            }
+        }
+
+        private void Move()
+        {
+            transform.position += _speed * Time.deltaTime * _direction;
+        }
+
+        private void DeactivateProjectile()
+        {
+            if (_projectileLifeTimer.IsExpired())
+            {
+                _projectileLifeTimer = SimulationTimer.None;
+                gameObject.SetActive(false);
+            }
         }
     }
 }

@@ -4,19 +4,21 @@ namespace ProjectTD
 {
     public class BasicProjectile : BaseProjectile
     {
-        private void OnTriggerEnter(Collider other)
+        protected override void HitTarget()
         {
-            bool isTriggerWithCharacter = other.TryGetComponent<CharacterAim>(out _);
-            bool isTriggerWithProjectile = other.TryGetComponent<BaseProjectile>(out _);
+            ClearHitColliderCache();
 
-            if (!isTriggerWithCharacter && !isTriggerWithProjectile)
+            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, _hitColliders, _targetMask);
+
+            for (int i = 0; i < numberOfCollider; i++)
             {
-                if (other.TryGetComponent<IDamageable>(out IDamageable target))
-                {
-                    target.TakeDamage(_damagePoints);
-                }
+                if (_hitColliders[i] == null) continue;
 
-                DeactivateProjectile();
+                if (_hitColliders[i].TryGetComponent(out IDamageable target))
+                {
+                    target.TryTakeDamage(_damagePoints);
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
