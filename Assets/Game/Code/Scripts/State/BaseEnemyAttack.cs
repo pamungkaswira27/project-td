@@ -7,9 +7,14 @@ namespace ProjectTD
 {
     public class BaseEnemyAttack : MonoBehaviour
     {
-        private int _damage;
         [SerializeField]
         protected AIFieldOfView aiFieldOfView;
+
+        protected LayerMask ObstructionMask => aiFieldOfView.Obstruction;
+        protected float ViewAngle => aiFieldOfView.Angle;
+        protected float ViewRadius => aiFieldOfView.Radius;
+
+        private int _damage;
 
         public virtual void MeleeAttack(int damaged)
         {
@@ -24,6 +29,16 @@ namespace ProjectTD
         public virtual void SelfExplodingAttack(int damage)
         {
             _damage = damage;
+        }
+
+        protected Transform GetTarget()
+        {
+            return aiFieldOfView.Target;
+        }
+
+        protected Transform LookAtPlayer()
+        {
+            return aiFieldOfView.transform;
         }
     }
 }

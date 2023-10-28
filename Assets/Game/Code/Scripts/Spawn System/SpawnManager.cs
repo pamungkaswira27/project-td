@@ -18,6 +18,11 @@ namespace ProjectTD
             _objectPooler = ObjectPooler.Instance;
         }
 
+        protected virtual void SpawningCrates()
+        {
+            _objectPooler = ObjectPooler.Instance;
+        }
+
         protected virtual IEnumerator SpawningTime()
         {
             yield return null;

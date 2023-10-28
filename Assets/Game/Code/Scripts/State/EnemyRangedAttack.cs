@@ -10,7 +10,6 @@ namespace ProjectTD
         public override void RangedAttack(int damaged)
         {
             Debug.Log($"Attacked by Ranged Type, with {damaged} damage's");
-            aiFieldOfView.transform.LookAt(aiFieldOfView.Target.position);
         }
     }
 }

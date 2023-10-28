@@ -9,7 +9,6 @@ namespace ProjectTD
         public override void SelfExplodingAttack(int damage)
         {
             Debug.Log($"Attacked by Self Exploding Type, with {damage} damage's.");
-            aiFieldOfView.transform.LookAt(aiFieldOfView.Target.position);
         }
     }
 }
