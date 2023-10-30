@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDrop : MonoBehaviour
+namespace ProjectTD
 {
-    public float damage;
-    private IDamageable damageable;
-
-    private void Start()
+    public class ItemDrop : MonoBehaviour
     {
-        damageable = GetComponent<IDamageable>();
-    }
+        public float damage;
+        private IDamageable damageable;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
+        private void Start()
         {
-            damageable.TakeDamage(damage);
+            damageable = GetComponent<IDamageable>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                // damageable.TakeDamage(damage);
+            }
         }
     }
 }
