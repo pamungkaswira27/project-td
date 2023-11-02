@@ -17,6 +17,7 @@ namespace ProjectTD
             CheckpointManager.Instance = null;
             CameraManager.Instance = null;
             ObjectPooler.Instance = null;
+            RespawnerManager.Instance = null;
         }
     }
 }

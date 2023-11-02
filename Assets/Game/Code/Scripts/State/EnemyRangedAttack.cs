@@ -9,7 +9,10 @@ namespace ProjectTD
     {
         public override void RangedAttack(int damaged)
         {
-            Debug.Log($"Attacked by Ranged Type, with {damaged} damage's");
+            if (aiFieldOfView.Target.TryGetComponent(out CharacterHealth characterHealth))
+            {
+                characterHealth.DecreaseHealth(damaged);
+            }
         }
     }
 }
