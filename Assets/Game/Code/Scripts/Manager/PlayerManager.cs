@@ -57,6 +57,7 @@ namespace ProjectTD
         {
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             CameraManager.Instance.SetupFollowCamera(player.transform);
+            RespawnerManager.Instance.RespawnObjects();
 
             if (!_isInitialSpawn)
             {
