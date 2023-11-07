@@ -55,16 +55,19 @@ namespace ProjectTD
                 if (isChasingPlayer)
                 {
                     Debug.Log("Enemy Ranged Chasing Player");
+                    GetComponent<AIChase>().enabled = true;
                     return;
                 }
+
                 return;
             }
+            GetComponent<AIChase>().enabled = false;
             Debug.Log("Enemy Ranged Patrolling");
         }
 
         private bool IsChasingPlayer(Vector3 inChasingDistance)
         {
-            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle / 2;
+            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle;
         }
 
         private bool IsMeleeAttack(float distanceToPlayer)

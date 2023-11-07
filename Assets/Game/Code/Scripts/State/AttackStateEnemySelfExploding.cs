@@ -39,16 +39,18 @@ namespace ProjectTD
                 if (isEnemyChasing)
                 {
                     Debug.Log("Enemy Self Exploding Chasing Player");
+                    GetComponent<AIChase>().enabled = true;
                     return;
                 }
                 return;
             }
+            GetComponent<AIChase>().enabled = false;
             Debug.Log("Enemy Self Exploding Patrolling");
         }
 
         private bool IsEnemyChasing(Vector3 inChasingDistance)
         {
-            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle / 2;
+            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle;
         }
 
         private bool IsSelfExplodingAttack(float distanceToPlayer)

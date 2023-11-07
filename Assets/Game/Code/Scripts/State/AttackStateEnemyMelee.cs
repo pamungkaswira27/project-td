@@ -11,11 +11,16 @@ namespace ProjectTD
         [Header("Damage")]
         [SerializeField]
         private int _meleeDamage;
+        [Header("Radius Chasing Melee Distance")]
+        [SerializeField]
+        private float _divideForRadiusChasing;
         [Header("Attack Melee Distance")]
         [SerializeField]
         private float _maxDistance;
         [SerializeField]
         private float _minDistance;
+
+        private Collider[] _otherEnemies;
 
         private void Update()
         {
@@ -30,19 +35,19 @@ namespace ProjectTD
 
                 if (isAttacking)
                 {
-                    //_attackMelee.MeleeAttack(_meleeDamage);
                     Debug.Log("Enemy Melee Attacking");
+                    _attackMelee.MeleeAttack(_meleeDamage);
                     return;
                 }
 
                 if (isEnemyChasing)
                 {
-                    Debug.Log("Enemy Melee Chasing Player");
+                    GetComponent<AIChase>().enabled = true;
                     return;
                 }
-
                 return;
             }
+            GetComponent<AIChase>().enabled = false;
             Debug.Log("Enemy Melee Patrolling");
         }
 
@@ -53,8 +58,26 @@ namespace ProjectTD
 
         private bool IsEnemyChasing(Vector3 fov)
         {
-            bool chasing = Vector3.Angle(transform.position, fov) < ViewAngle / 2;
-            return chasing;
+            return Vector3.Angle(transform.position, fov) < ViewAngle;
         }
+
+        //private void EnemyMeleeAlert(Vector3 playerPost, string enemyType)
+        //{
+        //    float rad = ViewRadius - 15;
+        //    Collider[] enemies = new Collider[5];
+        //    Physics.OverlapSphereNonAlloc(playerPost, rad, enemies, ObstructionMask);
+
+        //    foreach (Collider meleeEnemy in enemies)
+        //    {
+        //        if (meleeEnemy != null)
+        //        {
+        //            GameObject enemy = meleeEnemy.gameObject;
+        //            if (enemy.GetComponent<AttackStateEnemyMelee>().EnemyType == enemyType)
+        //            {
+        //                transform.LookAt(GetTarget().position);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
