@@ -24,6 +24,7 @@ namespace ProjectTD
         private CharacterUltimateShoot _characterUltimateShoot;
         private bool _isInitialSpawn;
 
+        public GameObject Player { get; private set; }
         public CharacterMovement CharacterMovement => _characterMovement;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
@@ -58,6 +59,7 @@ namespace ProjectTD
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             CameraManager.Instance.SetupFollowCamera(player.transform);
             RespawnerManager.Instance.RespawnObjects();
+            Player = player;
 
             if (!_isInitialSpawn)
             {
