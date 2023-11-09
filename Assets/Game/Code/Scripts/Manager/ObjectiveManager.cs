@@ -16,11 +16,6 @@ namespace ProjectTD
             Instance = this;
         }
 
-        private void Start()
-        {
-            SetActiveObjective();
-        }
-
         public bool HasActiveObjective()
         {
             return (ActiveObjective != null);

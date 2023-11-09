@@ -6,11 +6,16 @@ namespace ProjectTD
     {
         [Header("General")]
         [SerializeField]
-        private string _description;
+        protected string _description;
         public string Description => _description;
         [SerializeField]
-        private bool _isCompleted;
+        protected bool _isCompleted;
         public bool IsCompleted => _isCompleted;
+
+        private void Start()
+        {
+            RespawnerManager.Instance.AddObjectiveToReset(this);
+        }
 
         public void Complete()
         {

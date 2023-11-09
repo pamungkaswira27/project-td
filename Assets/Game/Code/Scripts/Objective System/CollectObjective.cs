@@ -22,5 +22,11 @@ namespace ProjectTD
         {
             _currentAmount++;
         }
+
+        public void ResetProgress()
+        {
+            _currentAmount = 0;
+            _isCompleted = false;
+        }
     }
 }

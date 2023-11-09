@@ -16,5 +16,10 @@ namespace ProjectTD
 
             return (Vector3.Distance(playerPosition, destinationPosition) <= 5f);
         }
+
+        public void ResetProgress()
+        {
+            _isCompleted = false;
+        }
     }
 }
