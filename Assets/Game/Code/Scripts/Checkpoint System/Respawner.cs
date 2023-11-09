@@ -17,8 +17,7 @@ namespace ProjectTD
 
         public void Respawn()
         {
-            transform.position = _initialPosition;
-            transform.rotation = _initialRotation;
+            transform.SetPositionAndRotation(_initialPosition, _initialRotation);
 
             if (TryGetComponent(out CharacterHealth characterHealth))
             {
