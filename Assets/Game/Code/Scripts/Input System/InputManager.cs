@@ -42,6 +42,16 @@ namespace ProjectTD
             UnsubscribeInputEvents();
         }
 
+        public void EnablePlayerInput()
+        {
+            _playerInputAction.Enable();
+        }
+
+        public void DisablePlayerInput()
+        {
+            _playerInputAction.Disable();
+        }
+
         private void SubscribeInputEvents()
         {
             // Character movement input

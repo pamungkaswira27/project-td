@@ -11,6 +11,8 @@ namespace ProjectTD
         private List<Respawner> _objectToRespawnList;
         [SerializeField]
         private List<Objective> _objectiveToReset;
+        [SerializeField]
+        private List<DialogueTrigger> _dialogueToReset;
 
         private void Awake()
         {
@@ -25,6 +27,11 @@ namespace ProjectTD
         public void AddObjectiveToReset(Objective objectiveToReset)
         {
             _objectiveToReset.Add(objectiveToReset);
+        }
+
+        public void AddDialogueToReset(DialogueTrigger dialogue)
+        {
+            _dialogueToReset.Add(dialogue);
         }
 
         public void RespawnObjects()
@@ -62,6 +69,14 @@ namespace ProjectTD
             }
         }
 
+        public void ResetDialogue()
+        {
+            foreach (DialogueTrigger dialogueToReset in _dialogueToReset)
+            {
+                dialogueToReset.ResetDialogueTrigger();
+            }
+        }
+
         public void ClearList()
         {
             foreach (Respawner objectToRespawn in _objectToRespawnList.ToArray())
@@ -77,6 +92,14 @@ namespace ProjectTD
                 if (objectiveToReset.IsCompleted)
                 {
                     _objectiveToReset.Remove(objectiveToReset);
+                }
+            }
+
+            foreach (DialogueTrigger dialogueToReset in _dialogueToReset.ToArray())
+            {
+                if (dialogueToReset.HasTriggered)
+                {
+                    _dialogueToReset.Remove(dialogueToReset);
                 }
             }
         }

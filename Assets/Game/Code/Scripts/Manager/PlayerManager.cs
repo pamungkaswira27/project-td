@@ -60,7 +60,7 @@ namespace ProjectTD
             CameraManager.Instance.SetupFollowCamera(player.transform);
             RespawnerManager.Instance.RespawnObjects();
             RespawnerManager.Instance.ResetObjective();
-            ObjectiveManager.Instance.SetActiveObjective();
+            RespawnerManager.Instance.ResetDialogue();
 
             Player = player;
 
@@ -69,6 +69,8 @@ namespace ProjectTD
                 _characterHealth.SetHealthPoints(_characterHealth.MaxHealthPoints);
                 return;
             }
+
+            ObjectiveManager.Instance.SetActiveObjective();
 
             _isInitialSpawn = false;
         }
