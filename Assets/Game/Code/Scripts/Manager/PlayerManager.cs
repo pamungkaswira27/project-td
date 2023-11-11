@@ -25,6 +25,7 @@ namespace ProjectTD
         private bool _isInitialSpawn;
         private Transform _playerTransform;
 
+        public GameObject Player { get; private set; }
         public CharacterMovement CharacterMovement => _characterMovement;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
@@ -59,12 +60,19 @@ namespace ProjectTD
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             _playerTransform = player.transform;
             CameraManager.Instance.SetupFollowCamera(player.transform);
+            RespawnerManager.Instance.RespawnObjects();
+            RespawnerManager.Instance.ResetObjective();
+            RespawnerManager.Instance.ResetDialogue();
+
+            Player = player;
 
             if (!_isInitialSpawn)
             {
                 _characterHealth.SetHealthPoints(_characterHealth.MaxHealthPoints);
                 return;
             }
+
+            ObjectiveManager.Instance.SetActiveObjective();
 
             _isInitialSpawn = false;
         }
