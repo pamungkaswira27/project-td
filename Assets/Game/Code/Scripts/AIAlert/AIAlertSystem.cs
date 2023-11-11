@@ -1,4 +1,5 @@
 using ProjectTD;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,52 +19,71 @@ namespace ProjectTD
         private string enemyType;
 
         private Collider[] otherEnemies;
-        public Transform _player;
-        public bool _isAttacked;
+        private Vector3 _playerPosition;
+        private Transform _player;
+        private Transform _post;
+        private bool _isAttacked;
+        public bool _deadRangedEnemy;
+
+        public float AlertRadius
+        {
+            get
+            {
+                return _radiusForTrigger;
+            }
+        }
+
+        public string EnemyType
+        {
+            get
+            {
+                return enemyType;
+            }
+        }
 
         private void Start()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
+            _playerManager = PlayerManager.Instance;
+            EnemyHealth.RangedEnemyDead += OnDeadEnemyRanged;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
-            if (_isAttacked)
+            if (!_isAttacked) return;
+
+            if (_playerManager == null) return;
+
+            _post = _playerManager.GetTransformPlayer();
+
+            if (_post == null) return;
+
+            _player = _post;
+            _playerPosition = _player.position;
+
+            Debug.Log(enemyType);
+
+            if (IsSelfExplode())
             {
-                _playerManager = FindObjectOfType<PlayerManager>();
+                CheckOtherEnemies();
+                return;
 
-                if (_playerManager != null)
-                {
-                    Transform post = _playerManager.GetTransformPlayer();
-
-                    if (post != null)
-                    {
-                        _player = post;
-                        Vector3 playerPost = _player.position;
-
-                        CheckOtherEnemies();
-
-                        if (IsSelfExplode())
-                        {
-                            EnemiesAlert(playerPost);
-                            return;
-                        }
-
-                        if (IsMelee())
-                        {
-                            EnemiesAlert(playerPost);
-                            return;
-                        }
-
-                        if (IsRanged())
-                        {
-                            EnemiesAlert(playerPost);
-                            return;
-                        }
-
-                    }
-                }
             }
+
+            if (IsMelee())
+            {
+                CheckOtherEnemies();
+                return;
+            }
+
+            if (IsRanged())
+            {
+                transform.LookAt(_playerPosition);
+                return;
+            }
+
+            if (!_deadRangedEnemy) return;
+
+            OnDeadEnemyRanged();
         }
 
         public void OnAttacked()
@@ -71,38 +91,36 @@ namespace ProjectTD
             _isAttacked = true;
         }
 
-        private void EnemiesAlert(Vector3 player)
+        public void OnDeadEnemyRanged()
         {
-            transform.LookAt(player);
+            if (enemyType != "Ranged") return;
+            if (_post == null) return;
+
+            _player = _post;
+            _playerPosition = _player.position;
+
+            CheckOtherEnemies();
         }
 
         private void CheckOtherEnemies()
         {
             otherEnemies = new Collider[10];
-            int a = Physics.OverlapSphereNonAlloc(transform.position, _radiusForTrigger, otherEnemies, _enemies);
-            Debug.Log(a);
+            int enemyInRadius = Physics.OverlapSphereNonAlloc(transform.position, _radiusForTrigger, otherEnemies, _enemies);
+            Debug.Log(enemyInRadius);
 
-            for (int i = 0; i < a; i++)
+            for (int i = 0; i < enemyInRadius; i++)
             {
                 Collider enemy = otherEnemies[i];
-
                 if (enemy != null)
                 {
-                    Debug.Log(enemyType);
-                    Debug.Log(enemy);
-                    AIAlertSystem otherEnemy = enemy.gameObject.GetComponent<AIAlertSystem>();
+                    if (!enemy.gameObject.TryGetComponent<AIAlertSystem>(out var otherEnemy)) return;
 
-                    Debug.Log(otherEnemy.enemyType);
-                    if (otherEnemy != null && otherEnemy.enemyType == enemyType)
+                    if (otherEnemy.enemyType == enemyType)
                     {
-                        Debug.Log("Attackkk");
+                        otherEnemy._deadRangedEnemy = true;
                         otherEnemy.OnAttacked();
                         transform.LookAt(_player.position);
-                        return;
                     }
-                    OnAttacked();
-                    transform.LookAt(_player.position);
-                    return;
                 }
             }
         }
@@ -111,6 +129,7 @@ namespace ProjectTD
         {
             return GetEnemyMeleeType() == enemyType;
         }
+
         private bool IsRanged()
         {
             return GetEnemyRangedType() == enemyType;
@@ -119,7 +138,5 @@ namespace ProjectTD
         {
             return GetEnemySelfExplodingType() == enemyType;
         }
-
-
     }
 }

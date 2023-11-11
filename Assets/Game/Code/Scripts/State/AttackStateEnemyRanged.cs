@@ -29,45 +29,29 @@ namespace ProjectTD
 
         private void Update()
         {
-            if(GetTarget() != null)
+            if (GetTarget() != null)
             {
                 LookAtPlayer().LookAt(GetTarget().position);
-                Vector3 inChasingDistance = (transform.position - GetTarget().position);
+
                 float distanceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
                 bool isRangedAttack = IsRangedAttack(distanceToPlayer);
                 bool isMeleeAttack = IsMeleeAttack(distanceToPlayer);
-                bool isChasingPlayer = IsChasingPlayer(inChasingDistance);
 
                 if (isRangedAttack)
                 {
-                    Debug.Log("Enemy Ranged Attacking");
                     _enemyRangedAttack.RangedAttack(_rangedDamage);
                     return;
                 }
 
                 if (isMeleeAttack)
                 {
-                    Debug.Log("Enemy Melee Attacking");
                     _enemyMeleeAttack.MeleeAttack(_meleeDamage);
                     return;
                 }
-
-                if (isChasingPlayer)
-                {
-                    Debug.Log("Enemy Ranged Chasing Player");
-                    GetComponent<AIChase>().enabled = true;
-                    return;
-                }
-
                 return;
             }
-            GetComponent<AIChase>().enabled = false;
-            Debug.Log("Enemy Ranged Patrolling");
-        }
+           
 
-        private bool IsChasingPlayer(Vector3 inChasingDistance)
-        {
-            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle;
         }
 
         private bool IsMeleeAttack(float distanceToPlayer)
@@ -77,7 +61,7 @@ namespace ProjectTD
 
         private bool IsRangedAttack(float distanceToPlayer)
         {
-            return distanceToPlayer <= _maxRangedDistance && distanceToPlayer > _minRangedDistance&& distanceToPlayer <= ViewRadius;
+            return distanceToPlayer <= _maxRangedDistance && distanceToPlayer > _minRangedDistance && distanceToPlayer <= ViewRadius;
         }
     }
 

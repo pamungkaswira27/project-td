@@ -24,33 +24,18 @@ namespace ProjectTD
             if(GetTarget() != null)
             {
                 LookAtPlayer().LookAt(GetTarget().position);
-                Vector3 inChasingDistance = (transform.position - GetTarget().position);
+
                 float distanceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
                 bool isSelfExplodingAttack = IsSelfExplodingAttack(distanceToPlayer);
-                bool isEnemyChasing = IsEnemyChasing(inChasingDistance);
 
                 if(isSelfExplodingAttack)
                 {
-                    Debug.Log("Enemy Self Exploding Attack");
                     _slefExplodingEnemy.SelfExplodingAttack(_damageSelfExploding);
                     return;
                 }
 
-                if (isEnemyChasing)
-                {
-                    Debug.Log("Enemy Self Exploding Chasing Player");
-                    GetComponent<AIChase>().enabled = true;
-                    return;
-                }
                 return;
             }
-            GetComponent<AIChase>().enabled = false;
-            Debug.Log("Enemy Self Exploding Patrolling");
-        }
-
-        private bool IsEnemyChasing(Vector3 inChasingDistance)
-        {
-            return Vector3.Angle(transform.position, inChasingDistance) < ViewAngle;
         }
 
         private bool IsSelfExplodingAttack(float distanceToPlayer)
