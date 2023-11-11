@@ -21,6 +21,11 @@ namespace ProjectTD
             return (ActiveObjective != null);
         }
 
+        public void ClearActiveObjective()
+        {
+            _activeObjective = null;
+        }
+
         public void SetActiveObjective()
         {
             _activeObjective = null;
@@ -29,13 +34,24 @@ namespace ProjectTD
             {
                 Objective objective = transform.GetChild(i).GetComponent<Objective>();
 
-                if (objective == null || objective.IsCompleted)
+                if (objective.IsCompleted)
                 {
                     continue;
                 }
 
                 _activeObjective = objective;
                 break;
+            }
+
+            if (_activeObjective == null)
+            {
+                return;
+            }
+
+            if (_activeObjective.TryGetComponent(out DialogueTrigger dialogueTrigger))
+            {
+                InputManager.Instance.DisablePlayerInput();
+                dialogueTrigger.TriggerDialogue();
             }
         }
     }

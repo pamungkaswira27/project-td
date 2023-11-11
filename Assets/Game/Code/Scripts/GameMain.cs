@@ -19,6 +19,7 @@ namespace ProjectTD
             ObjectiveManager.Instance = null;
             ObjectPooler.Instance = null;
             RespawnerManager.Instance = null;
+            DialogueManager.Instance = null;
         }
     }
 }

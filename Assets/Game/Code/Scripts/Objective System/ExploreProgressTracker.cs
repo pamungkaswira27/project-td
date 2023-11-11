@@ -21,7 +21,6 @@ namespace ProjectTD
             if (currentObjective.IsObjectiveCompleted())
             {
                 ObjectiveManager.Instance.ActiveObjective.Complete();
-                ObjectiveManager.Instance.SetActiveObjective();
                 Debug.Log($"[{nameof(ExploreProgressTracker)}]: Objective Completed!");
                 return;
             }
