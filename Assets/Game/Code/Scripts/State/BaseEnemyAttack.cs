@@ -13,7 +13,6 @@ namespace ProjectTD
         protected LayerMask ObstructionMask => aiFieldOfView.Obstruction;
         protected float ViewAngle => aiFieldOfView.Angle;
         protected float ViewRadius => aiFieldOfView.Radius;
-
         private int _damage;
 
         public virtual void MeleeAttack(int damaged)
@@ -39,6 +38,21 @@ namespace ProjectTD
         protected Transform LookAtPlayer()
         {
             return aiFieldOfView.transform;
+        }
+
+        protected string GetEnemyMeleeType()
+        {
+            return TagConst.TAG_ENEMY_MELEE;
+        }
+        
+        protected string GetEnemyRangedType()
+        {
+            return TagConst.TAG_ENEMY_RANGED;
+        }
+        
+        protected string GetEnemySelfExplodingType()
+        {
+            return TagConst.TAG_ENEMY_SELF_EXPLODING;
         }
     }
 }

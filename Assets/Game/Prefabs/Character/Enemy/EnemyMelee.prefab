@@ -132,10 +132,10 @@ GameObject:
   - component: {fileID: 1606072583883124681}
   - component: {fileID: 6653085608612990351}
   - component: {fileID: 5887631015249240994}
-  - component: {fileID: 8342180670406043975}
-  - component: {fileID: 7103209759114723706}
-  - component: {fileID: -4654777378286461859}
-  - component: {fileID: -7636287092644264062}
+  - component: {fileID: 6861453845891817368}
+  - component: {fileID: 1811367505334656762}
+  - component: {fileID: -3484594894648127204}
+  - component: {fileID: -7109048572229245644}
   m_Layer: 9
   m_Name: EnemyMelee
   m_TagString: Untagged
@@ -298,7 +298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPoints: 100
   _maxHealthPoints: 100
---- !u!114 &8342180670406043975
+  _aiAlert: {fileID: -7109048572229245644}
+--- !u!114 &6861453845891817368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,15 +308,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6995053595898973261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55d059bee896204b904d418838827cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1669447d3c866404e853b9888dfab28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
-  _attackMelee: {fileID: 7103209759114723706}
-  _meleeDamage: 15
-  _maxDistance: 0.1
-  _minDistance: 3
---- !u!114 &7103209759114723706
+--- !u!114 &1811367505334656762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
---- !u!114 &-4654777378286461859
+--- !u!114 &-3484594894648127204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,10 +334,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6995053595898973261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c29cb96f19e0d4b94a607e4de13824, type: 3}
+  m_Script: {fileID: 11500000, guid: a55d059bee896204b904d418838827cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7636287092644264062
+  aiFieldOfView: {fileID: 5992419859950814692}
+  _attackMelee: {fileID: 1811367505334656762}
+  _meleeDamage: 15
+  _divideForRadiusChasing: 0
+  _maxDistance: 1.5
+  _minDistance: 1
+--- !u!114 &-7109048572229245644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,9 +352,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6995053595898973261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd20627d5b460384286afabc19b03c4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c1a290f65c3219489420336fef557e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+  _playerManager: {fileID: 0}
+  _enemies:
+    serializedVersion: 2
+    m_Bits: 512
+  _radiusForTrigger: 4
+  enemyType: Melee
+  _player: {fileID: 0}
+  _isAttacked: 0
+  _isDead: 0
 --- !u!1 &7336273447544777384
 GameObject:
   m_ObjectHideFlags: 0
