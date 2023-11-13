@@ -148,8 +148,8 @@ namespace ProjectTD
 
         private void ActivateUltimate()
         {
-            _playerManager.CharacterUltimateShoot.ActivateUltimate();
             StopFire();
+            _playerManager.CharacterUltimateShoot.ActivateUltimate();
         }
     }
 }
