@@ -19,11 +19,12 @@ namespace ProjectTD
         private void Awake()
         {
             Instance = this;
+            _sentenceQueue = new Queue<string>();
         }
 
         private void Start()
         {
-            _sentenceQueue = new Queue<string>();
+            
         }
 
         public void StartDialogue(Dialogue dialogue)

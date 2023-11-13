@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/DemoScene/DemoScene_1.unity
-    guid: 8db0e0438c11e3645b153edd4af5cfc6
+    path: Assets/Game/Scenes/Milestone2/DemoMainMenu.unity
+    guid: f7cbb000d4451534e822b51c56a7a298
+  - enabled: 1
+    path: Assets/Game/Scenes/Milestone2/DemoScene2.unity
+    guid: dff7676a46e82734aa4159c240a8c9b0
   m_configObjects: {}
