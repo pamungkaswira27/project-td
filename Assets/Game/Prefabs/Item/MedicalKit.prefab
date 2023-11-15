@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 3109176853831388982}
   - component: {fileID: 2301970306078141914}
   - component: {fileID: 9182594606839280031}
-  - component: {fileID: 5556447501286630835}
   m_Layer: 0
   m_Name: MedicalKit
   m_TagString: Untagged
@@ -177,17 +176,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e7c23d01830f724cb1040e0e6281b10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5556447501286630835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4201906548685886550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f09d18268cd1e4d864357485b8cd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
