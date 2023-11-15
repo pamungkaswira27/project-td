@@ -7,7 +7,7 @@ namespace ProjectTD
         [SerializeField]
         private Transform _destination;
 
-        private float _minimumDistanceToReached = 5.5f;
+        private readonly float _minimumDistanceToReached = 5.5f;
 
         public override void OnStart()
         {
