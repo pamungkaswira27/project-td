@@ -2,24 +2,23 @@ using UnityEngine;
 
 namespace ProjectTD
 {
-    public class ExploreObjective : Objective
+    public class ExploreObjective : BaseObjective
     {
-        [Header("Explore Objective")]
         [SerializeField]
         private Transform _destination;
-        public Transform Destination => _destination;
+
+        private float _minimumDistanceToReached = 5.5f;
+
+        public override void OnStart()
+        {
+            _hasStarted = true;
+        }
 
         public override bool IsObjectiveCompleted()
         {
             Vector3 playerPosition = PlayerManager.Instance.Player.transform.position;
-            Vector3 destinationPosition = Destination.position;
 
-            return (Vector3.Distance(playerPosition, destinationPosition) <= 5f);
-        }
-
-        public void ResetProgress()
-        {
-            _isCompleted = false;
+            return (Vector3.Distance(_destination.position, playerPosition) <= _minimumDistanceToReached);
         }
     }
 }

@@ -1,32 +1,37 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace ProjectTD
 {
-    public class KillObjective : Objective
+    public class KillObjective : BaseObjective
     {
-        [Header("Kill Objective")]
         [SerializeField]
-        private int _requiredAmount;
-        public int RequiredAmount => _requiredAmount;
-        [SerializeField, ReadOnly]
-        private int _currentAmount;
-        public int CurrentAmount => _currentAmount;
+        private CharacterHealth[] _targets;
+
+        private int _targetCount;
+
+        public override void Initialize()
+        {
+            _targetCount = _targets.Length;
+
+            for (int i = 0; i < _targets.Length; i++)
+            {
+                if (_targets[i] == null)
+                {
+                    return;
+                }
+
+                _targets[i].OnCharacterDead += OnTargetKilled;
+            }
+        }
 
         public override bool IsObjectiveCompleted()
         {
-            return (CurrentAmount >= RequiredAmount);
+            return (_targetCount <= 0);
         }
 
-        public void UpdateCurrentAmount()
+        private void OnTargetKilled()
         {
-            _currentAmount++;
-        }
-
-        public void ResetProgress()
-        {
-            _currentAmount = 0;
-            _isCompleted = false;
+            _targetCount--;
         }
     }
 }

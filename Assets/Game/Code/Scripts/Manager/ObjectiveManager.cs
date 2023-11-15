@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace ProjectTD
@@ -7,51 +6,49 @@ namespace ProjectTD
     {
         public static ObjectiveManager Instance;
 
-        [SerializeField, ReadOnly]
-        private Objective _activeObjective;
-        public Objective ActiveObjective => _activeObjective;
+        [SerializeField]
+        private BaseObjective[] _objectives;
 
-        private void Awake()
+        private int _activeObjectiveIndex = 0;
+
+        private void Start()
         {
-            Instance = this;
-        }
-
-        public bool HasActiveObjective()
-        {
-            return (ActiveObjective != null);
-        }
-
-        public void ClearActiveObjective()
-        {
-            _activeObjective = null;
-        }
-
-        public void SetActiveObjective()
-        {
-            _activeObjective = null;
-
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i <  _objectives.Length; i++)
             {
-                Objective objective = transform.GetChild(i).GetComponent<Objective>();
-
-                if (objective.IsCompleted)
+                if (_objectives[i] == null)
                 {
                     continue;
                 }
 
-                _activeObjective = objective;
-                break;
+                _objectives[i].Initialize();
+            }
+        }
+
+        private void Update()
+        {
+            if (_activeObjectiveIndex >= _objectives.Length)
+            {
+                Debug.Log($"[{nameof(ObjectiveManager)}]: There's no objective left");
+                return;
             }
 
-            if (_activeObjective == null)
+            BaseObjective objective = _objectives[_activeObjectiveIndex];
+
+            if (objective == null)
             {
                 return;
             }
 
-            if (_activeObjective.TryGetComponent(out DialogueTrigger dialogueTrigger))
+            if (!objective.HasStarted)
             {
-                InputManager.Instance.DisablePlayerInput();
-                dialogueTrigger.TriggerDialogue();
+                objective.OnStart();
+            }
+
+            objective.OnUpdate();
+
+            if (objective.IsObjectiveCompleted())
+            {
+                _activeObjectiveIndex++;
             }
         }
     }
