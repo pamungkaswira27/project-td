@@ -17,8 +17,9 @@ namespace ProjectTD
                 if (_hitColliders[i].TryGetComponent(out IDamageable target))
                 {
                     target.TryTakeDamage(_damagePoints);
-                    gameObject.SetActive(false);
                 }
+
+                gameObject.SetActive(false);
             }
         }
     }
