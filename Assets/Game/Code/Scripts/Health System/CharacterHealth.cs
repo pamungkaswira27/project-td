@@ -39,6 +39,16 @@ namespace ProjectTD
             _healthPoints = amount;
         }
 
+        public void IncreaseHealthPoints(float amount)
+        {
+            _healthPoints += amount;
+
+            if (_healthPoints >= _maxHealthPoints)
+            {
+                _healthPoints = _maxHealthPoints;
+            }
+        }
+
         private void OnCharacterDamaged(float damageAmount)
         {
             DecreaseHealth(damageAmount);

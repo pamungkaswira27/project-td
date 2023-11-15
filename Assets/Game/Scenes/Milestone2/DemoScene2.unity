@@ -11403,21 +11403,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedicalKit
       objectReference: {fileID: 0}
-    - target: {fileID: 8258219399452720972, guid: a44a803fbc8a1f44ba7354cc28ef438f,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8258219399452720972, guid: a44a803fbc8a1f44ba7354cc28ef438f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6568213e06aca364c9372bf99a0331b6, type: 2}
-    - target: {fileID: 8258219399452720972, guid: a44a803fbc8a1f44ba7354cc28ef438f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6568213e06aca364c9372bf99a0331b6, type: 2}
     - target: {fileID: 8660268467763595159, guid: a44a803fbc8a1f44ba7354cc28ef438f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11468,8 +11453,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5556447501286630835, guid: a44a803fbc8a1f44ba7354cc28ef438f, type: 3}
+    - target: {fileID: 9182594606839280031, guid: a44a803fbc8a1f44ba7354cc28ef438f,
+        type: 3}
+      propertyPath: _overlapRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

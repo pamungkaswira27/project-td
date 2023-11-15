@@ -27,6 +27,7 @@ namespace ProjectTD
 
         public GameObject Player { get; private set; }
         public CharacterMovement CharacterMovement => _characterMovement;
+        public CharacterHealth CharacterHealth => _characterHealth;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
         public int Life => _life;
