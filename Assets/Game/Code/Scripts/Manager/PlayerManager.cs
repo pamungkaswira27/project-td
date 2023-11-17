@@ -27,6 +27,7 @@ namespace ProjectTD
 
         public GameObject Player { get; private set; }
         public CharacterMovement CharacterMovement => _characterMovement;
+        public CharacterHealth CharacterHealth => _characterHealth;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
         public int Life => _life;
@@ -59,10 +60,9 @@ namespace ProjectTD
         {
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             _playerTransform = player.transform;
+            InputManager.Instance.EnablePlayerInput();
             CameraManager.Instance.SetupFollowCamera(player.transform);
             RespawnerManager.Instance.RespawnObjects();
-            RespawnerManager.Instance.ResetObjective();
-            RespawnerManager.Instance.ResetDialogue();
 
             Player = player;
 
@@ -71,8 +71,6 @@ namespace ProjectTD
                 _characterHealth.SetHealthPoints(_characterHealth.MaxHealthPoints);
                 return;
             }
-
-            ObjectiveManager.Instance.SetActiveObjective();
 
             _isInitialSpawn = false;
         }

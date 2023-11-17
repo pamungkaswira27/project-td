@@ -8,41 +8,39 @@ namespace ProjectTD
         public static DialogueManager Instance;
 
         [SerializeField]
-        private float _nextSentenceTime;
+        private float _dialogueDisplayTime;
 
         private Queue<string> _sentenceQueue;
-        private Dialogue _currentDialogue;
 
         private string _sentence;
+        private bool _dialogueCompleted;
+
         public string Sentence => _sentence;
+        public bool DialogueCompleted => _dialogueCompleted;
 
         private void Awake()
         {
             Instance = this;
-            _sentenceQueue = new Queue<string>();
         }
 
         private void Start()
         {
-            
+            _sentenceQueue = new Queue<string>();
         }
 
-        public void StartDialogue(Dialogue dialogue)
+        public void StartDialogue(DialogueSO dialogue)
         {
-            _currentDialogue = dialogue;
+            InputManager.Instance.DisablePlayerInput();
+            _dialogueCompleted = false;
+
             _sentenceQueue.Clear();
 
-            foreach (string sentence in dialogue.sentences)
+            for (int i = 0; i < dialogue.GetSentenceLength(); i++)
             {
-                _sentenceQueue.Enqueue(sentence);
+                _sentenceQueue.Enqueue(dialogue.GetSentence(i));
             }
 
             DisplaySentence();
-        }
-
-        public void ClearSentence()
-        {
-            _sentence = null;
         }
 
         private void DisplaySentence()
@@ -55,28 +53,14 @@ namespace ProjectTD
 
             _sentence = _sentenceQueue.Dequeue();
 
-            // Display next sentence
-            Invoke(nameof(DisplaySentence), _nextSentenceTime);
+            Invoke(nameof(DisplaySentence), _dialogueDisplayTime);
         }
 
         private void EndDialogue()
         {
-            if (_currentDialogue.canTriggerObjective)
-            {
-                ObjectiveManager.Instance.SetActiveObjective();
-            }
-
-            if (ObjectiveManager.Instance.ActiveObjective == null)
-            {
-                _sentence = string.Empty;
-                return;
-            }
-
-            _sentence = ObjectiveManager.Instance.ActiveObjective.Description;
-            _currentDialogue = null;
             InputManager.Instance.EnablePlayerInput();
-
-            Debug.Log($"[{nameof(DialogueManager)}]: Dialogue end");
+            _dialogueCompleted = true;
+            _sentence = null;
         }
     }
 }

@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -8,6 +9,8 @@ namespace ProjectTD
         private static void Main()
         {
             CleanUpSingletons();
+
+            SpawnAudioManager();
         }
 
         private static void CleanUpSingletons() 
@@ -20,6 +23,15 @@ namespace ProjectTD
             ObjectPooler.Instance = null;
             RespawnerManager.Instance = null;
             DialogueManager.Instance = null;
+        }
+
+        private static void SpawnAudioManager()
+        {
+            GameObject audioManagerPrefab = Resources.Load<GameObject>(nameof(AudioManager));
+
+            Object.Instantiate(audioManagerPrefab);
+
+            
         }
     }
 }

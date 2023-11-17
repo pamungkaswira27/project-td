@@ -1,50 +1,55 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public class DialogueTrigger : MonoBehaviour
     {
+        private const int OVERLAP_RESULT_COLLIDER_SIZE = 1;
+
         [SerializeField]
-        private Dialogue _dialogue;
-        [SerializeField]
-        private bool _useColliderTrigger;
-        [SerializeField, ReadOnly]
+        private DialogueSO _dialogue;
+
+        private Collider[] _overlapResultColliders;
+        private readonly float _overlapRadius = 10f;
         private bool _hasTriggered;
-        public bool HasTriggered => _hasTriggered;
 
         private void Start()
         {
-            RespawnerManager.Instance.AddDialogueToReset(this);
+            _overlapResultColliders = new Collider[OVERLAP_RESULT_COLLIDER_SIZE];
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void Update()
         {
-            if (!_useColliderTrigger || _hasTriggered)
+            TriggerDialogue();
+        }
+
+        private void TriggerDialogue()
+        {
+            if (_hasTriggered)
             {
                 return;
             }
 
-            if (other.TryGetComponent<BaseCharacter>(out _))
+            if (_dialogue == null)
             {
-                TriggerDialogue();
-            }
-        }
-
-        public void TriggerDialogue()
-        {
-            if (_dialogue.canTriggerObjective)
-            {
-                InputManager.Instance.DisablePlayerInput();
+                return;
             }
 
-            DialogueManager.Instance.StartDialogue(_dialogue);
-            _hasTriggered = true;
-        }
+            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, _overlapRadius, _overlapResultColliders);
 
-        public void ResetDialogueTrigger()
-        {
-            _hasTriggered = false;
+            for (int i = 0; i < numberOfCollider; i++)
+            {
+                if (_overlapResultColliders[i] == null)
+                {
+                    return;
+                }
+
+                if (_overlapResultColliders[i].TryGetComponent<BaseCharacter>(out _))
+                {
+                    DialogueManager.Instance.StartDialogue(_dialogue);
+                    _hasTriggered = true;
+                }
+            }
         }
     }
 }

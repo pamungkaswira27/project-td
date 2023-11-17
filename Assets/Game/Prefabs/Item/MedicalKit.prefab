@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6568213e06aca364c9372bf99a0331b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 3109176853831388982}
   - component: {fileID: 2301970306078141914}
   - component: {fileID: 9182594606839280031}
-  - component: {fileID: 5556447501286630835}
   m_Layer: 0
   m_Name: MedicalKit
   m_TagString: Untagged
@@ -179,15 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7c23d01830f724cb1040e0e6281b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5556447501286630835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4201906548685886550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f09d18268cd1e4d864357485b8cd1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _item: {fileID: 11400000, guid: 81459a194c4878a40a6fd274bed9d060, type: 2}
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
