@@ -8,6 +8,11 @@ namespace ProjectTD
         [SerializeField]
         private float _walkSpeed = 8f;
 
+        [Header("Animation")]
+        [SerializeField]
+        private Animator _animator;
+
+        private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
         private Vector2 _direction;
         private Vector3 _move;
@@ -44,12 +49,13 @@ namespace ProjectTD
         private void Awake()
         {
             _capsuleCollider = GetComponent<CapsuleCollider>();
-
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Movement();
+            Animate();
         }
 
         private void Movement()
@@ -71,8 +77,21 @@ namespace ProjectTD
             }
 
             _move = new(_direction.x, 0, _direction.y);
-
+            
             transform.position += _moveSpeed * Time.deltaTime * _move;
+        }
+
+        private void Animate()
+        {
+            if (_animator == null)
+            {
+                return;
+            }
+
+            Vector3 localMove = transform.InverseTransformDirection(_move);
+
+            _animator.SetFloat("sideway", localMove.x);
+            _animator.SetFloat("forward", localMove.z);
         }
 
         private void RollingMovement()

@@ -89,7 +89,7 @@ namespace ProjectTD
         public Vector2 GetMovementInputVector()
         {
             _movementInputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
-            _movementInputVector.Normalize();
+            //_movementInputVector.Normalize();
 
             return _movementInputVector;
         }
