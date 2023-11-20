@@ -134,6 +134,7 @@ namespace ProjectTD
             }
             else
             {
+                _playerManager.CharacterBasicShoot.PlayMuzzleFlashVFX();
                 _fireCoroutine = StartCoroutine(_playerManager.CharacterBasicShoot.FireCoroutine());
             }
         }
@@ -142,6 +143,7 @@ namespace ProjectTD
         {
             if (_fireCoroutine != null && !_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
+                _playerManager.CharacterBasicShoot.StopMuzzleFlashVFX();
                 StopCoroutine(_fireCoroutine);
             }
         }
