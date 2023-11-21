@@ -1,10 +1,16 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace ProjectTD
 {
     [RequireComponent (typeof (Damageable))]
-    public class DestructibleProps : MonoBehaviour
+    public class Props : MonoBehaviour
     {
+        [Header("Props Type")]
+        [SerializeField]
+        private bool _destructible;
+
+        [ShowIf("_destructible")]
         [Header("Number of Hit to Destroy")]
         [SerializeField]
         private int _maxHitCount;
@@ -26,6 +32,11 @@ namespace ProjectTD
 
         private void OnPropsDamaged(float damageAmount)
         {
+            if (!_destructible)
+            {
+                return;
+            }
+
             _hitCount++;
 
             if (_hitCount >= _maxHitCount)
