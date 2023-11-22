@@ -70,7 +70,7 @@ namespace ProjectTD
 
             if (_inAngel && _inMeleeDistance && !_inFOV)
             {
-                _attackMelee.MeleeAttack(15);
+                //_attackMelee.MeleeAttack(15);
                 return;
             }
             

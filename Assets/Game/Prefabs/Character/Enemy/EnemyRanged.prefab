@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: -8899721758438496147}
   - component: {fileID: 293453621358221387}
   - component: {fileID: 5057044999366813801}
+  - component: {fileID: 8780480948770319083}
   m_Layer: 9
   m_Name: EnemyRanged
   m_TagString: Untagged
@@ -357,10 +358,12 @@ MonoBehaviour:
   _enemyRangedAttack: {fileID: 2576388074817104272}
   _enemyMeleeAttack: {fileID: -3412584333888605531}
   _rangedDamage: 25
+  _meleeDamage: 15
+  _attackSpeed: 1.5
   _maxRangedDistance: 20
-  _minRangedDistance: 1.5
-  _maxMeleeDistance: 1.5
-  _minMeleeDistance: 1
+  _minRangedDistance: 3
+  _maxMeleeDistance: 2.5
+  _minMeleeDistance: 1.5
 --- !u!114 &-8899721758438496147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +383,6 @@ MonoBehaviour:
     m_Bits: 512
   _radiusForTrigger: 8
   enemyType: Ranged
-  _deadRangedEnemy: 0
 --- !u!114 &293453621358221387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +407,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c29cb96f19e0d4b94a607e4de13824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8780480948770319083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c57f85ef487a84a8d2f0a7ad13f9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextWayPoint: 3
+  _speedPatrolling: 10
+  _aiRadiusPatrol: 15
+  _minXRandomPoint: 10
+  _maxXRandomPoint: 35
+  _minZRandomPoint: 10
+  _maxZRandomPoint: 35
 --- !u!1 &7336273447544777384
 GameObject:
   m_ObjectHideFlags: 0

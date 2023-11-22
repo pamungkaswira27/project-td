@@ -23,7 +23,7 @@ namespace ProjectTD
         private Transform _player;
         private Transform _post;
         private bool _isAttacked;
-        public bool _deadRangedEnemy;
+        private bool _deadRangedEnemy;
 
         public float AlertRadius
         {
@@ -66,7 +66,6 @@ namespace ProjectTD
             {
                 CheckOtherEnemies();
                 return;
-
             }
 
             if (IsMelee())
@@ -104,9 +103,8 @@ namespace ProjectTD
 
         private void CheckOtherEnemies()
         {
-            otherEnemies = new Collider[10];
+            otherEnemies = new Collider[COLLIDER_SIZE];
             int enemyInRadius = Physics.OverlapSphereNonAlloc(transform.position, _radiusForTrigger, otherEnemies, _enemies);
-            Debug.Log(enemyInRadius);
 
             for (int i = 0; i < enemyInRadius; i++)
             {
