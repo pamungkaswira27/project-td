@@ -1,78 +1,120 @@
 using Pathfinding;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public class AIPatrol : MonoBehaviour
     {
-        private float _waitTime;
-        private float _distance;
-        private bool _isReached;
-        private Vector3 _Pos;
-        private Vector3 _randomPos;
-        private Vector3 _center;
+        [Header("AI Patrol")]
+        [SerializeField]
+        private float _nextWayPoint;
+        [SerializeField]
+        private float _speedPatrolling;
 
-        [Header("AI")]
+        [Header("Radius Patrolling")]
         [SerializeField]
-        private AIPath _aiPath;
+        private float _aiRadiusPatrol;
 
-        [Header("Game Objects, Transform, Vector 3")]
+        [Header("Range for Random Position")]
         [SerializeField]
-        private GameObject[] _wayPoints;
+        private int _minXRandomPoint;
         [SerializeField]
-        private Transform _enemies;
+        private int _maxXRandomPoint;
         [SerializeField]
-        private Transform _targetSpots;
+        private int _minZRandomPoint;
         [SerializeField]
-        private Vector3 _spawnPosition;
+        private int _maxZRandomPoint;
 
-        [Header("Value of Time and Index")]
-        [SerializeField]
-        private float _startTime;
-        [SerializeField]
-        private int _wayPointIdx;
+        private Path _path;
+        private Seeker _seeker;
+        private Rigidbody _rigidBody;
+        private Vector3 _randomWayPoints;
+        private int _currentWayPoint;
+        private float _timer;
+        private bool _nextStep;
+
+        public float RadiusPatrol
+        {
+            get
+            {
+                return _aiRadiusPatrol;
+            }
+        }
 
         private void Awake()
         {
-            // time
-            _waitTime = _startTime;
+            _seeker = GetComponent<Seeker>();
+            _rigidBody = GetComponent<Rigidbody>();
+        }
 
-            // waypoints
-            _wayPoints = GameObject.FindGameObjectsWithTag("Waypoints");
-            _wayPointIdx = _wayPoints.Length - 1;
-            _targetSpots.position = _wayPoints[_wayPointIdx].transform.position;
-
-            // random spawn position
-            _Pos = new Vector3(Random.Range(-_spawnPosition.x, _spawnPosition.x), 0, Random.Range(-_spawnPosition.z, _spawnPosition.z));
-            _randomPos = _center + _Pos;
-            _enemies.position = _randomPos;
+        private void Start()
+        {
+            _timer = 2f;
+            SetRandomWayPoints();
+            _seeker.StartPath(_rigidBody.position, _randomWayPoints, OnPathComplete);
         }
 
         private void FixedUpdate()
         {
-            _distance = Vector3.Distance(_enemies.position, _targetSpots.position);
-            _isReached = _distance <= _aiPath.endReachedDistance;
+            Patrolling();
 
-            if (_isReached)
+            if (_nextStep)
             {
-                if (_waitTime <= 0)
+                _timer -= Time.deltaTime;
+                if (_timer <= 0)
                 {
-                    _wayPointIdx += 1;
-                    if (_wayPointIdx >= _wayPoints.Length)
-                    {
-                        _wayPointIdx = 0;
-                    }
-                    _targetSpots.position = _wayPoints[_wayPointIdx].transform.position;
-
-                    _waitTime = _startTime;
-
+                    _timer = 2f;
+                    _nextStep = false;
+                    UpdatePath();
                 }
-                else
+            }
+        }
+
+        private void UpdatePath()
+        {
+            if (_seeker.IsDone())
+            {
+                SetRandomWayPoints();
+                _seeker.StartPath(_rigidBody.position, _randomWayPoints, OnPathComplete);
+            }
+        }
+
+        private void Patrolling()
+        {
+            if (_path == null) return;
+            if (_currentWayPoint >= _path.vectorPath.Count) return;
+
+
+            Vector3 forceDir = (_path.vectorPath[_currentWayPoint] - _rigidBody.position);
+            Vector3 force = _speedPatrolling * forceDir;
+            _rigidBody.AddForce(force);
+
+            float toNextWay = Vector3.Distance(_rigidBody.position, _path.vectorPath[_currentWayPoint]);
+
+
+            if (toNextWay <= _nextWayPoint)
+            {
+                _currentWayPoint++;
+
+                if (_currentWayPoint == _path.vectorPath.Count)
                 {
-                    _waitTime -= Time.deltaTime;
+                    _nextStep = true;
                 }
+            }
+        }
+
+        private void SetRandomWayPoints()
+        {
+            Vector2 nexStep = Random.insideUnitCircle.normalized * _aiRadiusPatrol;
+            _randomWayPoints = new Vector3(nexStep.x, transform.position.y, nexStep.y) + transform.position;
+        }
+
+        private void OnPathComplete(Path path)
+        {
+            if (!path.error)
+            {
+                _path = path;
+                _currentWayPoint = 0;
             }
         }
     }
