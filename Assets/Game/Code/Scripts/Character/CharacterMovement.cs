@@ -1,3 +1,4 @@
+using StinkySteak.SimulationTimer;
 using UnityEngine;
 
 namespace ProjectTD
@@ -19,10 +20,13 @@ namespace ProjectTD
         private Animator _animator;
 
         private Rigidbody _rigidbody;
+        private SimulationTimer _rollTimer;
         private Vector2 _direction;
         private Vector3 _movement;
         private float _moveSpeed;
-        private bool _isRunning = false;
+        private bool _isRunning;
+        private bool _isRolling;
+        private float _rollDuration = 1.5f;
 
         public bool IsRunning
         {
@@ -43,14 +47,30 @@ namespace ProjectTD
 
         private void Update()
         {
+            if (_rollTimer.IsExpired())
+            {
+                PlayerManager.Instance.CharacterAim.enabled = true;
+                _isRolling = false;
+            }
+
             Movement();
             Animate();
         }
 
         private void Movement()
         {
+            if (_isRolling)
+            {
+                return;
+            }
+
             _direction = InputManager.Instance.GetMovementInputVector();
             _moveSpeed = _walkSpeed;
+
+            if (_isRunning)
+            {
+                _moveSpeed = _runSpeed;
+            }
 
             _movement = new(_direction.x, 0, _direction.y);
             transform.position += _moveSpeed * Time.deltaTime * _movement;
@@ -71,6 +91,12 @@ namespace ProjectTD
 
         public void Rolling()
         {
+            // Lock Player Direction and Movement
+            _rollTimer = SimulationTimer.CreateFromSeconds(_rollDuration);
+            PlayerManager.Instance.CharacterAim.enabled = false;
+            _isRolling = true;
+
+            // Play Roll Animation
             _animator.SetTrigger("rolling");
 
             if (_movement == Vector3.zero)
@@ -79,6 +105,7 @@ namespace ProjectTD
                 return;
             }
 
+            transform.localRotation = Quaternion.LookRotation(_movement);
             _rigidbody.AddForce(_movement * _rollForce);
         }
     }

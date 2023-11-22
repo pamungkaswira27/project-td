@@ -108,6 +108,7 @@ namespace ProjectTD
         {
             if (context.performed)
             {
+                StopFire();
                 _playerManager.CharacterMovement.Rolling();
                 StartCoroutine(DelayedRollCoroutine());
             }
