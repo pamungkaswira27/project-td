@@ -71,6 +71,8 @@ namespace ProjectTD
 
         public void Rolling()
         {
+            _animator.SetTrigger("rolling");
+
             if (_movement == Vector3.zero)
             {
                 _rigidbody.AddRelativeForce(Vector3.forward * _rollForce);
