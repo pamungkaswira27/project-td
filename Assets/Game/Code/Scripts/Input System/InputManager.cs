@@ -59,7 +59,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed += RollMovementState;
 
             _playerInputAction.Player.Running.canceled += RunMovementState;
-            _playerInputAction.Player.Rolling.canceled += RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started += _ => StartFire();
@@ -76,7 +75,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed -= RollMovementState;
 
             _playerInputAction.Player.Running.canceled -= RunMovementState;
-            _playerInputAction.Player.Rolling.canceled -= RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started -= _ => StartFire();
@@ -110,11 +108,7 @@ namespace ProjectTD
         {
             if (context.performed)
             {
-                _playerManager.CharacterMovement.IsRolling = true;
-            }
-            else if (context.canceled)
-            {
-                _playerManager.CharacterMovement.IsRolling = false;
+                _playerManager.CharacterMovement.Rolling();
                 StartCoroutine(DelayedRollCoroutine());
             }
         }
