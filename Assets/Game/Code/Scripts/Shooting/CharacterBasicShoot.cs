@@ -9,9 +9,6 @@ namespace ProjectTD
         [SerializeField]
         private float _firingRate = 15f;
 
-        [SerializeField]
-        private GameObject _muzzleFlashVFX;
-
         private GameObject _basicProjectile;
         private WaitForSeconds _firingRateWaitForSeconds;
 
@@ -34,16 +31,6 @@ namespace ProjectTD
 
                 yield return _firingRateWaitForSeconds;
             }
-        }
-
-        public void PlayMuzzleFlashVFX()
-        {
-            _muzzleFlashVFX.SetActive(true);
-        }
-
-        public void StopMuzzleFlashVFX()
-        {
-            _muzzleFlashVFX.SetActive(false);
         }
     }
 }

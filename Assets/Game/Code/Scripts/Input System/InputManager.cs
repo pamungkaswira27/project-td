@@ -125,6 +125,7 @@ namespace ProjectTD
         {
             if (_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
+                _playerManager.CharacterUltimateShoot.PlayMuzzleFlashVFX();
                 _fireCoroutine = StartCoroutine(_playerManager.CharacterUltimateShoot.FireCoroutine());
             }
             else

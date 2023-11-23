@@ -65,13 +65,15 @@ namespace ProjectTD
                 {
                     _ultimateProjectile = _objectPooler.GetPooledObject("UltimateProjectile", _firingPoint.position, _firingPoint.rotation);
 
-                    if (_ultimateProjectile.TryGetComponent<UltimateProjectile>(out UltimateProjectile ultimateProjectile))
+                    if (_ultimateProjectile.TryGetComponent(out UltimateProjectile ultimateProjectile))
                     {
                         ultimateProjectile.SetProjectileDirection(_firingPoint.forward);
                     }
 
                     yield return _intervalBetweenProjectileWaitForSeconds;
                 }
+
+                StopMuzzleFlashVFX();
             }
         }
 
