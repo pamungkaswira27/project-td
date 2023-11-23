@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: -3412584333888605531}
   - component: {fileID: 147171558429725571}
   - component: {fileID: -8899721758438496147}
-  - component: {fileID: 293453621358221387}
   - component: {fileID: 5057044999366813801}
   - component: {fileID: 8780480948770319083}
   m_Layer: 9
@@ -383,18 +382,6 @@ MonoBehaviour:
     m_Bits: 512
   _radiusForTrigger: 8
   enemyType: Ranged
---- !u!114 &293453621358221387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6995053595898973261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd20627d5b460384286afabc19b03c4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5057044999366813801
 MonoBehaviour:
   m_ObjectHideFlags: 0
