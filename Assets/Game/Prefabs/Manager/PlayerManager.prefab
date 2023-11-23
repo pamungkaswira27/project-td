@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _life: 3
+  _playerSpawnPoint: {fileID: 0}
+  _spawnTime: 1.5

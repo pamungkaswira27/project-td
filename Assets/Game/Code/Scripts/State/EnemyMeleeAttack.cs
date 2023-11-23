@@ -6,11 +6,11 @@ namespace ProjectTD
 {
     public class EnemyMeleeAttack : BaseEnemyAttack
     {
-        public override void MeleeAttack(int damaged)
+        public override void MeleeAttack(float damaged)
         {
-            if (aiFieldOfView.Target.TryGetComponent(out IDamageable damageable))
+            if (aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                damageable.TryTakeDamage(damaged);
+                playerHealth.DecreaseHealth(damaged);
             }
         }
     }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ProjectTD
@@ -73,7 +70,7 @@ namespace ProjectTD
 
             if (_inAngel && _inMeleeDistance && !_inFOV)
             {
-                _attackMelee.MeleeAttack(15);
+                //_attackMelee.MeleeAttack(15);
                 return;
             }
             
@@ -84,27 +81,6 @@ namespace ProjectTD
             }
 
 
-        }
-
-        private void RangedAttackMode()
-        {
-            //_attackEnemy.attackMode = Attack.Ranged;
-            //_enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
-        }
-
-        private void MeleeAttackMode()
-        {
-           // _attackEnemy.attackMode = Attack.Melee;
-           // _enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
-        }
-
-        private void SelfExplodingAttackMode()
-        {
-           // _attackEnemy.attackMode = Attack.SelfExploding;
-           // _enemy.transform.LookAt(_player.transform.position);
-            _lastRotation = _enemiesFacingDistance;
         }
 
     }

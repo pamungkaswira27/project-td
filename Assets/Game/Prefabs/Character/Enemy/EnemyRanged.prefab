@@ -132,6 +132,14 @@ GameObject:
   - component: {fileID: 1606072583883124681}
   - component: {fileID: 6653085608612990351}
   - component: {fileID: 5887631015249240994}
+  - component: {fileID: -4070494242524633903}
+  - component: {fileID: 2576388074817104272}
+  - component: {fileID: -3412584333888605531}
+  - component: {fileID: 147171558429725571}
+  - component: {fileID: -8899721758438496147}
+  - component: {fileID: 293453621358221387}
+  - component: {fileID: 5057044999366813801}
+  - component: {fileID: 8780480948770319083}
   m_Layer: 9
   m_Name: EnemyRanged
   m_TagString: Untagged
@@ -294,6 +302,130 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPoints: 100
   _maxHealthPoints: 100
+  _aiAlert: {fileID: -8899721758438496147}
+--- !u!114 &-4070494242524633903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1669447d3c866404e853b9888dfab28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+--- !u!114 &2576388074817104272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873f6af02ed8384a882051d489394fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+--- !u!114 &-3412584333888605531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce01b7c103b37ae4ba5f7ddf6d8ce45e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+--- !u!114 &147171558429725571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ce467caebcf3a44b931cbdc32b0e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+  _enemyRangedAttack: {fileID: 2576388074817104272}
+  _enemyMeleeAttack: {fileID: -3412584333888605531}
+  _rangedDamage: 25
+  _meleeDamage: 15
+  _attackSpeed: 1.5
+  _maxRangedDistance: 20
+  _minRangedDistance: 3
+  _maxMeleeDistance: 2.5
+  _minMeleeDistance: 1.5
+--- !u!114 &-8899721758438496147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a290f65c3219489420336fef557e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+  _playerManager: {fileID: 0}
+  _enemies:
+    serializedVersion: 2
+    m_Bits: 512
+  _radiusForTrigger: 8
+  enemyType: Ranged
+--- !u!114 &293453621358221387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd20627d5b460384286afabc19b03c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5057044999366813801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c29cb96f19e0d4b94a607e4de13824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8780480948770319083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c57f85ef487a84a8d2f0a7ad13f9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextWayPoint: 3
+  _speedPatrolling: 10
+  _aiRadiusPatrol: 15
+  _minXRandomPoint: 10
+  _maxXRandomPoint: 35
+  _minZRandomPoint: 10
+  _maxZRandomPoint: 35
 --- !u!1 &7336273447544777384
 GameObject:
   m_ObjectHideFlags: 0

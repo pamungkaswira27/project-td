@@ -18,13 +18,18 @@ namespace ProjectTD
         [SerializeField]
         private float _spawnTime;
 
+        private CharacterAim _characterAim;
         private CharacterMovement _characterMovement;
         private CharacterHealth _characterHealth;
         private CharacterBasicShoot _characterBasicShoot;
         private CharacterUltimateShoot _characterUltimateShoot;
         private bool _isInitialSpawn;
+        private Transform _playerTransform;
 
+        public GameObject Player { get; private set; }
+        public CharacterAim CharacterAim => _characterAim;
         public CharacterMovement CharacterMovement => _characterMovement;
+        public CharacterHealth CharacterHealth => _characterHealth;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
         public CharacterUltimateShoot CharacterUltimateShoot => _characterUltimateShoot;
         public int Life => _life;
@@ -47,6 +52,7 @@ namespace ProjectTD
 
         public void SetupPlayer(BaseCharacter character)
         {
+            _characterAim = character.GetComponent<CharacterAim>();
             _characterMovement = character.GetComponent<CharacterMovement>();
             _characterHealth = character.GetComponent<CharacterHealth>();
             _characterBasicShoot = character.GetComponent<CharacterBasicShoot>();
@@ -56,7 +62,12 @@ namespace ProjectTD
         public void SpawnPlayer()
         {
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
+            _playerTransform = player.transform;
+            InputManager.Instance.EnablePlayerInput();
             CameraManager.Instance.SetupFollowCamera(player.transform);
+            RespawnerManager.Instance.RespawnObjects();
+
+            Player = player;
 
             if (!_isInitialSpawn)
             {
@@ -79,6 +90,11 @@ namespace ProjectTD
             {
                 Invoke(nameof(SpawnPlayer), _spawnTime);
             }
+        }
+
+        public Transform GetTransformPlayer()
+        {
+            return _playerTransform;
         }
     }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-2053755385381120751
+--- !u!28 &-6491704785917067852
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,11 +61,11 @@ MonoBehaviour:
   m_Name: MiltonianTattoo-Regular SDF
   m_EditorClassIdentifier: 
   hashCode: -1599555256
-  material: {fileID: 6629112613516406618}
+  material: {fileID: 4929046398889719817}
   materialHashCode: 1274784872
   m_Version: 1.1.0
-  m_SourceFontFileGUID: 606d4b133fa64c548b61c46b5e93feb6
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 606d4b133fa64c548b61c46b5e93feb6,
+  m_SourceFontFileGUID: 249176ae1867ec3439b9482f83116a30
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 249176ae1867ec3439b9482f83116a30,
     type: 3}
   m_SourceFontFile: {fileID: 0}
   m_AtlasPopulationMode: 0
@@ -1937,7 +1937,7 @@ MonoBehaviour:
     m_GlyphIndex: 233
     m_Scale: 1
   m_AtlasTextures:
-  - {fileID: -2053755385381120751}
+  - {fileID: -6491704785917067852}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_ClearDynamicDataOnBuild: 0
@@ -2659,7 +2659,7 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: 606d4b133fa64c548b61c46b5e93feb6
+    sourceFontFileGUID: 249176ae1867ec3439b9482f83116a30
     pointSizeSamplingMode: 0
     pointSize: 66
     padding: 5
@@ -2702,7 +2702,7 @@ MonoBehaviour:
   boldSpacing: 7
   italicStyle: 35
   tabSize: 10
---- !u!21 &6629112613516406618
+--- !u!21 &4929046398889719817
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -2738,7 +2738,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -2053755385381120751}
+        m_Texture: {fileID: -6491704785917067852}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:

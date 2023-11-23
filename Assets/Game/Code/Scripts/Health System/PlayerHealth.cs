@@ -11,6 +11,7 @@ namespace ProjectTD
 
             if (_healthPoints <= 0f)
             {
+                InputManager.Instance.DisablePlayerInput();
                 _healthPoints = 0f;
                 PlayerManager.Instance.DecreaseLife();
                 gameObject.SetActive(false);

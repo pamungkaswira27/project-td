@@ -42,6 +42,16 @@ namespace ProjectTD
             UnsubscribeInputEvents();
         }
 
+        public void EnablePlayerInput()
+        {
+            _playerInputAction.Enable();
+        }
+
+        public void DisablePlayerInput()
+        {
+            _playerInputAction.Disable();
+        }
+
         private void SubscribeInputEvents()
         {
             // Character movement input
@@ -49,7 +59,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed += RollMovementState;
 
             _playerInputAction.Player.Running.canceled += RunMovementState;
-            _playerInputAction.Player.Rolling.canceled += RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started += _ => StartFire();
@@ -66,7 +75,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed -= RollMovementState;
 
             _playerInputAction.Player.Running.canceled -= RunMovementState;
-            _playerInputAction.Player.Rolling.canceled -= RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started -= _ => StartFire();
@@ -79,7 +87,7 @@ namespace ProjectTD
         public Vector2 GetMovementInputVector()
         {
             _movementInputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
-            _movementInputVector.Normalize();
+            //_movementInputVector.Normalize();
 
             return _movementInputVector;
         }
@@ -100,11 +108,8 @@ namespace ProjectTD
         {
             if (context.performed)
             {
-                _playerManager.CharacterMovement.IsRolling = true;
-            }
-            else if (context.canceled)
-            {
-                _playerManager.CharacterMovement.IsRolling = false;
+                StopFire();
+                _playerManager.CharacterMovement.Rolling();
                 StartCoroutine(DelayedRollCoroutine());
             }
         }
@@ -124,6 +129,7 @@ namespace ProjectTD
             }
             else
             {
+                _playerManager.CharacterBasicShoot.PlayMuzzleFlashVFX();
                 _fireCoroutine = StartCoroutine(_playerManager.CharacterBasicShoot.FireCoroutine());
             }
         }
@@ -132,14 +138,15 @@ namespace ProjectTD
         {
             if (_fireCoroutine != null && !_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
+                _playerManager.CharacterBasicShoot.StopMuzzleFlashVFX();
                 StopCoroutine(_fireCoroutine);
             }
         }
 
         private void ActivateUltimate()
         {
-            _playerManager.CharacterUltimateShoot.ActivateUltimate();
             StopFire();
+            _playerManager.CharacterUltimateShoot.ActivateUltimate();
         }
     }
 }

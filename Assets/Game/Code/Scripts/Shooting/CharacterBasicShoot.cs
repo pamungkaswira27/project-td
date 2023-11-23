@@ -9,6 +9,9 @@ namespace ProjectTD
         [SerializeField]
         private float _firingRate = 15f;
 
+        [SerializeField]
+        private GameObject _muzzleFlashVFX;
+
         private GameObject _basicProjectile;
         private WaitForSeconds _firingRateWaitForSeconds;
 
@@ -24,13 +27,23 @@ namespace ProjectTD
             {
                 _basicProjectile = _objectPooler.GetPooledObject("BasicProjectile", _firingPoint.position, _firingPoint.rotation);
 
-                if (_basicProjectile.TryGetComponent<BasicProjectile>(out BasicProjectile basicProjectile))
+                if (_basicProjectile.TryGetComponent(out BasicProjectile basicProjectile))
                 {
                     basicProjectile.SetProjectileDirection(_firingPoint.forward);
                 }
 
                 yield return _firingRateWaitForSeconds;
             }
+        }
+
+        public void PlayMuzzleFlashVFX()
+        {
+            _muzzleFlashVFX.SetActive(true);
+        }
+
+        public void StopMuzzleFlashVFX()
+        {
+            _muzzleFlashVFX.SetActive(false);
         }
     }
 }

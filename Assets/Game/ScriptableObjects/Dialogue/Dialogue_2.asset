@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a422c79c1d81b440b608e3b228025be, type: 3}
+  m_Name: Dialogue_2
+  m_EditorClassIdentifier: 
+  _sentences:
+  - "(Beep\u2026) Communication to the earth cannot be made due to destroyed communication
+    devices."
+  - "(Beep\u2026) Downloading data location from last distress call\u2026"
+  - "(Beep\u2026) The #0007 Survey Team\u2019s Base located 50km south of this mountain"
+  - "(Beep\u2026) Mountain Hike Probability : Impossible"
+  - "(Beep\u2026) Find other way around to reach the Base"

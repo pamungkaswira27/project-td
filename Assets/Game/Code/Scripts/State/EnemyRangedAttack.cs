@@ -7,10 +7,12 @@ namespace ProjectTD
 {
     public class EnemyRangedAttack : BaseEnemyAttack
     {
-        public override void RangedAttack(int damaged)
+        public override void RangedAttack(float damaged)
         {
-            Debug.Log($"Attacked by Ranged Type, with {damaged} damage's");
-            aiFieldOfView.transform.LookAt(aiFieldOfView.Target.position);
+            if (aiFieldOfView.Target.TryGetComponent(out CharacterHealth characterHealth))
+            {
+                characterHealth.DecreaseHealth(damaged);
+            }
         }
     }
 }
