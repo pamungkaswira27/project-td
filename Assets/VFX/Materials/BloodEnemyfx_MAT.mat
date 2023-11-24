@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bloodfx_MAT
+  m_Name: BloodEnemyfx_MAT
   m_Shader: {fileID: -6465566751694194690, guid: 7ca9126d71e0c3045851e84f48d4bcbd,
     type: 3}
   m_Parent: {fileID: 0}
@@ -57,12 +57,12 @@ Material:
     m_Floats:
     - _Glossines: 0.5
     - _NoiseAmount: 0.1
-    - _NoiseScale: 0.2
-    - _NoiseSpeed: 1
+    - _NoiseScale: 0.5
+    - _NoiseSpeed: 1000
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Specular: 10
-    - _power: 2
+    - _power: 3.38
     m_Colors:
-    - _Color: {r: 2, g: 2, b: 2, a: 0}
+    - _Color: {r: 0, g: 0.31487703, b: 0.004800513, a: 0}
   m_BuildTextureStacks: []
