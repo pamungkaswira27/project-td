@@ -321,6 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6523892725943837460}
   - component: {fileID: 3638016537466304211}
+  - component: {fileID: 4950574114458909830}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -358,3 +359,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _followCamera: {fileID: 1822124108237915413}
+--- !u!114 &4950574114458909830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5002496073809847933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
