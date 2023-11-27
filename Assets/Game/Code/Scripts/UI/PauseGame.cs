@@ -10,17 +10,11 @@ public class PauseGame : MonoBehaviour
     [SerializeField] private GameObject _pauseGamePanel;
 
     private PlayerInputAction _inputActions;
-    private CharacterAim _aim;
     private bool _isPaused;
 
     private void Awake()
     {
         _inputActions = new PlayerInputAction();
-    }
-
-    private void Start()
-    {
-        _aim = CharacterAim.Instance;
     }
 
     private void OnEnable()
@@ -54,7 +48,7 @@ public class PauseGame : MonoBehaviour
         Time.timeScale = 0;
         _pauseGamePanel.SetActive(true);
         InputManager.Instance.DisablePlayerInput();
-        _aim.enabled = false;
+        PlayerManager.Instance.CharacterAim.enabled = false;
     }
 
     public void UIPauseGameDeactived()
@@ -62,6 +56,6 @@ public class PauseGame : MonoBehaviour
         Time.timeScale = 1;
         _pauseGamePanel.SetActive(false);
         InputManager.Instance.EnablePlayerInput();
-        _aim.enabled = true;
+        PlayerManager.Instance.CharacterAim.enabled = true;
     }
 }

@@ -5,7 +5,6 @@ namespace ProjectTD
 {
     public class CharacterAim : MonoBehaviour
     {
-        public static CharacterAim Instance;
 
         private Camera _camera;
         private Ray _ray;
@@ -14,7 +13,6 @@ namespace ProjectTD
 
         private void Awake()
         {
-            Instance = this;
             _camera = Camera.main;
         }
 
