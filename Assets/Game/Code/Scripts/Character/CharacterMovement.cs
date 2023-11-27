@@ -85,6 +85,7 @@ namespace ProjectTD
 
             Vector3 localMove = transform.InverseTransformDirection(_movement);
 
+            _animator.SetBool("isWalking", localMove.magnitude > 0);
             _animator.SetFloat("sideway", localMove.x);
             _animator.SetFloat("forward", localMove.z);
         }
