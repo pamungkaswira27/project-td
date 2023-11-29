@@ -833,6 +833,8 @@ GameObject:
   - component: {fileID: 6320143013073286209}
   - component: {fileID: 6522541288446969223}
   - component: {fileID: 628456949447955310}
+  - component: {fileID: 4478704297507818517}
+  - component: {fileID: 5384104598878033524}
   m_Layer: 5
   m_Name: PlayGame
   m_TagString: Untagged
@@ -923,6 +925,33 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4478704297507818517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3507742938595155271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ecfe0a44c4b624abad76b9fe59f7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSlider: {fileID: 0}
+  _powerSlider: {fileID: 0}
+--- !u!114 &5384104598878033524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3507742938595155271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01ea3023eb0944e91c17f51ab8d4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _messageText: {fileID: 0}
 --- !u!1 &4018227997773090850
 GameObject:
   m_ObjectHideFlags: 0
