@@ -28,6 +28,7 @@ namespace ProjectTD
         private bool _isRolling;
         private float _rollDuration = 1.5f;
 
+        public bool IsRolling => _isRolling;
         public bool IsRunning
         {
             get
@@ -72,7 +73,7 @@ namespace ProjectTD
                 _moveSpeed = _runSpeed;
             }
 
-            _movement = new(_direction.x, 0, _direction.y);
+            _movement = new Vector3(_direction.x, 0, _direction.y);
             transform.position += _moveSpeed * Time.deltaTime * _movement;
         }
 
