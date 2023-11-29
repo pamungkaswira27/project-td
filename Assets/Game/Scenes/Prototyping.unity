@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -377,6 +377,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseGamePanel: {fileID: 473237344}
+--- !u!1001 &331468251
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315997984321277172, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995053595898973261, guid: e8109b634aa7c8e4a8f86fd3e8594edd,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyRanged
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8109b634aa7c8e4a8f86fd3e8594edd, type: 3}
 --- !u!1 &340244585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,27 +1832,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[3].tag
-      value: BasicHitImpact
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[3].size
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[3].prefab
-      value: 
-      objectReference: {fileID: 3768976069547879947, guid: 46f1d8f8dc06dad469dbd668cda23789,
-        type: 3}
     - target: {fileID: 9103452757775716317, guid: 36a8401d94ef716469a921be1900c811,
         type: 3}
       propertyPath: m_Name
@@ -2436,3 +2483,4 @@ SceneRoots:
   - {fileID: 1530594875}
   - {fileID: 1694872478}
   - {fileID: 1904036206}
+  - {fileID: 331468251}

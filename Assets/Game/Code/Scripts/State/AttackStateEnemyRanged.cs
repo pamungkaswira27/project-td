@@ -36,6 +36,8 @@ namespace ProjectTD
         private WaitForSeconds _attackDelay;
         private AIChase _chase;
 
+        public float AttackSpeed => _attackSpeed;
+
         private void OnEnable()
         {
             _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);

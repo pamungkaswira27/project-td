@@ -7,11 +7,18 @@ namespace ProjectTD
 {
     public class EnemyRangedAttack : BaseEnemyAttack
     {
+        private EnemyRangedShoot _enemyRangedShoot;
+
+        public override void Initialization()
+        {
+            _enemyRangedShoot = GetComponent<EnemyRangedShoot>();
+        }
+
         public override void RangedAttack(float damaged)
         {
             if (aiFieldOfView.Target.TryGetComponent(out CharacterHealth characterHealth))
             {
-                characterHealth.DecreaseHealth(damaged);
+                StartCoroutine(_enemyRangedShoot.FireCoroutine());
             }
         }
     }
