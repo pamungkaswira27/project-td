@@ -62,6 +62,7 @@ namespace ProjectTD
         {
             if (_isRolling)
             {
+                transform.localRotation = Quaternion.LookRotation(_movement);
                 return;
             }
 
@@ -107,7 +108,6 @@ namespace ProjectTD
                 return;
             }
 
-            transform.localRotation = Quaternion.LookRotation(_movement);
             _rigidbody.AddForce(_movement * _rollForce);
         }
     }
