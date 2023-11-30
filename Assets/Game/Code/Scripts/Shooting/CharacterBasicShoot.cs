@@ -12,6 +12,8 @@ namespace ProjectTD
         private GameObject _basicProjectile;
         private WaitForSeconds _firingRateWaitForSeconds;
 
+        [SerializeField] private float _stress;
+
         protected override void Initialization()
         {
             base.Initialization();
@@ -22,9 +24,10 @@ namespace ProjectTD
         {
             while (true)
             {
+                StressReceiver.Instance.InduceStress(_stress);
                 _basicProjectile = _objectPooler.GetPooledObject("BasicProjectile", _firingPoint.position, _firingPoint.rotation);
 
-                if (_basicProjectile.TryGetComponent<BasicProjectile>(out BasicProjectile basicProjectile))
+                if (_basicProjectile.TryGetComponent(out BasicProjectile basicProjectile))
                 {
                     basicProjectile.SetProjectileDirection(_firingPoint.forward);
                 }

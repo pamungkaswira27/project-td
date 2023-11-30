@@ -6,9 +6,13 @@ namespace ProjectTD
 {
     public class EnemySelfExplodingAttack : BaseEnemyAttack
     {
-        public override void SelfExplodingAttack(int damage)
+        public override void SelfExplodingAttack(float damage)
         {
-            Debug.Log($"Attacked by Self Exploding Type, with {damage} damage's.");
+            if(aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out var playerHealth))
+            {
+                playerHealth.DecreaseHealth(damage);
+                Debug.Log($"{damage} to Player.");
+            }
         }
     }
 }

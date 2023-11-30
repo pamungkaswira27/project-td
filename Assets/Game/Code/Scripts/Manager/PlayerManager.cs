@@ -18,6 +18,7 @@ namespace ProjectTD
         [SerializeField]
         private float _spawnTime;
 
+        private CharacterAim _characterAim;
         private CharacterMovement _characterMovement;
         private CharacterHealth _characterHealth;
         private CharacterBasicShoot _characterBasicShoot;
@@ -26,6 +27,7 @@ namespace ProjectTD
         private Transform _playerTransform;
 
         public GameObject Player { get; private set; }
+        public CharacterAim CharacterAim => _characterAim;
         public CharacterMovement CharacterMovement => _characterMovement;
         public CharacterHealth CharacterHealth => _characterHealth;
         public CharacterBasicShoot CharacterBasicShoot => _characterBasicShoot;
@@ -50,6 +52,7 @@ namespace ProjectTD
 
         public void SetupPlayer(BaseCharacter character)
         {
+            _characterAim = character.GetComponent<CharacterAim>();
             _characterMovement = character.GetComponent<CharacterMovement>();
             _characterHealth = character.GetComponent<CharacterHealth>();
             _characterBasicShoot = character.GetComponent<CharacterBasicShoot>();

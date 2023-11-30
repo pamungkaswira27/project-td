@@ -9,6 +9,10 @@ namespace ProjectTD
         [SerializeField]
         protected Transform _firingPoint;
 
+        [Header("Visual Effect")]
+        [SerializeField]
+        protected GameObject _muzzleFlashVFX;
+
         protected ObjectPooler _objectPooler;
 
         protected void Start()
@@ -34,6 +38,26 @@ namespace ProjectTD
         public virtual IEnumerator FireCoroutine()
         {
             yield return null;
+        }
+
+        public virtual void PlayMuzzleFlashVFX()
+        {
+            if (_muzzleFlashVFX == null)
+            {
+                return;
+            }
+
+            _muzzleFlashVFX.SetActive(true);
+        }
+
+        public virtual void StopMuzzleFlashVFX()
+        {
+            if (_muzzleFlashVFX == null)
+            {
+                return;
+            }
+
+            _muzzleFlashVFX.SetActive(false);
         }
     }
 }

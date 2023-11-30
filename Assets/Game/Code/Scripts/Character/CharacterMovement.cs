@@ -1,3 +1,4 @@
+using StinkySteak.SimulationTimer;
 using UnityEngine;
 
 namespace ProjectTD
@@ -7,15 +8,25 @@ namespace ProjectTD
         [Header("Character Speed")]
         [SerializeField]
         private float _walkSpeed = 8f;
+        [SerializeField]
+        private float _runSpeed = 16f;
 
-        private CapsuleCollider _capsuleCollider;
+        [Header("Character Roll")]
+        [SerializeField]
+        private float _rollForce = 550f;
+
+        [Header("Animation")]
+        [SerializeField]
+        private Animator _animator;
+
+        private Rigidbody _rigidbody;
+        private SimulationTimer _rollTimer;
         private Vector2 _direction;
-        private Vector3 _move;
-        private Vector3 _positionCollider;
+        private Vector3 _movement;
         private float _moveSpeed;
-        private float _heightCollider;
-        private bool _isRunning = false;
-        private bool _isRolling = false;
+        private bool _isRunning;
+        private bool _isRolling;
+        private float _rollDuration = 1.5f;
 
         public bool IsRunning
         {
@@ -29,68 +40,74 @@ namespace ProjectTD
             }
         }
 
-        public bool IsRolling
-        {
-            get
-            {
-                return _isRolling;
-            }
-            set
-            {
-                _isRolling = value;
-            }
-        }
-
         private void Awake()
         {
-            _capsuleCollider = GetComponent<CapsuleCollider>();
-
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            if (_rollTimer.IsExpired())
+            {
+                PlayerManager.Instance.CharacterAim.enabled = true;
+                _isRolling = false;
+            }
+
             Movement();
+            Animate();
         }
 
         private void Movement()
         {
-            _moveSpeed = _walkSpeed;
+            if (_isRolling)
+            {
+                return;
+            }
+
             _direction = InputManager.Instance.GetMovementInputVector();
+            _moveSpeed = _walkSpeed;
 
             if (_isRunning)
             {
-                _moveSpeed = _walkSpeed * 2;
-            }
-            else if (_isRolling)
-            {
-                RollingMovement();
-            }
-            else if (!_isRolling)
-            {
-                RollCompleted();
+                _moveSpeed = _runSpeed;
             }
 
-            _move = new(_direction.x, 0, _direction.y);
-
-            transform.position += _moveSpeed * Time.deltaTime * _move;
+            _movement = new(_direction.x, 0, _direction.y);
+            transform.position += _moveSpeed * Time.deltaTime * _movement;
         }
 
-        private void RollingMovement()
+        private void Animate()
         {
-            _heightCollider = 0.5f;
-            _positionCollider = new(0, 0.5f, 0);
+            if (_animator == null)
+            {
+                return;
+            }
 
-            _capsuleCollider.height = _heightCollider;
-            _capsuleCollider.center = _positionCollider;
+            Vector3 localMove = transform.InverseTransformDirection(_movement);
+
+            _animator.SetBool("isWalking", localMove.magnitude > 0);
+            _animator.SetFloat("sideway", localMove.x);
+            _animator.SetFloat("forward", localMove.z);
         }
 
-        private void RollCompleted()
+        public void Rolling()
         {
-            _heightCollider = 2;
-            _positionCollider = new(0, 1, 0);
+            // Lock Player Direction and Movement
+            _rollTimer = SimulationTimer.CreateFromSeconds(_rollDuration);
+            PlayerManager.Instance.CharacterAim.enabled = false;
+            _isRolling = true;
 
-            _capsuleCollider.height = _heightCollider;
-            _capsuleCollider.center = _positionCollider;
+            // Play Roll Animation
+            _animator.SetTrigger("rolling");
+
+            if (_movement == Vector3.zero)
+            {
+                _rigidbody.AddRelativeForce(Vector3.forward * _rollForce);
+                return;
+            }
+
+            transform.localRotation = Quaternion.LookRotation(_movement);
+            _rigidbody.AddForce(_movement * _rollForce);
         }
     }
 }

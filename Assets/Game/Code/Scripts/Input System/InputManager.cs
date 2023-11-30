@@ -59,7 +59,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed += RollMovementState;
 
             _playerInputAction.Player.Running.canceled += RunMovementState;
-            _playerInputAction.Player.Rolling.canceled += RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started += _ => StartFire();
@@ -76,7 +75,6 @@ namespace ProjectTD
             _playerInputAction.Player.Rolling.performed -= RollMovementState;
 
             _playerInputAction.Player.Running.canceled -= RunMovementState;
-            _playerInputAction.Player.Rolling.canceled -= RollMovementState;
 
             // Character primary fire
             _playerInputAction.Player.Fire.started -= _ => StartFire();
@@ -89,7 +87,7 @@ namespace ProjectTD
         public Vector2 GetMovementInputVector()
         {
             _movementInputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
-            _movementInputVector.Normalize();
+            //_movementInputVector.Normalize();
 
             return _movementInputVector;
         }
@@ -110,11 +108,8 @@ namespace ProjectTD
         {
             if (context.performed)
             {
-                _playerManager.CharacterMovement.IsRolling = true;
-            }
-            else if (context.canceled)
-            {
-                _playerManager.CharacterMovement.IsRolling = false;
+                StopFire();
+                _playerManager.CharacterMovement.Rolling();
                 StartCoroutine(DelayedRollCoroutine());
             }
         }
@@ -130,10 +125,12 @@ namespace ProjectTD
         {
             if (_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
+                _playerManager.CharacterUltimateShoot.PlayMuzzleFlashVFX();
                 _fireCoroutine = StartCoroutine(_playerManager.CharacterUltimateShoot.FireCoroutine());
             }
             else
             {
+                _playerManager.CharacterBasicShoot.PlayMuzzleFlashVFX();
                 _fireCoroutine = StartCoroutine(_playerManager.CharacterBasicShoot.FireCoroutine());
             }
         }
@@ -142,6 +139,7 @@ namespace ProjectTD
         {
             if (_fireCoroutine != null && !_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
+                _playerManager.CharacterBasicShoot.StopMuzzleFlashVFX();
                 StopCoroutine(_fireCoroutine);
             }
         }

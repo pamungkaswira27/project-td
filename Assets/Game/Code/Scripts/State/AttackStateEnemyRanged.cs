@@ -1,4 +1,5 @@
 using ProjectTD;
+using StinkySteak.SimulationTimer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,12 @@ namespace ProjectTD
         private EnemyMeleeAttack _enemyMeleeAttack;
         [Header("Damage")]
         [SerializeField]
-        private int _rangedDamage;
-        private int _meleeDamage;
+        private float _rangedDamage;
+        [SerializeField]
+        private float _meleeDamage;
+        [Header("Attack Speed")]
+        [SerializeField]
+        private float _attackSpeed;
         [Header("Attack Ranged Distance")]
         [SerializeField]
         private float _maxRangedDistance;
@@ -27,7 +32,29 @@ namespace ProjectTD
         [SerializeField]
         private float _minMeleeDistance;
 
-        private void Update()
+        private SimulationTimer _timerAttack;
+        private WaitForSeconds _attackDelay;
+        private AIChase _chase;
+
+        public float AttackSpeed => _attackSpeed;
+
+        private void OnEnable()
+        {
+            _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+        }
+
+        public override void Initialization()
+        {
+            base.Initialization();
+            _attackDelay = new WaitForSeconds(_attackSpeed);
+        }
+
+        private void Awake()
+        {
+            _chase = GetComponent<AIChase>();
+        }
+
+        private void FixedUpdate()
         {
             if (GetTarget() != null)
             {
@@ -39,19 +66,44 @@ namespace ProjectTD
 
                 if (isRangedAttack)
                 {
-                    _enemyRangedAttack.RangedAttack(_rangedDamage);
+                    StartCoroutine(IntervalAttack());
+                    _chase.enabled = false;
                     return;
                 }
 
                 if (isMeleeAttack)
                 {
-                    _enemyMeleeAttack.MeleeAttack(_meleeDamage);
+                    StartCoroutine(IntervalAttack());
+                    _chase.enabled = false;
                     return;
                 }
+                _chase.enabled = true;
+                StopAllCoroutines();
                 return;
             }
-           
+        }
 
+        public override IEnumerator IntervalAttack()
+        {
+            yield return _attackDelay;
+            float distance = Vector3.Distance(transform.position, GetTarget().position);
+
+            if (_timerAttack.IsExpired())
+            {
+                if (IsRangedAttack(distance))
+                {
+                    _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                    _enemyRangedAttack.RangedAttack(_rangedDamage);
+                    yield return null;
+                }
+
+                if (IsMeleeAttack(distance))
+                {
+                    _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                    _enemyMeleeAttack.MeleeAttack(_meleeDamage);
+                    yield return null;
+                }
+            }
         }
 
         private bool IsMeleeAttack(float distanceToPlayer)
