@@ -75,7 +75,8 @@ namespace ProjectTD
             }
 
             _movement = new Vector3(_direction.x, 0, _direction.y);
-            transform.position += _moveSpeed * Time.deltaTime * _movement;
+            //transform.position += _moveSpeed * Time.deltaTime * _movement;
+            _rigidbody.velocity = _moveSpeed * Time.deltaTime * _movement;
         }
 
         private void Animate()
