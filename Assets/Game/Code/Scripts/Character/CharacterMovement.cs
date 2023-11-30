@@ -14,6 +14,8 @@ namespace ProjectTD
         [Header("Character Roll")]
         [SerializeField]
         private float _rollForce = 550f;
+        [SerializeField]
+        private GameObject _weaponToHide;
 
         [Header("Animation")]
         [SerializeField]
@@ -51,6 +53,7 @@ namespace ProjectTD
             if (_rollTimer.IsExpired())
             {
                 PlayerManager.Instance.CharacterAim.enabled = true;
+                _weaponToHide.SetActive(true);
                 _isRolling = false;
             }
 
@@ -98,6 +101,7 @@ namespace ProjectTD
             // Lock Player Direction and Movement
             _rollTimer = SimulationTimer.CreateFromSeconds(_rollDuration);
             PlayerManager.Instance.CharacterAim.enabled = false;
+            _weaponToHide.SetActive(false);
             _isRolling = true;
 
             // Play Roll Animation

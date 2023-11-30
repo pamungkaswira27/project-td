@@ -119,6 +119,7 @@ MonoBehaviour:
   _walkSpeed: 300
   _runSpeed: 600
   _rollForce: 700
+  _weaponToHide: {fileID: 6293643530176341021}
   _animator: {fileID: 2772621132779684366}
 --- !u!114 &3540956177163467309
 MonoBehaviour:
@@ -1048,6 +1049,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91017666db23fe14680c301f1213ca16, type: 3}
+--- !u!1 &6293643530176341021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 91017666db23fe14680c301f1213ca16,
+    type: 3}
+  m_PrefabInstance: {fileID: 6599720293702670668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6637272166295994023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 91017666db23fe14680c301f1213ca16,
