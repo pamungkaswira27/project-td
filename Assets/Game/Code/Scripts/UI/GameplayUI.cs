@@ -12,7 +12,7 @@ namespace ProjectTD
 
         private void Start()
         {
-            Initialize();
+            Invoke(nameof(Initialize), 0.1f);
         }
 
         private void Update()
@@ -23,7 +23,20 @@ namespace ProjectTD
 
         private void Initialize()
         {
-            IsRequiredComponentNull();
+            if (_healthSlider == null)
+            {
+                return;
+            }
+
+            if (_powerSlider == null)
+            {
+                return;
+            }
+
+            if (PlayerManager.Instance == null)
+            {
+                return;
+            }
 
             _healthSlider.maxValue = PlayerManager.Instance.CharacterHealth.MaxHealthPoints;
             _healthSlider.value = PlayerManager.Instance.CharacterHealth.HealthPoints;
@@ -34,21 +47,22 @@ namespace ProjectTD
 
         private void UpdateHealthBar()
         {
-            IsRequiredComponentNull();
+            if (_healthSlider == null)
+            {
+                return;
+            }
 
             _healthSlider.value = PlayerManager.Instance.CharacterHealth.HealthPoints;
         }
 
         private void UpdatePowerBar()
         {
-            IsRequiredComponentNull();
+            if (_powerSlider == null)
+            {
+                return;
+            }
 
             _powerSlider.value = 0f;
-        }
-
-        private bool IsRequiredComponentNull()
-        {
-            return (_healthSlider == null || _powerSlider == null || PlayerManager.Instance == null) ;
         }
     }
 }
