@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -7,6 +8,7 @@ namespace ProjectTD
     {
         public override void DecreaseHealth(float amount)
         {
+            AudioManager.PlaySound(MainSounds.player_hit_effect_01);
             base.DecreaseHealth(amount);
 
             if (_healthPoints <= 0f)

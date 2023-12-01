@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -34,6 +35,7 @@ namespace ProjectTD
                 return;
             }
 
+            AudioManager.PlaySound(MainSounds.item_pickup);
             _item.Use();
             gameObject.SetActive(false);
         }
