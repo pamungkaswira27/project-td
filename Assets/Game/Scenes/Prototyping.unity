@@ -1663,21 +1663,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5356234796138736810, guid: 47df5e1d0dad9f549af1ccfd218fa656,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356234796138736810, guid: 47df5e1d0dad9f549af1ccfd218fa656,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356234796138736810, guid: 47df5e1d0dad9f549af1ccfd218fa656,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356234796138736810, guid: 47df5e1d0dad9f549af1ccfd218fa656,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.75
       objectReference: {fileID: 0}
@@ -1725,11 +1710,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356234796138736810, guid: 47df5e1d0dad9f549af1ccfd218fa656,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2202,6 +2182,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
+        type: 3}
+      propertyPath: _poolList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
+        type: 3}
+      propertyPath: _poolList.Array.data[5].tag
+      value: NormalMedkit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
+        type: 3}
+      propertyPath: _poolList.Array.data[5].size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
+        type: 3}
+      propertyPath: _poolList.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 4201906548685886550, guid: a44a803fbc8a1f44ba7354cc28ef438f,
+        type: 3}
     - target: {fileID: 9103452757775716317, guid: 36a8401d94ef716469a921be1900c811,
         type: 3}
       propertyPath: m_Name

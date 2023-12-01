@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public class ItemDrop : MonoBehaviour
     {
-        public float damage;
-        private IDamageable damageable;
+        [SerializeField]
+        private ItemSO[] _itemsToDrop;
+        [SerializeField, Range(0.1f, 1f)]
+        private float _dropChance;
 
-        private void Start()
+        private void OnDisable()
         {
-            damageable = GetComponent<IDamageable>();
+            SpawnRandomItem();
         }
 
-        private void Update()
+        private void SpawnRandomItem()
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Random.Range(0f, 1f) <= _dropChance)
             {
-                // damageable.TakeDamage(damage);
+                int randomIndex = Random.Range(0, _itemsToDrop.Length);
+                ObjectPooler.Instance.GetPooledObject(_itemsToDrop[randomIndex].name, transform.position, Quaternion.identity);
             }
         }
     }

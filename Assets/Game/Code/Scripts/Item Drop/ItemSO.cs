@@ -5,7 +5,7 @@ namespace ProjectTD
     public class ItemSO : ScriptableObject
     {
         [SerializeField]
-        protected string _name;
+        protected string _id;
 
         public virtual void Use() { }
     }

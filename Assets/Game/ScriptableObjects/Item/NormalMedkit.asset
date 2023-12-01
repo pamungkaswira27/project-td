@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eb3cfd8cb5bc5468425581d55f1eeb, type: 3}
   m_Name: NormalMedkit
   m_EditorClassIdentifier: 
-  _name: Normal Medkit
+  _id: NormalMedkit
   _healAmount: 50
