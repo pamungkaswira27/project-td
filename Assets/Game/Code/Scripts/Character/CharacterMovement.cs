@@ -55,6 +55,7 @@ namespace ProjectTD
                 PlayerManager.Instance.CharacterAim.enabled = true;
                 _weaponToHide.SetActive(true);
                 _isRolling = false;
+                gameObject.layer = LayerMask.NameToLayer("Player");
             }
 
             Movement();
@@ -98,6 +99,8 @@ namespace ProjectTD
 
         public void Rolling()
         {
+            gameObject.layer = LayerMask.NameToLayer("Rolling");
+
             // Lock Player Direction and Movement
             _rollTimer = SimulationTimer.CreateFromSeconds(_rollDuration);
             PlayerManager.Instance.CharacterAim.enabled = false;
