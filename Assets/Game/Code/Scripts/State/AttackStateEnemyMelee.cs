@@ -3,6 +3,7 @@ using StinkySteak.SimulationTimer;
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ProjectTD
 {
@@ -16,6 +17,9 @@ namespace ProjectTD
         [Header("Attack Speed")]
         [SerializeField]
         private float _attackSpeed;
+        [Header("Attack Animation")]
+        [SerializeField]
+        private Animator _animationAttack;
         [Header("Attack Melee Distance")]
         [SerializeField]
         private float _maxDistance;
@@ -24,7 +28,10 @@ namespace ProjectTD
 
         private SimulationTimer _timerAttack;
         private WaitForSeconds _attackDelay;
+        private WaitForSeconds _attackDamage;
         private AIChase _chase;
+        private AIPatrol _patrol;
+        private float _damageAfterAnimation = 0.5f;
 
         private void OnEnable()
         {
@@ -40,6 +47,8 @@ namespace ProjectTD
         private void Awake()
         {
             _chase = GetComponent<AIChase>();
+            _patrol = GetComponent<AIPatrol>();
+            _attackDamage = new WaitForSeconds(_damageAfterAnimation);
         }
 
         private void FixedUpdate()
@@ -48,8 +57,11 @@ namespace ProjectTD
             {
                 LookAtPlayer().LookAt(GetTarget().position);
 
-                float distanceToEnemy = Vector3.Distance(GetTarget().position, transform.position);
+                float distanceToEnemy = Vector3.Distance(transform.position, GetTarget().position);
                 bool isAttacking = IsMeleeDistance(distanceToEnemy);
+
+                _animationAttack.SetBool("IsMoving", false);
+                _animationAttack.SetBool("IsChasingPlayer", false);
 
                 if (isAttacking)
                 {
@@ -57,26 +69,42 @@ namespace ProjectTD
                     _chase.enabled = false;
                     return;
                 }
+
                 _chase.enabled = true;
                 StopAllCoroutines();
-                return;
             }
+
+            _patrol.IsPatroling = true;
+            _chase.enabled = true;
+            StopAllCoroutines();
         }
 
         public override IEnumerator IntervalAttack()
         {
             yield return _attackDelay;
 
+            if (GetTarget() == null) yield return null;
+
             if (_timerAttack.IsExpired())
             {
-                _attackMelee.MeleeAttack(_meleeDamage);
-                _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                float distance = Vector3.Distance(transform.position, GetTarget().position);
+                _timerAttack = SimulationTimer.None;
+
+                if (IsMeleeDistance(distance))
+                {
+                    _animationAttack.SetTrigger("IsAttackingMelee");
+                    yield return _attackDamage;
+                    _attackMelee.MeleeAttack(_meleeDamage);
+                    _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                }
+
+                yield return null;
             }
         }
 
         private bool IsMeleeDistance(float distance)
         {
-            return distance <= _maxDistance && distance >= _minDistance && distance <= ViewRadius;
+            return distance <= _maxDistance && distance > _minDistance && distance <= ViewRadius;
         }
 
     }

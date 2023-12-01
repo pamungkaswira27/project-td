@@ -10,24 +10,34 @@ namespace ProjectTD
         private EnemySelfExplodingAttack _slefExplodingEnemy;
         [SerializeField]
         private LayerMask _target;
+
         [Header("Damage")]
         [SerializeField]
         private float _minDamage;
         [SerializeField]
         private float _maxDamage;
+
         [Header("AoE (Area of Effect")]
         [SerializeField]
         private float _radiusExplode;
+
         [Header("Self Exploding Enemy Distance")]
         [SerializeField]
         private float _maxDistance;
         [SerializeField]
         private float _minDistance;
+
+        [Header("Time to Explode")]
         [SerializeField]
         private float _timer;
 
+        [Header("Animation Exploding")]
+        [SerializeField]
+        private Animator _animationAttack;
+
         private Collider[] _inRadiusExplode;
         private AIChase _chase;
+        private AIPatrol _patrol;
         private SimulationTimer _timToExplode;
         private int _insideRadius;
         private bool _isInRadiusExplode;
@@ -43,6 +53,7 @@ namespace ProjectTD
         private void Awake()
         {
             _chase = GetComponent<AIChase>();
+            _patrol = GetComponent<AIPatrol>();
         }
 
         private void Update()
@@ -50,20 +61,24 @@ namespace ProjectTD
             if (GetTarget() != null)
             {
                 LookAtPlayer().LookAt(GetTarget().position);
+                _patrol.enabled = false;
                 float distanceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
                 bool isSelfExplodingAttack = IsSelfExplodingAttack(distanceToPlayer);
-
 
                 if (isSelfExplodingAttack)
                 {
                     _chase.enabled = false;
                     _isInRadiusExplode = true;
+                    _animationAttack.SetBool("IsExplodingTime", true);
+                    _animationAttack.SetBool("IsMoving", false);
+                    _animationAttack.SetBool("IsChasingPlayer", false);
                 }
 
                 if (_isInRadiusExplode)
                 {
                     _chase.enabled = false;
                     OnRadiusExploding();
+                    _animationAttack.SetBool("IsMoving", false);
                     if (_timToExplode.IsRunning) return;
                     _timToExplode = SimulationTimer.CreateFromSeconds(_timer);
                 }
@@ -88,18 +103,21 @@ namespace ProjectTD
 
                 if (player == null) return;
 
-                if (player.gameObject.layer == 7)
-                {
-                    _isInRadiusExplode = true;
-                }
-
-                if (_timToExplode.IsExpired()) // maybe at this line is used to Animations. . . . :)
+                if (_timToExplode.IsExpired())
                 {
                     DamageToObject(player.gameObject);
                     gameObject.SetActive(false);
                     _timToExplode = SimulationTimer.None;
                 }
+
+                if (player.gameObject.layer == 7)
+                {
+                    _isInRadiusExplode = true;
+                    return;
+                }
+
             }
+            _animationAttack.SetBool("IsExplodingTime", false);
             _isInRadiusExplode = false;
         }
 
@@ -127,8 +145,6 @@ namespace ProjectTD
         public override IEnumerator IntervalAttack()
         {
             yield return new WaitForSeconds(_timer);
-
-
         }
     }
 

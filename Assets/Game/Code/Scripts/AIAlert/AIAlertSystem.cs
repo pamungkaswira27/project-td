@@ -22,28 +22,24 @@ namespace ProjectTD
         private Vector3 _playerPosition;
         private Transform _player;
         private Transform _post;
+        private AIPatrol _patrol;
         private bool _isAttacked;
         private bool _deadRangedEnemy;
 
         public float AlertRadius
         {
-            get
-            {
-                return _radiusForTrigger;
-            }
+            get { return _radiusForTrigger; }
         }
 
         public string EnemyType
         {
-            get
-            {
-                return enemyType;
-            }
+            get { return enemyType; }
         }
 
         private void Start()
         {
             _playerManager = PlayerManager.Instance;
+            _patrol = GetComponent<AIPatrol>();
             EnemyHealth.RangedEnemyDead += OnDeadEnemyRanged;
         }
 
@@ -59,8 +55,6 @@ namespace ProjectTD
 
             _player = _post;
             _playerPosition = _player.position;
-
-            Debug.Log(enemyType);
 
             if (IsSelfExplode())
             {
@@ -85,9 +79,14 @@ namespace ProjectTD
             OnDeadEnemyRanged();
         }
 
-        public void OnAttacked()
+        public bool OnAttacked()
         {
-            _isAttacked = true;
+            return _isAttacked = true;
+        }
+
+        public bool NotAttacked()
+        {
+            return _isAttacked = false;
         }
 
         public void OnDeadEnemyRanged()
@@ -104,21 +103,28 @@ namespace ProjectTD
         private void CheckOtherEnemies()
         {
             otherEnemies = new Collider[COLLIDER_SIZE];
+
+            Vector3 playerPost = (_playerPosition - transform.position);
+            Quaternion lookPlayer = Quaternion.LookRotation(playerPost);
             int enemyInRadius = Physics.OverlapSphereNonAlloc(transform.position, _radiusForTrigger, otherEnemies, _enemies);
 
             for (int i = 0; i < enemyInRadius; i++)
             {
                 Collider enemy = otherEnemies[i];
-                if (enemy != null)
-                {
-                    if (!enemy.gameObject.TryGetComponent<AIAlertSystem>(out var otherEnemy)) return;
+                if (enemy == null) return;
 
-                    if (otherEnemy.enemyType == enemyType)
-                    {
-                        otherEnemy._deadRangedEnemy = true;
-                        otherEnemy.OnAttacked();
-                        transform.LookAt(_player.position);
-                    }
+                if (!enemy.gameObject.TryGetComponent<AIAlertSystem>(out var otherEnemy)) return;
+
+                if (enemyType == otherEnemy.enemyType)
+                {
+                    otherEnemy._deadRangedEnemy = true;
+                    otherEnemy.OnAttacked();
+                }
+
+                if (otherEnemy.OnAttacked())
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookPlayer, Time.deltaTime * 500);
+                    return;
                 }
             }
         }
@@ -132,6 +138,7 @@ namespace ProjectTD
         {
             return GetEnemyRangedType() == enemyType;
         }
+
         private bool IsSelfExplode()
         {
             return GetEnemySelfExplodingType() == enemyType;
