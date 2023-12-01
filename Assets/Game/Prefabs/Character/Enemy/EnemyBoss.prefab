@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1315997984321277172
 Transform:
   m_ObjectHideFlags: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb5ab548ace3fd48b812c82d89df279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: 100
-  _maxHealthPoints: 100
+  _healthPoints: 1000
+  _maxHealthPoints: 1000
   _aiAlert: {fileID: -7109048572229245644}
 --- !u!114 &6861453845891817368
 MonoBehaviour:
@@ -276,10 +276,10 @@ MonoBehaviour:
   _rangedDamage: 25
   _meleeDamage: 50
   _attackSpeed: 1.5
-  _maxRangedDistance: 15
+  _maxRangedDistance: 25
   _minRangedDistance: 3
-  _maxMeleeDistance: 2.5
-  _minMeleeDistance: 1.5
+  _maxMeleeDistance: 10
+  _minMeleeDistance: 6
   _animationAttack: {fileID: 5454908306990119709}
 --- !u!114 &-7109048572229245644
 MonoBehaviour:
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 8
+  _speedPatrolling: 4
   _aiRadiusPatrol: 10
   _minXRandomPoint: 5
   _maxXRandomPoint: 20

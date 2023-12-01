@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 35
+  _speed: 15
   _nextWaypointDistance: 3
-  _enemyAnim: {fileID: 0}
+  _enemyAnim: {fileID: 3214408901585253437}
 --- !u!114 &6653085608612990351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,9 +260,9 @@ MonoBehaviour:
   _attackMelee: {fileID: 1811367505334656762}
   _meleeDamage: 15
   _attackSpeed: 1
-  _animationAttack: {fileID: 0}
-  _maxDistance: 2.5
-  _minDistance: 1.5
+  _animationAttack: {fileID: 3214408901585253437}
+  _maxDistance: 5
+  _minDistance: 2
 --- !u!114 &-7109048572229245644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   _maxXRandomPoint: 20
   _minZRandomPoint: 5
   _maxZRandomPoint: 20
-  _animationPatrol: {fileID: 0}
+  _animationPatrol: {fileID: 3214408901585253437}
   _timer: 4
   _rotationSpeed: 300
 --- !u!1001 &3967302741441320287

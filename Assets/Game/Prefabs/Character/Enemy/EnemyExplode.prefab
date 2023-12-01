@@ -60,7 +60,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1315997984321277172
 Transform:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ Rigidbody:
   m_GameObject: {fileID: 6995053595898973261}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1.5
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 35
+  _speed: 18
   _nextWaypointDistance: 3
-  _enemyAnim: {fileID: 0}
+  _enemyAnim: {fileID: 6896695775409570128}
 --- !u!114 &6653085608612990351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,13 +261,13 @@ MonoBehaviour:
   _target:
     serializedVersion: 2
     m_Bits: 384
-  _minDamage: 10
+  _minDamage: 15
   _maxDamage: 30
-  _radiusExplode: 11
+  _radiusExplode: 10
   _maxDistance: 2.5
   _minDistance: 1
-  _timer: 2
-  _explodeAnimation: {fileID: 0}
+  _timer: 1.5
+  _animationAttack: {fileID: 0}
 --- !u!114 &-224294777729826740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,15 +312,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 9
+  _speedPatrolling: 5
   _aiRadiusPatrol: 12
   _minXRandomPoint: 8
   _maxXRandomPoint: 24
   _minZRandomPoint: 8
   _maxZRandomPoint: 24
-  _animationPatrol: {fileID: 0}
-  _timer: 0
-  _rotationSpeed: 0
+  _animationPatrol: {fileID: 6896695775409570128}
+  _timer: 4
+  _rotationSpeed: 250
 --- !u!1001 &5478436484188275105
 PrefabInstance:
   m_ObjectHideFlags: 0
