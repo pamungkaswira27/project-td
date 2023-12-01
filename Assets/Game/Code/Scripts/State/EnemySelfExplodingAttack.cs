@@ -11,7 +11,6 @@ namespace ProjectTD
             if(aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out var playerHealth))
             {
                 playerHealth.DecreaseHealth(damage);
-                Debug.Log($"{damage} to Player.");
             }
         }
     }

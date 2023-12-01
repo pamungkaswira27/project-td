@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed: 10
-  _runSpeed: 15
+  _runSpeed: 50
   _rollForce: 700
   _animator: {fileID: 2772621132779684366}
 --- !u!114 &3540956177163467309

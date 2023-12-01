@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectTD
 {
-    [RequireComponent (typeof (AIFieldOfView), typeof(Rigidbody), typeof(Seeker))]
+    [RequireComponent(typeof(AIFieldOfView), typeof(Rigidbody), typeof(Seeker))]
     public class AIChase : MonoBehaviour
     {
         [SerializeField]
@@ -12,7 +12,11 @@ namespace ProjectTD
         private float _speed;
         [SerializeField]
         private float _nextWaypointDistance = 3f;
+        [SerializeField]
+        private Animator _enemyAnim;
 
+        private AIPatrol _patrol;
+        private AIAlertSystem _alertSystem;
         private Path _currentPath;
         private Seeker _seeker;
         private Rigidbody _rigidbody;
@@ -31,10 +35,12 @@ namespace ProjectTD
 
         private void Start()
         {
+            _patrol = GetComponent<AIPatrol>();
+            _alertSystem = GetComponent<AIAlertSystem>();
             InvokeRepeating(nameof(UpdatePath), 0f, 0.2f);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (_currentPath != null)
             {
@@ -45,12 +51,17 @@ namespace ProjectTD
 
                 if (_aIFieldOfView.Target == null)
                 {
+                    _currentPath = null;
+                    _alertSystem.NotAttacked();
                     return;
                 }
 
+                _enemyAnim.SetBool("IsChasingPlayer", true);
+                _patrol.IsPatroling = false;
                 _forceDirection = (_currentPath.vectorPath[_currentWaypointIndex] - _rigidbody.position).normalized;
                 _rigidbodyForce = _speed * _forceDirection;
                 _rigidbody.AddForce(_rigidbodyForce);
+
 
                 _lookAtDirection = (_aIFieldOfView.Target.position - transform.position).normalized;
                 transform.localRotation = Quaternion.LookRotation(_lookAtDirection);
@@ -60,8 +71,13 @@ namespace ProjectTD
                 if (_distanceToWaypoint < _nextWaypointDistance)
                 {
                     _currentWaypointIndex++;
+                    return;
                 }
+                return;
             }
+            _enemyAnim.SetBool("IsChasingPlayer", false);
+            _patrol.IsPatroling = true;
+            _patrol.enabled = true;
         }
 
         private void OnPathComplete(Path path)

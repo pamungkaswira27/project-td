@@ -1,4 +1,5 @@
 using Pathfinding;
+using StinkySteak.SimulationTimer;
 using UnityEngine;
 
 namespace ProjectTD
@@ -25,20 +26,38 @@ namespace ProjectTD
         [SerializeField]
         private int _maxZRandomPoint;
 
+        [Header("Animation")]
+        [SerializeField]
+        private Animator _animationPatrol;
+
+        [Header("Timer for Stay in Place")]
+        [SerializeField]
+        private float _timer;
+        
+        [Header("Speed for Rotation")]
+        [SerializeField]
+        private float _rotationSpeed;
+
         private Path _path;
         private Seeker _seeker;
-        private Rigidbody _rigidBody;
+        private AIChase _aiChase;
         private Vector3 _randomWayPoints;
+        private Rigidbody _rigidBody;
+        private SimulationTimer _stayTime;
         private int _currentWayPoint;
-        private float _timer;
         private bool _nextStep;
+        private bool _animate = true;
+        private bool _isPatroling = true;
 
         public float RadiusPatrol
         {
-            get
-            {
-                return _aiRadiusPatrol;
-            }
+            get { return _aiRadiusPatrol; }
+        }
+
+        public bool IsPatroling
+        {
+            get { return _isPatroling;}
+            set { _isPatroling = value; }
         }
 
         private void Awake()
@@ -49,25 +68,40 @@ namespace ProjectTD
 
         private void Start()
         {
-            _timer = 2f;
+            _aiChase = GetComponent<AIChase>();
             SetRandomWayPoints();
             _seeker.StartPath(_rigidBody.position, _randomWayPoints, OnPathComplete);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            Patrolling();
-
             if (_nextStep)
             {
-                _timer -= Time.deltaTime;
-                if (_timer <= 0)
+                if (_stayTime.IsExpired())
                 {
-                    _timer = 2f;
                     _nextStep = false;
+                    _animate = true;
                     UpdatePath();
+                    _stayTime = SimulationTimer.None;
                 }
+
             }
+
+            if(!_isPatroling)
+            {
+                this.enabled = false;
+            }
+
+            if(_isPatroling)
+            {
+                SetRandomWayPoints();
+                Patrolling();
+                Animation();
+            }
+
+
+            if (_stayTime.IsRunning) return;
+            _stayTime = SimulationTimer.CreateFromSeconds(_timer);
         }
 
         private void UpdatePath()
@@ -86,8 +120,12 @@ namespace ProjectTD
 
 
             Vector3 forceDir = (_path.vectorPath[_currentWayPoint] - _rigidBody.position);
+            Vector3 lookAtDir = (_path.vectorPath[_currentWayPoint] - transform.position);
             Vector3 force = _speedPatrolling * forceDir;
+
             _rigidBody.AddForce(force);
+            Quaternion lookRotate = Quaternion.LookRotation(lookAtDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotate, Time.deltaTime * _rotationSpeed);
 
             float toNextWay = Vector3.Distance(_rigidBody.position, _path.vectorPath[_currentWayPoint]);
 
@@ -99,11 +137,19 @@ namespace ProjectTD
                 if (_currentWayPoint == _path.vectorPath.Count)
                 {
                     _nextStep = true;
+                    _animate = false;
                 }
             }
         }
 
-        private void SetRandomWayPoints()
+        private void Animation()
+        {
+            if (_animationPatrol == null) return;
+
+            _animationPatrol.SetBool("IsMoving", _animate);
+        }
+
+        public void SetRandomWayPoints()
         {
             Vector2 nexStep = Random.insideUnitCircle.normalized * _aiRadiusPatrol;
             _randomWayPoints = new Vector3(nexStep.x, transform.position.y, nexStep.y) + transform.position;
