@@ -47,6 +47,8 @@ namespace ProjectTD
 
         private void Start()
         {
+            AudioManager.StopAllMusic();
+            AudioManager.PlayMusic(MainMusic.battle_theme_01);
             _isInitialSpawn = true;
             SpawnPlayer();
         }
@@ -62,9 +64,6 @@ namespace ProjectTD
 
         public void SpawnPlayer()
         {
-            AudioManager.StopAllMusic();
-            AudioManager.PlayMusic(MainMusic.battle_theme_01);
-
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
             _playerTransform = player.transform;
             InputManager.Instance.EnablePlayerInput();
