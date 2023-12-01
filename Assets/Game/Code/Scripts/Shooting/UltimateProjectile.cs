@@ -23,6 +23,7 @@ namespace ProjectTD
 
                 if (_hitColliders[i].TryGetComponent(out IDamageable target))
                 {
+                    base.HitTarget();
                     target.TryTakeDamage(_damagePoints);
                 }
 

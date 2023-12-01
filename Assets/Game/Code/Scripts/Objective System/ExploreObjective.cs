@@ -11,6 +11,7 @@ namespace ProjectTD
 
         public override void OnStart()
         {
+            base.OnStart();
             _hasStarted = true;
         }
 

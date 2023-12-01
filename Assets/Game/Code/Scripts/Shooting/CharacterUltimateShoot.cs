@@ -1,3 +1,4 @@
+using JSAM;
 using StinkySteak.SimulationTimer;
 using System.Collections;
 using UnityEngine;
@@ -63,6 +64,7 @@ namespace ProjectTD
 
                 for (int i = 0; i < _numberOfProjectile; i++)
                 {
+                    AudioManager.PlaySound(MainSounds.player_shoot_effect);
                     _ultimateProjectile = _objectPooler.GetPooledObject("UltimateProjectile", _firingPoint.position, _firingPoint.rotation);
 
                     if (_ultimateProjectile.TryGetComponent(out UltimateProjectile ultimateProjectile))
@@ -86,6 +88,7 @@ namespace ProjectTD
         {
             if (!_cooldownTimer.IsRunning && !_durationTimer.IsRunning)
             {
+                AudioManager.PlaySound(MainSounds.ultimate_shot_ready);
                 _durationTimer = SimulationTimer.CreateFromSeconds(_duration);
             }
         }
