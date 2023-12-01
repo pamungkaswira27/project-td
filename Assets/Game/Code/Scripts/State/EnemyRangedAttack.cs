@@ -16,6 +16,11 @@ namespace ProjectTD
 
         public override void RangedAttack(float damaged)
         {
+            if (aiFieldOfView.Target == null)
+            {
+                return;
+            }
+
             if (aiFieldOfView.Target.TryGetComponent(out CharacterHealth characterHealth))
             {
                 StartCoroutine(_enemyRangedShoot.FireCoroutine());
