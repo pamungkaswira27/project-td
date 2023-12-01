@@ -1,3 +1,4 @@
+using JSAM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,14 @@ namespace ProjectTD
     {
         public override void SelfExplodingAttack(float damage)
         {
-            if(aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out var playerHealth))
+            if (aiFieldOfView.Target == null)
             {
+                return;
+            }
+
+            if (aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out var playerHealth))
+            {
+                AudioManager.PlaySound(MainSounds.enemy_suicide_attack_effect);
                 playerHealth.DecreaseHealth(damage);
             }
         }

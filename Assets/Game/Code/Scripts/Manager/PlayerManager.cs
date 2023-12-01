@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -46,6 +47,8 @@ namespace ProjectTD
 
         private void Start()
         {
+            AudioManager.StopAllMusic();
+            AudioManager.PlayMusic(MainMusic.battle_theme_01);
             _isInitialSpawn = true;
             SpawnPlayer();
         }

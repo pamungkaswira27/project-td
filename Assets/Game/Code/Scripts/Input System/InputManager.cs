@@ -123,6 +123,11 @@ namespace ProjectTD
 
         private void StartFire()
         {
+            if (_playerManager.CharacterMovement.IsRolling)
+            {
+                return;
+            }
+
             if (_playerManager.CharacterUltimateShoot.IsUltimateActive())
             {
                 _playerManager.CharacterUltimateShoot.PlayMuzzleFlashVFX();
@@ -146,6 +151,11 @@ namespace ProjectTD
 
         private void ActivateUltimate()
         {
+            if (_playerManager.CharacterMovement.IsRolling)
+            {
+                return;
+            }
+
             StopFire();
             _playerManager.CharacterUltimateShoot.ActivateUltimate();
         }

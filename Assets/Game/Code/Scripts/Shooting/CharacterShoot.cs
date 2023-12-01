@@ -42,11 +42,21 @@ namespace ProjectTD
 
         public virtual void PlayMuzzleFlashVFX()
         {
+            if (_muzzleFlashVFX == null)
+            {
+                return;
+            }
+
             _muzzleFlashVFX.SetActive(true);
         }
 
         public virtual void StopMuzzleFlashVFX()
         {
+            if (_muzzleFlashVFX == null)
+            {
+                return;
+            }
+
             _muzzleFlashVFX.SetActive(false);
         }
     }

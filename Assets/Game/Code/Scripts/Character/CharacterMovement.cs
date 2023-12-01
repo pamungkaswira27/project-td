@@ -14,6 +14,8 @@ namespace ProjectTD
         [Header("Character Roll")]
         [SerializeField]
         private float _rollForce = 550f;
+        [SerializeField]
+        private GameObject _weaponToHide;
 
         [Header("Animation")]
         [SerializeField]
@@ -28,6 +30,7 @@ namespace ProjectTD
         private bool _isRolling;
         private float _rollDuration = 1.5f;
 
+        public bool IsRolling => _isRolling;
         public bool IsRunning
         {
             get
@@ -50,7 +53,9 @@ namespace ProjectTD
             if (_rollTimer.IsExpired())
             {
                 PlayerManager.Instance.CharacterAim.enabled = true;
+                _weaponToHide.SetActive(true);
                 _isRolling = false;
+                gameObject.layer = LayerMask.NameToLayer("Player");
             }
 
             Movement();
@@ -61,6 +66,7 @@ namespace ProjectTD
         {
             if (_isRolling)
             {
+                transform.localRotation = Quaternion.LookRotation(_movement);
                 return;
             }
 
@@ -72,8 +78,9 @@ namespace ProjectTD
                 _moveSpeed = _runSpeed;
             }
 
-            _movement = new(_direction.x, 0, _direction.y);
-            transform.position += _moveSpeed * Time.deltaTime * _movement;
+            _movement = new Vector3(_direction.x, 0, _direction.y);
+            //transform.position += _moveSpeed * Time.deltaTime * _movement;
+            _rigidbody.velocity = _moveSpeed * Time.deltaTime * _movement;
         }
 
         private void Animate()
@@ -92,9 +99,12 @@ namespace ProjectTD
 
         public void Rolling()
         {
+            gameObject.layer = LayerMask.NameToLayer("Rolling");
+
             // Lock Player Direction and Movement
             _rollTimer = SimulationTimer.CreateFromSeconds(_rollDuration);
             PlayerManager.Instance.CharacterAim.enabled = false;
+            _weaponToHide.SetActive(false);
             _isRolling = true;
 
             // Play Roll Animation
@@ -106,7 +116,6 @@ namespace ProjectTD
                 return;
             }
 
-            transform.localRotation = Quaternion.LookRotation(_movement);
             _rigidbody.AddForce(_movement * _rollForce);
         }
     }

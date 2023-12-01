@@ -1,46 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
+using JSAM;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace ProjectTD
 {
     public class Settings : MonoBehaviour
     {
-        [Header("--------- Audio Mixer ---------")]
-        [SerializeField] private AudioMixer myMixer;
-        [SerializeField] private Slider musicSlider;
-        [SerializeField] private Slider SFXSlider;
-        [SerializeField] private AudioSource buttonClick;
-
-        public void SetMusicVolume()
-        {
-            float volume = musicSlider.value;
-            myMixer.SetFloat("music", Mathf.Log10(volume)*20);
-        }
-
-        public void SetSFXVolume()
-        {
-            float volume = SFXSlider.value;
-            myMixer.SetFloat("SFX", Mathf.Log10(volume)*20);
-        }
-
-        public void playThisSoundButton()
-        {
-            buttonClick.Play();
-        }
+        [SerializeField]
+        private Slider _musicVolumeSlider;
+        [SerializeField]
+        private Slider _soundVolumeSlider;
 
         private void Start()
         {
-            SetMusicVolume();
-            SetSFXVolume();
+            InitializeVolumeSettings();
+            InitializeVolumeSlider();
         }
 
-        void Back()
+        private void Update()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            UpdateVolume();
+        }
+
+        public void SaveSettings()
+        {
+            PlayerPrefs.SetFloat("MusicVolume", AudioManager.MusicVolume);
+            PlayerPrefs.SetFloat("SoundVolume", AudioManager.SoundVolume);
+
+            PlayerPrefs.Save();
+        }
+
+        private void InitializeVolumeSettings()
+        {
+            AudioManager.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+            AudioManager.SoundVolume = PlayerPrefs.GetFloat("SoundVolume", 1f);
+
+            SaveSettings();
+        }
+
+        private void InitializeVolumeSlider()
+        {
+            _musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+            _soundVolumeSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1f);
+        }
+
+        private void UpdateVolume()
+        {
+            AudioManager.MusicVolume = _musicVolumeSlider.value;
+            AudioManager.SoundVolume = _soundVolumeSlider.value;
         }
     }
 }

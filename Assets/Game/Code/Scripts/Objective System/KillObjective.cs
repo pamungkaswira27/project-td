@@ -24,6 +24,11 @@ namespace ProjectTD
             }
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+        }
+
         public override bool IsObjectiveCompleted()
         {
             return (_targetCount <= 0);

@@ -47,6 +47,8 @@ namespace ProjectTD
         private AIPatrol _patrol;
         private float _damageAfterAnimation = 0.5f;
 
+        public float AttackSpeed => _attackSpeed;
+
         private void OnEnable()
         {
             _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);

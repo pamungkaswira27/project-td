@@ -1,3 +1,4 @@
+using JSAM;
 using ProjectTD;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ public class PauseGame : MonoBehaviour
 
     private void OnEnable()
     {
+        AudioManager.PlaySound(MainSounds.pause_game);
         _inputActions.Enable();
-
         _inputActions.UI.PauseGame.performed += GamePause;
     }
 
