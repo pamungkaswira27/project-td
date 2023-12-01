@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 6653085608612990351}
   - component: {fileID: 5887631015249240994}
   - component: {fileID: 6861453845891817368}
+  - component: {fileID: 6981163093140350346}
   - component: {fileID: 1811367505334656762}
   - component: {fileID: 4995141494023666462}
   - component: {fileID: 5797885566467807734}
@@ -61,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1315997984321277172
 Transform:
   m_ObjectHideFlags: 0
@@ -232,6 +233,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
+--- !u!114 &6981163093140350346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55d059bee896204b904d418838827cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiFieldOfView: {fileID: 5992419859950814692}
+  _attackMelee: {fileID: 1811367505334656762}
+  _meleeDamage: 50
+  _attackSpeed: 2
+  _animationAttack: {fileID: 5454908306990119709}
+  _maxDistance: 9
+  _minDistance: 7
 --- !u!114 &1811367505334656762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +272,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995053595898973261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c873f6af02ed8384a882051d489394fb, type: 3}
   m_Name: 
@@ -265,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995053595898973261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84ce467caebcf3a44b931cbdc32b0e0a, type: 3}
   m_Name: 

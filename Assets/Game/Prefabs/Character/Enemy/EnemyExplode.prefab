@@ -60,7 +60,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1315997984321277172
 Transform:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   _maxDistance: 2.5
   _minDistance: 1
   _timer: 1.5
-  _animationAttack: {fileID: 0}
+  _animationAttack: {fileID: 6896695775409570128}
 --- !u!114 &-224294777729826740
 MonoBehaviour:
   m_ObjectHideFlags: 0

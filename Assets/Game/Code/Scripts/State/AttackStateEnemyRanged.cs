@@ -119,7 +119,6 @@ namespace ProjectTD
                 {
                     _animationAttack.SetTrigger("IsAttackingRanged");
                     yield return _attackDamage;
-                    Debug.Log("RANGED");
                     _enemyRangedAttack.RangedAttack(_rangedDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                 }
@@ -128,7 +127,6 @@ namespace ProjectTD
                 {
                     _animationAttack.SetTrigger("IsAttackingMelee");
                     yield return _attackDamage;
-                    Debug.Log("MELEE");
                     _enemyMeleeAttack.MeleeAttack(_meleeDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                 }
