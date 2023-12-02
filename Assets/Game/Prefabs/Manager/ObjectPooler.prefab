@@ -75,3 +75,7 @@ MonoBehaviour:
     prefab: {fileID: 4315809858900715545, guid: 5db8eac6dd65d0f48a6376953df705b2,
       type: 3}
     size: 25
+  - tag: HealVFX
+    prefab: {fileID: 6125573847501342491, guid: b65c52a37874d7541959be4aa75fd3ac,
+      type: 3}
+    size: 25

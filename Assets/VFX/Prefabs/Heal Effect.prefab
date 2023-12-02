@@ -4897,6 +4897,7 @@ GameObject:
   - component: {fileID: 7714302537027135991}
   - component: {fileID: 5721310877024976454}
   - component: {fileID: 1449216412807765955}
+  - component: {fileID: 6346024042249106102}
   m_Layer: 0
   m_Name: Heal Effect
   m_TagString: Untagged
@@ -4913,9 +4914,9 @@ Transform:
   m_GameObject: {fileID: 6125573847501342491}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.4024935, y: 0.281, z: 8.68}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 204051109446980729}
   - {fileID: 1601366474177616845}
@@ -9774,6 +9775,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6346024042249106102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125573847501342491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274778285d2961a458454ac6986027e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vFX: {fileID: 5721310877024976454}
 --- !u!1 &6942251292134523533
 GameObject:
   m_ObjectHideFlags: 0
