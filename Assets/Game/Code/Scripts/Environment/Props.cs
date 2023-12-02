@@ -6,6 +6,8 @@ namespace ProjectTD
     [RequireComponent (typeof (Damageable))]
     public class Props : MonoBehaviour
     {
+        private const string DESTRUCTIBLE_VFX_POOL_TAG = "DestructibleVFX";
+
         [Header("Props Type")]
         [SerializeField]
         private bool _destructible;
@@ -43,6 +45,7 @@ namespace ProjectTD
 
             if (_hitCount >= _maxHitCount)
             {
+                ObjectPooler.Instance.GetPooledObject(DESTRUCTIBLE_VFX_POOL_TAG, transform.position, Quaternion.identity);
                 _itemDrop.SpawnRandomItem();
                 _hitCount = 0;
                 gameObject.SetActive(false);

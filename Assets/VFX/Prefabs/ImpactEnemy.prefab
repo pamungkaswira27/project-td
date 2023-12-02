@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7399282974206400391}
   - component: {fileID: 8475325100672661343}
   - component: {fileID: 5150876107167377088}
+  - component: {fileID: 3574942579683507951}
   m_Layer: 0
   m_Name: ImpactEnemy
   m_TagString: Untagged
@@ -4886,3 +4887,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3574942579683507951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500085153124035401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274778285d2961a458454ac6986027e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vFX: {fileID: 8475325100672661343}

@@ -61,6 +61,17 @@ MonoBehaviour:
     prefab: {fileID: 3768976069547879947, guid: 46f1d8f8dc06dad469dbd668cda23789,
       type: 3}
     size: 50
+  - tag: EnemyHitImpact
+    prefab: {fileID: 500085153124035401, guid: 94586f066bd23324fa6e7c6ba3c87c13, type: 3}
+    size: 50
   - tag: EnemyProjectile
     prefab: {fileID: 77967188066702510, guid: c6757c91f8f8acb4ab46f37237786cc4, type: 3}
     size: 50
+  - tag: NormalMedkit
+    prefab: {fileID: 4201906548685886550, guid: a44a803fbc8a1f44ba7354cc28ef438f,
+      type: 3}
+    size: 25
+  - tag: DestructibleVFX
+    prefab: {fileID: 4315809858900715545, guid: 5db8eac6dd65d0f48a6376953df705b2,
+      type: 3}
+    size: 25
