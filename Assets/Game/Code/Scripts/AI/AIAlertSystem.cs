@@ -1,7 +1,3 @@
-using ProjectTD;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectTD
@@ -10,19 +6,17 @@ namespace ProjectTD
     public class AIAlertSystem : BaseEnemyAttack
     {
         [SerializeField]
-        private PlayerManager _playerManager;
-        [SerializeField]
         private LayerMask _enemies;
         [SerializeField]
         private float _radiusForTrigger;
         [SerializeField]
         private string enemyType;
 
+        private PlayerManager _playerManager;
         private Collider[] otherEnemies;
         private Vector3 _playerPosition;
         private Transform _player;
         private Transform _post;
-        private AIPatrol _patrol;
         private bool _isAttacked;
         private bool _deadRangedEnemy;
 
@@ -39,7 +33,6 @@ namespace ProjectTD
         private void Start()
         {
             _playerManager = PlayerManager.Instance;
-            _patrol = GetComponent<AIPatrol>();
             EnemyHealth.RangedEnemyDead += OnDeadEnemyRanged;
         }
 
