@@ -79,3 +79,7 @@ MonoBehaviour:
     prefab: {fileID: 6125573847501342491, guid: b65c52a37874d7541959be4aa75fd3ac,
       type: 3}
     size: 25
+  - tag: EnemySuicideVFX
+    prefab: {fileID: 2245124338721005119, guid: b54eba13147b17c4cbb88ec5fc05148b,
+      type: 3}
+    size: 50
