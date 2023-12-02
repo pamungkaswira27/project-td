@@ -1,11 +1,10 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
 {
     public class AIAlertOnAttack : BaseEnemyAttack
-    {
-        [SerializeField]
-        private PlayerManager _playerManager;
+    {   
         [SerializeField]
         private LayerMask _enemies;
         [SerializeField]
@@ -14,24 +13,23 @@ namespace ProjectTD
         private string enemyType;
 
         private Collider[] otherEnemies;
+        private PlayerManager _playerManager;
         public Transform _player;
         public bool _isAttacked;
 
 
         private void Start()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
+            _playerManager = PlayerManager.Instance;
         }
 
         private void LateUpdate()
         {
             if (_isAttacked)
             {
-                _playerManager = FindObjectOfType<PlayerManager>();
-
                 if (_playerManager != null)
                 {
-                    Transform post = _playerManager.GetTransformPlayer();
+                    Transform post = _playerManager.Player.transform;
 
                     if (post != null)
                     {
@@ -86,6 +84,7 @@ namespace ProjectTD
             //        return;
             //    }
             //}
+
             transform.LookAt(player);
         }
 
@@ -93,7 +92,6 @@ namespace ProjectTD
         {
             otherEnemies = new Collider[10];
             int a = Physics.OverlapSphereNonAlloc(transform.position, _radiusForTrigger, otherEnemies, _enemies);
-            Debug.Log(a);
 
             for (int i = 0; i < a; i++)
             {
@@ -101,14 +99,10 @@ namespace ProjectTD
 
                 if (enemy != null)
                 {
-                    Debug.Log(enemyType);
-                    Debug.Log(enemy);
                     AIAlertOnAttack otherEnemy = enemy.gameObject.GetComponent<AIAlertOnAttack>();
 
-                    Debug.Log(otherEnemy.enemyType);
                     if (otherEnemy != null && otherEnemy.enemyType == enemyType)
                     {
-                        Debug.Log("Attackkk");
                         otherEnemy.OnAttacked();
                         transform.LookAt(_player.position);
                         return;

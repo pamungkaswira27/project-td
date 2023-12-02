@@ -25,7 +25,6 @@ namespace ProjectTD
         private CharacterBasicShoot _characterBasicShoot;
         private CharacterUltimateShoot _characterUltimateShoot;
         private bool _isInitialSpawn;
-        private Transform _playerTransform;
 
         public GameObject Player { get; private set; }
         public CharacterAim CharacterAim => _characterAim;
@@ -65,7 +64,6 @@ namespace ProjectTD
         public void SpawnPlayer()
         {
             GameObject player = ObjectPooler.Instance.GetPooledObject(PLAYER_POOL_TAG, _playerSpawnPoint.position, Quaternion.identity);
-            _playerTransform = player.transform;
             InputManager.Instance.EnablePlayerInput();
             CameraManager.Instance.SetupFollowCamera(player.transform);
             RespawnerManager.Instance.RespawnObjects();
@@ -93,11 +91,6 @@ namespace ProjectTD
             {
                 Invoke(nameof(SpawnPlayer), _spawnTime);
             }
-        }
-
-        public Transform GetTransformPlayer()
-        {
-            return _playerTransform;
         }
     }
 }

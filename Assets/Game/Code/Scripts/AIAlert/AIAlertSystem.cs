@@ -49,7 +49,7 @@ namespace ProjectTD
 
             if (_playerManager == null) return;
 
-            _post = _playerManager.GetTransformPlayer();
+            _post = _playerManager.Player.transform;
 
             if (_post == null) return;
 
