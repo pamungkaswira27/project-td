@@ -66,6 +66,11 @@ namespace ProjectTD
         {
             if (_isRolling)
             {
+                if (_movement == Vector3.zero)
+                {
+                    return;
+                }
+
                 transform.localRotation = Quaternion.LookRotation(_movement);
                 return;
             }
