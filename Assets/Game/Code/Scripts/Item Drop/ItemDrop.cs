@@ -9,12 +9,7 @@ namespace ProjectTD
         [SerializeField, Range(0.1f, 1f)]
         private float _dropChance;
 
-        private void OnDisable()
-        {
-            SpawnRandomItem();
-        }
-
-        private void SpawnRandomItem()
+        public void SpawnRandomItem()
         {
             if (Random.Range(0f, 1f) <= _dropChance)
             {
