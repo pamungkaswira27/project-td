@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8312670741791043892}
   - component: {fileID: 8601858623063808237}
   - component: {fileID: 4926128858761317622}
+  - component: {fileID: 1589812040364104669}
   m_Layer: 0
   m_Name: bloodEnemy
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3612396884045343829}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26583052, y: 1.1719999, z: 9.399914}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4915,6 +4916,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1589812040364104669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612396884045343829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274778285d2961a458454ac6986027e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vFX: {fileID: 8601858623063808237}
 --- !u!1 &6923510789539259070
 GameObject:
   m_ObjectHideFlags: 0

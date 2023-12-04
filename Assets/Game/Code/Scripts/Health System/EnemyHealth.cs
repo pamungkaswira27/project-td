@@ -13,6 +13,7 @@ namespace ProjectTD
 
         public override void DecreaseHealth(float amount)
         {
+            ObjectPooler.Instance.GetPooledObject("EnemyBloodVFX", transform.position, Quaternion.identity);
             base.DecreaseHealth(amount);
 
             if (_healthPoints <= 0f)

@@ -2313,27 +2313,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[10].tag
-      value: PlayerBloodVFX
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[10].size
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880485720573739371, guid: 36a8401d94ef716469a921be1900c811,
-        type: 3}
-      propertyPath: _poolList.Array.data[10].prefab
-      value: 
-      objectReference: {fileID: 4724070625597159194, guid: 644698c3bc701bd4b808187869b5cc3f,
-        type: 3}
     - target: {fileID: 9103452757775716317, guid: 36a8401d94ef716469a921be1900c811,
         type: 3}
       propertyPath: m_Name

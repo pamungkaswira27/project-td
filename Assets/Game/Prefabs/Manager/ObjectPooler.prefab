@@ -83,3 +83,11 @@ MonoBehaviour:
     prefab: {fileID: 2245124338721005119, guid: b54eba13147b17c4cbb88ec5fc05148b,
       type: 3}
     size: 50
+  - tag: PlayerBloodVFX
+    prefab: {fileID: 4724070625597159194, guid: 644698c3bc701bd4b808187869b5cc3f,
+      type: 3}
+    size: 50
+  - tag: EnemyBloodVFX
+    prefab: {fileID: 3612396884045343829, guid: f1f99df411d00094a8049b7daf2174cd,
+      type: 3}
+    size: 50
