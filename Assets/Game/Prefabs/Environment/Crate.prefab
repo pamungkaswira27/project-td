@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2329451345899059548}
   - component: {fileID: 2758265802326448244}
   - component: {fileID: 5630412281615813087}
+  - component: {fileID: 4563753446833398288}
   m_Layer: 8
   m_Name: Crate
   m_TagString: Untagged
@@ -126,6 +127,18 @@ MonoBehaviour:
   _itemsToDrop:
   - {fileID: 11400000, guid: 81459a194c4878a40a6fd274bed9d060, type: 2}
   _dropChance: 0.5
+--- !u!114 &4563753446833398288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900404051621807821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c29cb96f19e0d4b94a607e4de13824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5225475520166957510
 GameObject:
   m_ObjectHideFlags: 0
