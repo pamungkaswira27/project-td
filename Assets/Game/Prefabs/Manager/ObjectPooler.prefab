@@ -91,3 +91,7 @@ MonoBehaviour:
     prefab: {fileID: 3612396884045343829, guid: f1f99df411d00094a8049b7daf2174cd,
       type: 3}
     size: 50
+  - tag: DustRoll
+    prefab: {fileID: 8396336802441010080, guid: b01cf0cafc3b4c948bb1002030f48225,
+      type: 3}
+    size: 50

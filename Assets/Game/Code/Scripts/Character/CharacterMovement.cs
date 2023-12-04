@@ -104,6 +104,7 @@ namespace ProjectTD
 
         public void Rolling()
         {
+            ObjectPooler.Instance.GetPooledObject("DustRoll", transform.position, Quaternion.Euler(-90f, 0f, 0f));
             gameObject.layer = LayerMask.NameToLayer("Rolling");
 
             // Lock Player Direction and Movement
