@@ -19,12 +19,10 @@ namespace ProjectTD
 
         private int _hitCount;
 
-        private ItemDrop _itemDrop;
         private IDamageable _damageable;
 
         private void Awake()
         {
-            _itemDrop = GetComponent<ItemDrop>();
             _damageable = GetComponent<Damageable>();
         }
 
@@ -46,7 +44,12 @@ namespace ProjectTD
             if (_hitCount >= _maxHitCount)
             {
                 ObjectPooler.Instance.GetPooledObject(DESTRUCTIBLE_VFX_POOL_TAG, transform.position, Quaternion.identity);
-                _itemDrop.SpawnRandomItem();
+
+                if (TryGetComponent(out ItemDrop itemDrop))
+                {
+                    itemDrop.SpawnRandomItem();
+                }
+                
                 _hitCount = 0;
                 gameObject.SetActive(false);
             }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4904478061386521860}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bloodCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4724070625597159194}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.055339, y: 3.6324136, z: 10.791505}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6346112991847862751}
   - component: {fileID: 689708528039182372}
   - component: {fileID: 6049157036763272270}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: blood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4958,7 +4958,7 @@ GameObject:
   - component: {fileID: 2252172083532071697}
   - component: {fileID: 6873678112369499401}
   - component: {fileID: 4172945510728018034}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

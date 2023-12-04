@@ -16,6 +16,7 @@ namespace ProjectTD
 
             if (aiFieldOfView.Target.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
+                ObjectPooler.Instance.GetPooledObject("PlayerBloodVFX", playerHealth.transform.position, Quaternion.identity);
                 AudioManager.PlaySound(MainSounds.enemy_melee_attack_effect);
                 playerHealth.DecreaseHealth(damaged);
             }

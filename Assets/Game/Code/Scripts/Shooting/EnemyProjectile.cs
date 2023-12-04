@@ -16,6 +16,7 @@ namespace ProjectTD
 
                 if (_hitColliders[i].TryGetComponent(out IDamageable target))
                 {
+                    ObjectPooler.Instance.GetPooledObject("PlayerBloodVFX", _hitColliders[i].ClosestPoint(transform.position), Quaternion.LookRotation(-_direction));
                     target.TryTakeDamage(_damagePoints);
                 }
 
