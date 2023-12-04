@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 300
   _runSpeed: 600
-  _rollForce: 700
+  _rollForce: 600
   _weaponToHide: {fileID: 6293643530176341021}
   _animator: {fileID: 2772621132779684366}
 --- !u!114 &3540956177163467309
