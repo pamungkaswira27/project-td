@@ -45,6 +45,11 @@ namespace ProjectTD
             {
                 ObjectPooler.Instance.GetPooledObject(DESTRUCTIBLE_VFX_POOL_TAG, transform.position, Quaternion.identity);
 
+                if (TryGetComponent(out Barrel barrel))
+                {
+                    barrel.Explode();
+                }
+
                 if (TryGetComponent(out ItemDrop itemDrop))
                 {
                     itemDrop.SpawnRandomItem();
