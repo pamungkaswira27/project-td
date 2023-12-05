@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -7,6 +8,7 @@ namespace ProjectTD
         public void Explode()
         {
             ObjectPooler.Instance.GetPooledObject("ExplosionVFX", transform.position, Quaternion.identity);
+            AudioManager.PlaySound(MainSounds.explosion);
         }
     }
 }

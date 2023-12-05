@@ -17,7 +17,8 @@
         player_hit_effect_01,
         player_hit_effect_02,
         player_shoot_effect,
-        ultimate_shot_ready
+        ultimate_shot_ready,
+        explosion
     }
     public enum MainMusic {
         battle_theme_01,
