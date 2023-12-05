@@ -31,7 +31,7 @@ namespace ProjectTD
         private WaitForSeconds _attackDamage;
         private AIChase _chase;
         private AIPatrol _patrol;
-        private float _damageAfterAnimation = 0.5f;
+        private float _damageAfterAnimation = 0.25f;
 
         private void OnEnable()
         {
@@ -92,12 +92,13 @@ namespace ProjectTD
 
                 if (IsMeleeDistance(distance))
                 {
-                    _animationAttack.SetTrigger("IsAttackingMelee");
+                    _animationAttack.SetBool("IsAttackingMelee", true);
                     yield return _attackDamage;
                     _attackMelee.MeleeAttack(_meleeDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                 }
 
+                _animationAttack.SetBool("IsAttackingMelee", false);
                 yield return null;
             }
         }
