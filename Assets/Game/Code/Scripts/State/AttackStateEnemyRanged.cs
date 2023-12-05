@@ -45,7 +45,7 @@ namespace ProjectTD
         private WaitForSeconds _attackDamage;
         private AIChase _chase;
         private AIPatrol _patrol;
-        private float _damageAfterAnimation = 0.5f;
+        private float _damageAfterAnimation = 1f;
 
         public float AttackSpeed => _attackSpeed;
 
@@ -117,7 +117,7 @@ namespace ProjectTD
 
                 if (IsRangedAttack(distance))
                 {
-                    _animationAttack.SetTrigger("IsAttackingRanged");
+                    _animationAttack.SetBool("IsAttackingRanged", true);
                     yield return _attackDamage;
                     _enemyRangedAttack.RangedAttack(_rangedDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
@@ -130,6 +130,8 @@ namespace ProjectTD
                     _enemyMeleeAttack.MeleeAttack(_meleeDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                 }
+
+                _animationAttack.SetBool("IsAttackingRanged", false);
 
                 yield return null;
             }
