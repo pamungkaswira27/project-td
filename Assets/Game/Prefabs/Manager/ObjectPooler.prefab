@@ -98,3 +98,6 @@ MonoBehaviour:
   - tag: ExplosionVFX
     prefab: {fileID: 896901888785105720, guid: bd64d36f178fa35468eec885d2ede66d, type: 3}
     size: 25
+  - tag: ItemDropVFX
+    prefab: {fileID: 96141593465549251, guid: 8266ea1547efdf348b0f498b159bb1e5, type: 3}
+    size: 25

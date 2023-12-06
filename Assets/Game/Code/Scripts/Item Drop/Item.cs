@@ -15,9 +15,11 @@ namespace ProjectTD
         private LayerMask _playerLayerMask;
 
         private Collider[] _overlapResultColliders;
+        private GameObject _itemDropVFX;
 
         private void Start()
         {
+            _itemDropVFX = ObjectPooler.Instance.GetPooledObject("ItemDropVFX", transform.position, Quaternion.identity);
             _overlapResultColliders = new Collider[OVERLAP_RESULT_COLLIDER_SIZE];
         }
 
@@ -37,6 +39,7 @@ namespace ProjectTD
 
             AudioManager.PlaySound(MainSounds.item_pickup);
             _item.Use();
+            _itemDropVFX.SetActive(false);
             gameObject.SetActive(false);
         }
 
