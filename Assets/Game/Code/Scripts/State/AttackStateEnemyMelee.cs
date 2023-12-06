@@ -96,10 +96,9 @@ namespace ProjectTD
                     yield return _attackDamage;
                     _attackMelee.MeleeAttack(_meleeDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                    _animationAttack.SetBool("IsAttackingMelee", false);
                 }
-                _animationAttack.SetBool("IsAttackingMelee", false);
-
-                _animationAttack.SetBool("IsAttackingMelee", false);
+                
                 yield return null;
             }
         }
