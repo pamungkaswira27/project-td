@@ -11,14 +11,10 @@ namespace ProjectTD
     {
         [SerializeField]
         private EnemyRangedAttack _enemyRangedAttack;
-        [SerializeField]
-        private EnemyMeleeAttack _enemyMeleeAttack;
 
         [Header("Damage")]
         [SerializeField]
         private float _rangedDamage;
-        [SerializeField]
-        private float _meleeDamage;
 
         [Header("Attack Speed")]
         [SerializeField]
@@ -29,12 +25,6 @@ namespace ProjectTD
         private float _maxRangedDistance;
         [SerializeField]
         private float _minRangedDistance;
-
-        [Header("Attack Melee Distance")]
-        [SerializeField]
-        private float _maxMeleeDistance;
-        [SerializeField]
-        private float _minMeleeDistance;
 
         [Header("Animation Attack")]
         [SerializeField]
@@ -75,7 +65,6 @@ namespace ProjectTD
 
                 float distanceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
                 bool isRangedAttack = IsRangedAttack(distanceToPlayer);
-                bool isMeleeAttack = IsMeleeAttack(distanceToPlayer);
 
                 _animationAttack.SetBool("IsMoving", false);
                 _animationAttack.SetBool("IsChasingPlayer", false);
@@ -84,15 +73,10 @@ namespace ProjectTD
                 {
                     StartCoroutine(IntervalAttack());
                     _chase.enabled = false;
+                    _patrol.IsPatroling = false;
                     return;
                 }
 
-                if (isMeleeAttack)
-                {
-                    StartCoroutine(IntervalAttack());
-                    _chase.enabled = false;
-                    return;
-                }
                 _chase.enabled = true;
                 StopAllCoroutines();
 
@@ -123,23 +107,9 @@ namespace ProjectTD
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                 }
 
-                if (IsMeleeAttack(distance))
-                {
-                    _animationAttack.SetTrigger("IsAttackingMelee");
-                    yield return _attackDamage;
-                    _enemyMeleeAttack.MeleeAttack(_meleeDamage);
-                    _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
-                }
-
                 _animationAttack.SetBool("IsAttackingRanged", false);
-
                 yield return null;
             }
-        }
-
-        private bool IsMeleeAttack(float distanceToPlayer)
-        {
-            return distanceToPlayer <= _maxMeleeDistance && distanceToPlayer > _minMeleeDistance && distanceToPlayer <= ViewRadius;
         }
 
         private bool IsRangedAttack(float distanceToPlayer)

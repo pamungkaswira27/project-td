@@ -99,6 +99,7 @@ namespace ProjectTD
                 }
                 _animationAttack.SetBool("IsAttackingMelee", false);
 
+                _animationAttack.SetBool("IsAttackingMelee", false);
                 yield return null;
             }
         }

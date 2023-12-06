@@ -165,7 +165,6 @@ GameObject:
   - component: {fileID: 5887631015249240994}
   - component: {fileID: -4070494242524633903}
   - component: {fileID: 2576388074817104272}
-  - component: {fileID: -3412584333888605531}
   - component: {fileID: 147171558429725571}
   - component: {fileID: 3949575630829090461}
   - component: {fileID: -8899721758438496147}
@@ -362,19 +361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
---- !u!114 &-3412584333888605531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6995053595898973261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce01b7c103b37ae4ba5f7ddf6d8ce45e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiFieldOfView: {fileID: 5992419859950814692}
 --- !u!114 &147171558429725571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,14 +375,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
   _enemyRangedAttack: {fileID: 2576388074817104272}
-  _enemyMeleeAttack: {fileID: -3412584333888605531}
   _rangedDamage: 10
-  _meleeDamage: 15
   _attackSpeed: 1.5
   _maxRangedDistance: 15
-  _minRangedDistance: 3
-  _maxMeleeDistance: 2.5
-  _minMeleeDistance: 1.5
+  _minRangedDistance: 0
   _animationAttack: {fileID: 5946336622979233302}
 --- !u!114 &3949575630829090461
 MonoBehaviour:
