@@ -10,6 +10,14 @@ namespace ProjectTD
         private BaseObjective[] _objectives;
 
         private int _activeObjectiveIndex = 0;
+        private bool _isAllObjectiveClear;
+
+        public bool IsAllObjectiveClear => _isAllObjectiveClear;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -28,6 +36,7 @@ namespace ProjectTD
         {
             if (_activeObjectiveIndex >= _objectives.Length)
             {
+                _isAllObjectiveClear = true;
                 Debug.Log($"[{nameof(ObjectiveManager)}]: There's no objective left");
                 return;
             }
