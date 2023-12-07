@@ -20,12 +20,12 @@ namespace ProjectTD
 
         public void Retry()
         {
-            SceneManager.LoadScene("DemoScene2");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void Quit()
         {
-            SceneManager.LoadScene("DemoMainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void DisplayGameOverUI()
