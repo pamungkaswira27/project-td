@@ -56,7 +56,7 @@ namespace ProjectTD
         {
             // Character movement input
             _playerInputAction.Player.Running.performed += RunMovementState;
-            _playerInputAction.Player.Rolling.performed += RollMovementState;
+            //_playerInputAction.Player.Rolling.performed += RollMovementState;
 
             _playerInputAction.Player.Running.canceled += RunMovementState;
 
@@ -72,7 +72,7 @@ namespace ProjectTD
         {
             // Character movement
             _playerInputAction.Player.Running.performed -= RunMovementState;
-            _playerInputAction.Player.Rolling.performed -= RollMovementState;
+            //_playerInputAction.Player.Rolling.performed -= RollMovementState;
 
             _playerInputAction.Player.Running.canceled -= RunMovementState;
 
