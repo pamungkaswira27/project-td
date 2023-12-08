@@ -81,7 +81,7 @@ namespace ProjectTD
 
         public override IEnumerator IntervalAttack()
         {
-            yield return _attackDelay;
+            // yield return _attackDelay;
 
             if (GetTarget() == null) yield return null;
 
