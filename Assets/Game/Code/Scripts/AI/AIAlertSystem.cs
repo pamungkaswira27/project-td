@@ -116,7 +116,7 @@ namespace ProjectTD
 
                 if (otherEnemy.OnAttacked())
                 {
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookPlayer, Time.deltaTime * 500);
+                    transform.rotation = lookPlayer;
                     return;
                 }
             }
