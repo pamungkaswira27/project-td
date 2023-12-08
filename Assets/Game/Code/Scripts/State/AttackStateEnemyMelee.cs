@@ -3,7 +3,6 @@ using StinkySteak.SimulationTimer;
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ProjectTD
 {
