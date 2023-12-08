@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 35
+  _speed: 175
   _nextWaypointDistance: 3
   _enemyAnim: {fileID: 5454908306990119709}
 --- !u!114 &6653085608612990351
@@ -292,14 +292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
   _enemyRangedAttack: {fileID: 4995141494023666462}
-  _enemyMeleeAttack: {fileID: 1811367505334656762}
   _rangedDamage: 25
-  _meleeDamage: 50
   _attackSpeed: 1.5
   _maxRangedDistance: 25
   _minRangedDistance: 3
-  _maxMeleeDistance: 10
-  _minMeleeDistance: 6
   _animationAttack: {fileID: 5454908306990119709}
 --- !u!114 &-7109048572229245644
 MonoBehaviour:
@@ -314,7 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
-  _playerManager: {fileID: 0}
   _enemies:
     serializedVersion: 2
     m_Bits: 512
@@ -345,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 4
+  _speedPatrolling: 40
   _aiRadiusPatrol: 10
   _minXRandomPoint: 5
   _maxXRandomPoint: 20
