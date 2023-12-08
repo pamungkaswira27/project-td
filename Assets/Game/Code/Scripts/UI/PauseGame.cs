@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour
 {
@@ -28,6 +29,22 @@ public class PauseGame : MonoBehaviour
     private void OnDisable()
     {
         _inputActions.Disable();
+    }
+
+    public void ResumeGame()
+    {
+        UIPauseGameDeactived();
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private void GamePause(InputAction.CallbackContext context)
