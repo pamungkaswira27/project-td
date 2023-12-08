@@ -26,6 +26,8 @@ namespace ProjectTD
         [Header("Animation Attack")]
         [SerializeField]
         private Animator _animationAttack;
+        [SerializeField]
+        private Animator _bowAnimator;
 
         private SimulationTimer _timerAttack;
         private WaitForSeconds _attackDelay;
@@ -98,6 +100,7 @@ namespace ProjectTD
 
                 if (IsRangedAttack(distance))
                 {
+                    _bowAnimator.SetTrigger("attack");
                     _animationAttack.SetBool("IsAttackingRanged", true);
                     yield return _attackDamage;
                     _enemyRangedAttack.RangedAttack(_rangedDamage);
