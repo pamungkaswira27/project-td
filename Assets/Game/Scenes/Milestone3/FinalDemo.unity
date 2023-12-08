@@ -13775,6 +13775,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 152131676}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &152131678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3872502403985777625, guid: e12456660c3bf2b4f9f330d50d1821b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 152131676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &154589344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7031529446534752245, guid: eb1240b6553003f47a36d7ea563377cc,
@@ -14008,6 +14014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 166457423}
+  - component: {fileID: 166457424}
   m_Layer: 0
   m_Name: UICanvas
   m_TagString: Untagged
@@ -14035,6 +14042,19 @@ Transform:
   - {fileID: 1861112556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &166457424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166457422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06805b577136ce848a6efad0c2636f8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseGamePanel: {fileID: 152131678}
 --- !u!1 &166874545 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7136218459786308504, guid: 5e79f05abea471e4687d49f61da3e93d,
