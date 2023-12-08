@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5992419859950814692}
   - component: {fileID: 5191838458584867019}
   - component: {fileID: 1606072583883124681}
+  - component: {fileID: 2700862199466851755}
   - component: {fileID: 6653085608612990351}
   - component: {fileID: 5887631015249240994}
   - component: {fileID: 6861453845891817368}
@@ -53,7 +54,6 @@ GameObject:
   - component: {fileID: -3484594894648127204}
   - component: {fileID: -7109048572229245644}
   - component: {fileID: 8136381601014771188}
-  - component: {fileID: 2700862199466851755}
   m_Layer: 9
   m_Name: EnemyMelee
   m_TagString: Untagged
@@ -111,7 +111,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995053595898973261}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5bb1a713feb1184c90bc9b4928d281f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -188,9 +188,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 15
+  _speed: 150
   _nextWaypointDistance: 3
   _enemyAnim: {fileID: 3214408901585253437}
+--- !u!114 &2700862199466851755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995053595898973261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c57f85ef487a84a8d2f0a7ad13f9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextWayPoint: 3
+  _speedPatrolling: 30
+  _aiRadiusPatrol: 12
+  _minXRandomPoint: 5
+  _maxXRandomPoint: 20
+  _minZRandomPoint: 5
+  _maxZRandomPoint: 20
+  _animationPatrol: {fileID: 3214408901585253437}
+  _timer: 4
+  _rotationSpeed: 300
 --- !u!114 &6653085608612990351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiFieldOfView: {fileID: 5992419859950814692}
-  _playerManager: {fileID: 0}
   _enemies:
     serializedVersion: 2
     m_Bits: 512
@@ -294,28 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c29cb96f19e0d4b94a607e4de13824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2700862199466851755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6995053595898973261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c57f85ef487a84a8d2f0a7ad13f9c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nextWayPoint: 3
-  _speedPatrolling: 5
-  _aiRadiusPatrol: 12
-  _minXRandomPoint: 5
-  _maxXRandomPoint: 20
-  _minZRandomPoint: 5
-  _maxZRandomPoint: 20
-  _animationPatrol: {fileID: 3214408901585253437}
-  _timer: 4
-  _rotationSpeed: 300
 --- !u!1001 &3967302741441320287
 PrefabInstance:
   m_ObjectHideFlags: 0

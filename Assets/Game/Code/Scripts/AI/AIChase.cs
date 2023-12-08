@@ -31,12 +31,12 @@ namespace ProjectTD
         {
             _seeker = GetComponent<Seeker>();
             _rigidbody = GetComponent<Rigidbody>();
+            _patrol = GetComponent<AIPatrol>();
+            _alertSystem = GetComponent<AIAlertSystem>();
         }
 
         private void Start()
         {
-            _patrol = GetComponent<AIPatrol>();
-            _alertSystem = GetComponent<AIAlertSystem>();
             InvokeRepeating(nameof(UpdatePath), 0f, 0.2f);
         }
 
@@ -58,12 +58,12 @@ namespace ProjectTD
 
                 _enemyAnim.SetBool("IsChasingPlayer", true);
                 _patrol.IsPatroling = false;
-                _forceDirection = (_currentPath.vectorPath[_currentWaypointIndex] - _rigidbody.position).normalized;
-                _rigidbodyForce = _speed * _forceDirection;
-                _rigidbody.AddForce(_rigidbodyForce);
+                _forceDirection = (_currentPath.vectorPath[_currentWaypointIndex] - _rigidbody.position);
+                _rigidbodyForce = _speed * Time.deltaTime * _forceDirection;
+                _rigidbody.velocity = (_rigidbodyForce);
 
 
-                _lookAtDirection = (_aIFieldOfView.Target.position - transform.position).normalized;
+                _lookAtDirection = (_aIFieldOfView.Target.position - transform.position);
                 transform.localRotation = Quaternion.LookRotation(_lookAtDirection);
 
                 _distanceToWaypoint = Vector3.Distance(_rigidbody.position, _currentPath.vectorPath[_currentWaypointIndex]);

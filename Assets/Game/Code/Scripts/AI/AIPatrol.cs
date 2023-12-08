@@ -40,7 +40,6 @@ namespace ProjectTD
 
         private Path _path;
         private Seeker _seeker;
-        private AIChase _aiChase;
         private Vector3 _randomWayPoints;
         private Rigidbody _rigidBody;
         private SimulationTimer _stayTime;
@@ -68,7 +67,6 @@ namespace ProjectTD
 
         private void Start()
         {
-            _aiChase = GetComponent<AIChase>();
             SetRandomWayPoints();
             _seeker.StartPath(_rigidBody.position, _randomWayPoints, OnPathComplete);
         }
@@ -121,11 +119,11 @@ namespace ProjectTD
 
             Vector3 forceDir = (_path.vectorPath[_currentWayPoint] - _rigidBody.position);
             Vector3 lookAtDir = (_path.vectorPath[_currentWayPoint] - transform.position);
-            Vector3 force = _speedPatrolling * forceDir;
+            Vector3 force = _speedPatrolling * Time.deltaTime * forceDir;
 
-            _rigidBody.AddForce(force);
+            _rigidBody.velocity = (force);
             Quaternion lookRotate = Quaternion.LookRotation(lookAtDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotate, Time.deltaTime * _rotationSpeed);
+            transform.rotation = lookRotate;
 
             float toNextWay = Vector3.Distance(_rigidBody.position, _path.vectorPath[_currentWayPoint]);
 
