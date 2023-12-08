@@ -1,8 +1,5 @@
-using ProjectTD;
 using StinkySteak.SimulationTimer;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectTD
@@ -79,7 +76,7 @@ namespace ProjectTD
 
                 _chase.enabled = true;
                 StopAllCoroutines();
-
+                return;
             }
 
             StopAllCoroutines();
@@ -89,7 +86,7 @@ namespace ProjectTD
 
         public override IEnumerator IntervalAttack()
         {
-            yield return _attackDelay;
+            // yield return _attackDelay;
 
             if (GetTarget() == null) yield return null;
 

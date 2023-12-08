@@ -228,7 +228,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995053595898973261}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5bb1a713feb1184c90bc9b4928d281f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 20
+  _speed: 100
   _nextWaypointDistance: 3
   _enemyAnim: {fileID: 5946336622979233302}
 --- !u!114 &6653085608612990351
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 10
+  _speedPatrolling: 35
   _aiRadiusPatrol: 15
   _minXRandomPoint: 10
   _maxXRandomPoint: 35
