@@ -10,7 +10,7 @@ namespace ProjectTD
         {
             CleanUpSingletons();
 
-            SpawnAudioManager();
+            //SpawnAudioManager();
         }
 
         private static void CleanUpSingletons() 
@@ -25,13 +25,13 @@ namespace ProjectTD
             DialogueManager.Instance = null;
         }
 
-        private static void SpawnAudioManager()
-        {
-            GameObject audioManagerPrefab = Resources.Load<GameObject>(nameof(AudioManager));
+        //private static void SpawnAudioManager()
+        //{
+        //    GameObject audioManagerPrefab = Resources.Load<GameObject>(nameof(AudioManager));
 
-            Object.Instantiate(audioManagerPrefab);
+        //    Object.Instantiate(audioManagerPrefab);
 
             
-        }
+        //}
     }
 }
