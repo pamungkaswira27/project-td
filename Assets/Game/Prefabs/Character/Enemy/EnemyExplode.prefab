@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aIFieldOfView: {fileID: 5992419859950814692}
-  _speed: 100
+  _speed: 150
   _nextWaypointDistance: 3
   _enemyAnim: {fileID: 6896695775409570128}
 --- !u!114 &6653085608612990351
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 30
+  _speedPatrolling: 35
   _aiRadiusPatrol: 12
   _minXRandomPoint: 8
   _maxXRandomPoint: 24

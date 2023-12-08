@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 30
+  _speedPatrolling: 35
   _aiRadiusPatrol: 12
   _minXRandomPoint: 5
   _maxXRandomPoint: 20
@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb5ab548ace3fd48b812c82d89df279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: 100
-  _maxHealthPoints: 100
+  _healthPoints: 150
+  _maxHealthPoints: 150
   _aiAlert: {fileID: -7109048572229245644}
 --- !u!114 &6861453845891817368
 MonoBehaviour:
