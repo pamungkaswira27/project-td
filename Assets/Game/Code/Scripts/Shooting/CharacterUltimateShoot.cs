@@ -66,7 +66,7 @@ namespace ProjectTD
 
                 for (int i = 0; i < _numberOfProjectile; i++)
                 {
-                    StressReceiver.Instance.InduceStress(_stress);
+                    // StressReceiver.Instance.InduceStress(_stress);
                     AudioManager.PlaySound(MainSounds.player_shoot_effect);
                     _ultimateProjectile = _objectPooler.GetPooledObject("UltimateProjectile", _firingPoint.position, _firingPoint.rotation);
 

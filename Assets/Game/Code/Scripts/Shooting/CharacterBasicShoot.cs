@@ -25,7 +25,7 @@ namespace ProjectTD
         {
             while (true)
             {
-                StressReceiver.Instance.InduceStress(_stress);
+                // StressReceiver.Instance.InduceStress(_stress);
                 AudioManager.PlaySound(MainSounds.player_shoot_effect);
                 _basicProjectile = _objectPooler.GetPooledObject("BasicProjectile", _firingPoint.position, _firingPoint.rotation);
 
