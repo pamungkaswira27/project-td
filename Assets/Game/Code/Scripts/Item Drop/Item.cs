@@ -37,7 +37,7 @@ namespace ProjectTD
                 return;
             }
 
-            AudioManager.PlaySound(MainSounds.item_pickup);
+            AudioManager.PlaySound(MainSounds.item_pickup, PlayerManager.Instance.Player.transform.position);
             _item.Use();
             _itemDropVFX.SetActive(false);
             gameObject.SetActive(false);

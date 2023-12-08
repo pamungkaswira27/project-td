@@ -8,7 +8,7 @@ namespace ProjectTD
         public void Explode()
         {
             ObjectPooler.Instance.GetPooledObject("ExplosionVFX", transform.position, Quaternion.identity);
-            AudioManager.PlaySound(MainSounds.explosion);
+            AudioManager.PlaySound(MainSounds.explosion, transform.position);
         }
     }
 }

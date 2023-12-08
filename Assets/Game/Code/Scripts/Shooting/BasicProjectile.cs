@@ -1,3 +1,4 @@
+using JSAM;
 using UnityEngine;
 
 namespace ProjectTD
@@ -31,7 +32,7 @@ namespace ProjectTD
 
                 if (_hitColliders[i].TryGetComponent(out IDamageable target))
                 {
-                    base.HitTarget();
+                    AudioManager.PlaySound(MainSounds.enemy_hit_effect_01, impactPos);
                     target.TryTakeDamage(_damagePoints);
                 }
 

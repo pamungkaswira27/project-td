@@ -1,4 +1,3 @@
-using JSAM;
 using StinkySteak.SimulationTimer;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ namespace ProjectTD
 
         protected virtual void HitTarget()
         {
-            AudioManager.PlaySound(MainSounds.enemy_hit_effect_01);
+            
         }
 
         protected virtual void ClearHitColliderCache()
