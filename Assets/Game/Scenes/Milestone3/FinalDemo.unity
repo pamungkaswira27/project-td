@@ -64773,6 +64773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 0e2921d3b69e02740b8369e90a7a444f, type: 2}
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1003825370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7626817699058452482, guid: eb1240b6553003f47a36d7ea563377cc,
@@ -70473,6 +70476,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: b693af340f0adf546a82703a76e6370a, type: 2}
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1134115596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6362253433918397033, guid: eb1240b6553003f47a36d7ea563377cc,

@@ -8,6 +8,8 @@ namespace ProjectTD
 
         [SerializeField]
         private DialogueSO _dialogue;
+        [SerializeField]
+        private LayerMask _playerLayerMask;
 
         private Collider[] _overlapResultColliders;
         private readonly float _overlapRadius = 15f;
@@ -15,6 +17,7 @@ namespace ProjectTD
 
         private void Start()
         {
+            _hasTriggered = false;
             _overlapResultColliders = new Collider[OVERLAP_RESULT_COLLIDER_SIZE];
         }
 
@@ -35,7 +38,7 @@ namespace ProjectTD
                 return;
             }
 
-            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, _overlapRadius, _overlapResultColliders);
+            int numberOfCollider = Physics.OverlapSphereNonAlloc(transform.position, _overlapRadius, _overlapResultColliders, _playerLayerMask);
 
             for (int i = 0; i < numberOfCollider; i++)
             {
@@ -44,11 +47,8 @@ namespace ProjectTD
                     return;
                 }
 
-                if (_overlapResultColliders[i].TryGetComponent<BaseCharacter>(out _))
-                {
-                    DialogueManager.Instance.StartDialogue(_dialogue);
-                    _hasTriggered = true;
-                }
+                DialogueManager.Instance.StartDialogue(_dialogue);
+                _hasTriggered = true;
             }
         }
         private void OnDrawGizmosSelected()
