@@ -69,13 +69,14 @@ namespace ProjectTD
                     return;
                 }
 
-                _chase.enabled = true;
                 StopAllCoroutines();
-                return;
+                _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                _animationAttack.SetBool("IsAttackingMelee", false);
+                _chase.enabled = true;
             }
 
-            _patrol.IsPatroling = true;
             StopAllCoroutines();
+            _patrol.IsPatroling = true;
         }
 
         public override IEnumerator IntervalAttack()
@@ -97,8 +98,6 @@ namespace ProjectTD
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
                     _animationAttack.SetBool("IsAttackingMelee", false);
                 }
-                
-                yield return null;
             }
         }
 

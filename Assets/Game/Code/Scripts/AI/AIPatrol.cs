@@ -12,19 +12,9 @@ namespace ProjectTD
         [SerializeField]
         private float _speedPatrolling;
 
-        [Header("Radius Patrolling")]
+        [Header("Multiple Max Random Position")]
         [SerializeField]
-        private float _aiRadiusPatrol;
-
-        [Header("Range for Random Position")]
-        [SerializeField]
-        private int _minXRandomPoint;
-        [SerializeField]
-        private int _maxXRandomPoint;
-        [SerializeField]
-        private int _minZRandomPoint;
-        [SerializeField]
-        private int _maxZRandomPoint;
+        private float _multipleForMaxRandomPosition;
 
         [Header("Animation")]
         [SerializeField]
@@ -33,7 +23,7 @@ namespace ProjectTD
         [Header("Timer for Stay in Place")]
         [SerializeField]
         private float _timer;
-        
+
         [Header("Speed for Rotation")]
         [SerializeField]
         private float _rotationSpeed;
@@ -47,15 +37,18 @@ namespace ProjectTD
         private bool _nextStep;
         private bool _animate = true;
         private bool _isPatroling = true;
-
-        public float RadiusPatrol
-        {
-            get { return _aiRadiusPatrol; }
-        }
+        [SerializeField]
+        private float _minXRandomPoint;
+        [SerializeField]
+        private float _maxXRandomPoint;
+        [SerializeField]
+        private float _minZRandomPoint;
+        [SerializeField]
+        private float _maxZRandomPoint;
 
         public bool IsPatroling
         {
-            get { return _isPatroling;}
+            get { return _isPatroling; }
             set { _isPatroling = value; }
         }
 
@@ -63,6 +56,10 @@ namespace ProjectTD
         {
             _seeker = GetComponent<Seeker>();
             _rigidBody = GetComponent<Rigidbody>();
+            _minXRandomPoint = transform.position.x;
+            _maxXRandomPoint = transform.position.x * _multipleForMaxRandomPosition;
+            _minZRandomPoint = transform.position.z;
+            _maxZRandomPoint = transform.position.z * _multipleForMaxRandomPosition;
         }
 
         private void Start()
@@ -71,7 +68,7 @@ namespace ProjectTD
             _seeker.StartPath(_rigidBody.position, _randomWayPoints, OnPathComplete);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_nextStep)
             {
@@ -81,25 +78,25 @@ namespace ProjectTD
                     _animate = true;
                     UpdatePath();
                     _stayTime = SimulationTimer.None;
-                }
 
+                }
+                return;
             }
 
-            if(!_isPatroling)
+            if (!_isPatroling)
             {
                 this.enabled = false;
+                return;
             }
 
-            if(_isPatroling)
-            {
-                SetRandomWayPoints();
-                Patrolling();
-                Animation();
-            }
+
+            SetRandomWayPoints();
+            Patrolling();
+            Animation();
+
 
 
             if (_stayTime.IsRunning) return;
-            _stayTime = SimulationTimer.CreateFromSeconds(_timer);
         }
 
         private void UpdatePath()
@@ -121,7 +118,7 @@ namespace ProjectTD
             Vector3 lookAtDir = (_path.vectorPath[_currentWayPoint] - transform.position);
             Vector3 force = _speedPatrolling * Time.deltaTime * forceDir;
 
-            _rigidBody.velocity = (force);
+            _rigidBody.velocity = force;
             Quaternion lookRotate = Quaternion.LookRotation(lookAtDir);
             transform.rotation = lookRotate;
 
@@ -136,6 +133,7 @@ namespace ProjectTD
                 {
                     _nextStep = true;
                     _animate = false;
+                    _stayTime = SimulationTimer.CreateFromSeconds(_timer);
                 }
             }
         }
@@ -149,8 +147,9 @@ namespace ProjectTD
 
         public void SetRandomWayPoints()
         {
-            Vector2 nexStep = Random.insideUnitCircle.normalized * _aiRadiusPatrol;
-            _randomWayPoints = new Vector3(nexStep.x, transform.position.y, nexStep.y) + transform.position;
+            float nextStepX = Random.Range(_minXRandomPoint, _maxXRandomPoint);
+            float nextStepZ = Random.Range(_minZRandomPoint, _maxZRandomPoint);
+            _randomWayPoints = new Vector3(nextStepX, 0, nextStepZ);
         }
 
         private void OnPathComplete(Path path)

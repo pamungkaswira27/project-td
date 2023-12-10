@@ -76,9 +76,10 @@ namespace ProjectTD
                     return;
                 }
 
-                _chase.enabled = true;
                 StopAllCoroutines();
-                return;
+                _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                _animationAttack.SetBool("IsAttackingRanged", false);
+                _chase.enabled = true;
             }
 
             StopAllCoroutines();
@@ -105,6 +106,8 @@ namespace ProjectTD
                     yield return _attackDamage;
                     _enemyRangedAttack.RangedAttack(_rangedDamage);
                     _timerAttack = SimulationTimer.CreateFromSeconds(_attackSpeed);
+                    _animationAttack.SetBool("IsAttackingRanged", false);
+                    yield return null;
                 }
 
                 _animationAttack.SetBool("IsAttackingRanged", false);
