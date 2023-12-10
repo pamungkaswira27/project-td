@@ -16,3 +16,5 @@ MonoBehaviour:
   - You can activate the ultimate shot by pressing the RIGHT MOUSE button
   - Ultimate shots have a duration of 10 seconds
   - ... and one minute cooldown
+  - You can check the ultimate duration and cooldown status through the power bar
+    below the health bar
