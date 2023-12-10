@@ -251,7 +251,7 @@ MonoBehaviour:
   _attackSpeed: 2
   _animationAttack: {fileID: 5454908306990119709}
   _maxDistance: 9
-  _minDistance: 7
+  _minDistance: 3
 --- !u!114 &1811367505334656762
 MonoBehaviour:
   m_ObjectHideFlags: 0
