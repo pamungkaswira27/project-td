@@ -10,7 +10,7 @@ namespace ProjectTD
         private DialogueSO _dialogue;
 
         private Collider[] _overlapResultColliders;
-        private readonly float _overlapRadius = 10f;
+        private readonly float _overlapRadius = 15f;
         private bool _hasTriggered;
 
         private void Start()
@@ -50,6 +50,11 @@ namespace ProjectTD
                     _hasTriggered = true;
                 }
             }
+        }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, _overlapRadius);
         }
     }
 }
