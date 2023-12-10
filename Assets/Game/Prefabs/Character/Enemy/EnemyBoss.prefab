@@ -297,6 +297,7 @@ MonoBehaviour:
   _maxRangedDistance: 25
   _minRangedDistance: 3
   _animationAttack: {fileID: 5454908306990119709}
+  _bowAnimator: {fileID: 0}
 --- !u!114 &-7109048572229245644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,14 +342,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
   _speedPatrolling: 40
-  _aiRadiusPatrol: 10
-  _minXRandomPoint: 5
-  _maxXRandomPoint: 20
-  _minZRandomPoint: 5
-  _maxZRandomPoint: 20
+  _multipleForMaxRandomPosition: 3.5
   _animationPatrol: {fileID: 5454908306990119709}
   _timer: 9
   _rotationSpeed: 300
+  _minXRandomPoint: 0
+  _maxXRandomPoint: 0
+  _minZRandomPoint: 0
+  _maxZRandomPoint: 0
 --- !u!1001 &2832641391490948909
 PrefabInstance:
   m_ObjectHideFlags: 0

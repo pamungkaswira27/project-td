@@ -202,8 +202,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995053595898973261}
   serializedVersion: 4
-  m_Mass: 2
-  m_Drag: 4
+  m_Mass: 1
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -438,15 +438,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWayPoint: 3
-  _speedPatrolling: 30
-  _aiRadiusPatrol: 15
-  _minXRandomPoint: 10
-  _maxXRandomPoint: 35
-  _minZRandomPoint: 10
-  _maxZRandomPoint: 35
+  _speedPatrolling: 45
+  _multipleForMaxRandomPosition: 2.5
   _animationPatrol: {fileID: 5946336622979233302}
   _timer: 6
-  _rotationSpeed: 300
+  _rotationSpeed: 100
+  _minXRandomPoint: 0
+  _maxXRandomPoint: 0
+  _minZRandomPoint: 0
+  _maxZRandomPoint: 0
 --- !u!1001 &1628124960492123114
 PrefabInstance:
   m_ObjectHideFlags: 0
