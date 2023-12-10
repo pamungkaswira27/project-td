@@ -40,7 +40,7 @@ namespace ProjectTD
             InvokeRepeating(nameof(UpdatePath), 0f, 0.2f);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_currentPath != null)
             {
@@ -85,7 +85,7 @@ namespace ProjectTD
             if (!path.error)
             {
                 _currentPath = path;
-                _currentWaypointIndex = 0;
+                _currentWaypointIndex = 1;
             }
         }
 
