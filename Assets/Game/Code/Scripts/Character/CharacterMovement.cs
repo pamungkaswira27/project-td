@@ -65,7 +65,7 @@ namespace ProjectTD
         private void FixedUpdate()
         {
             // move player
-            _rigidbody.velocity = _moveSpeed * Time.deltaTime * _movement;
+            _rigidbody.MovePosition(_rigidbody.position + _moveSpeed * Time.deltaTime * _movement);
         }
 
         private void Movement()
