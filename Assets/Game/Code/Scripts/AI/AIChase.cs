@@ -15,7 +15,7 @@ namespace ProjectTD
         [SerializeField]
         private Animator _enemyAnim;
 
-        private AIPatrol _patrol;
+        //private AIPatrol _patrol;
         private AIAlertSystem _alertSystem;
         private Path _currentPath;
         private Seeker _seeker;
@@ -31,7 +31,7 @@ namespace ProjectTD
         {
             _seeker = GetComponent<Seeker>();
             _rigidbody = GetComponent<Rigidbody>();
-            _patrol = GetComponent<AIPatrol>();
+            //_patrol = GetComponent<AIPatrol>();
             _alertSystem = GetComponent<AIAlertSystem>();
         }
 
@@ -57,7 +57,7 @@ namespace ProjectTD
                 }
 
                 _enemyAnim.SetBool("IsChasingPlayer", true);
-                _patrol.IsPatroling = false;
+                //_patrol.IsPatroling = false;
                 _forceDirection = (_currentPath.vectorPath[_currentWaypointIndex] - _rigidbody.position);
                 _rigidbodyForce = _speed * Time.deltaTime * _forceDirection;
                 _rigidbody.velocity = (_rigidbodyForce);
@@ -76,8 +76,8 @@ namespace ProjectTD
                 return;
             }
             _enemyAnim.SetBool("IsChasingPlayer", false);
-            _patrol.IsPatroling = true;
-            _patrol.enabled = true;
+            //_patrol.IsPatroling = true;
+            //_patrol.enabled = true;
         }
 
         private void OnPathComplete(Path path)
