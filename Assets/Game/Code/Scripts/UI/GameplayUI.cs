@@ -41,8 +41,8 @@ namespace ProjectTD
             _healthSlider.maxValue = PlayerManager.Instance.CharacterHealth.MaxHealthPoints;
             _healthSlider.value = PlayerManager.Instance.CharacterHealth.HealthPoints;
 
-            _powerSlider.maxValue = 0f;
-            _powerSlider.value = 0f;
+            _powerSlider.maxValue = PlayerManager.Instance.CharacterUltimateShoot.DurationTime;
+            _powerSlider.value = PlayerManager.Instance.CharacterUltimateShoot.DurationTime;
         }
 
         private void UpdateHealthBar()
@@ -62,7 +62,24 @@ namespace ProjectTD
                 return;
             }
 
-            _powerSlider.value = 0f;
+            if (PlayerManager.Instance.CharacterUltimateShoot.IsActive)
+            {
+                _powerSlider.maxValue = PlayerManager.Instance.CharacterUltimateShoot.DurationTime;
+                _powerSlider.value = PlayerManager.Instance.CharacterUltimateShoot.DurationRemainTime;
+                return;
+            }
+            
+            if (PlayerManager.Instance.CharacterUltimateShoot.IsCooldown)
+            {
+                _powerSlider.maxValue = PlayerManager.Instance.CharacterUltimateShoot.CooldownTime;
+                _powerSlider.value += Time.deltaTime;
+
+                if (_powerSlider.value == _powerSlider.maxValue)
+                {
+                    PlayerManager.Instance.CharacterUltimateShoot.IsCooldown = false;
+                    _powerSlider.value = _powerSlider.maxValue;
+                }
+            }
         }
     }
 }

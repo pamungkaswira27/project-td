@@ -26,6 +26,18 @@ namespace ProjectTD
         private SimulationTimer _cooldownTimer;
         private SimulationTimer _intervalBetweenShootTimer;
         private WaitForSeconds _intervalBetweenProjectileWaitForSeconds;
+        private bool _isActive;
+        private bool _isCooldown;
+
+        public float DurationTime => _duration;
+        public float DurationRemainTime => _durationTimer.RemainingSeconds;
+        public float CooldownTime => _cooldown;
+        public bool IsActive => _isActive;
+        public bool IsCooldown
+        {
+            get => _isCooldown;
+            set => _isCooldown = value;
+        }
 
         protected override void Initialization()
         {
@@ -43,6 +55,8 @@ namespace ProjectTD
 
             if (_durationTimer.IsExpired())
             {
+                _isActive = false;
+                _isCooldown = true;
                 _durationTimer = SimulationTimer.None;
                 _cooldownTimer = SimulationTimer.CreateFromSeconds(_cooldown);
             }
@@ -92,6 +106,7 @@ namespace ProjectTD
             if (!_cooldownTimer.IsRunning && !_durationTimer.IsRunning)
             {
                 AudioManager.PlaySound(MainSounds.ultimate_shot_ready);
+                _isActive = true;
                 _durationTimer = SimulationTimer.CreateFromSeconds(_duration);
             }
         }

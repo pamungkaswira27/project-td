@@ -165,7 +165,7 @@ MonoBehaviour:
   _muzzleFlashVFX: {fileID: 9024718143658403849}
   _numberOfProjectile: 3
   _duration: 10
-  _cooldown: 60
+  _cooldown: 15
   _intervalBetweenShoot: 0.5
   _intervalBetweenProjectile: 0.1
   _stress: 0.125
