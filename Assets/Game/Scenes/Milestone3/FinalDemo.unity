@@ -126273,8 +126273,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProjectTD.GameOverUI, Assembly-CSharp
+      - m_Target: {fileID: 7353442576245711707}
+        m_TargetAssemblyTypeName: ProjectTD.GameClearUI, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
